@@ -1,0 +1,163 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Login</title>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            background-color: #016aa9;
+            overflow: hidden;
+        
+        }
+
+        .STYLE1 {
+            color: #000000;
+            font-size: 12px;
+          
+        }
+
+
+        .msg {
+            height: 100px;
+        }
+
+        .error {
+            padding-top: 40px;
+            color: red;
+            text-align: center;
+            font-weight: 700;
+        }
+
+            .error ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+        -->
+    </style>
+</head>
+<body>
+    <div class="msg">
+        @Html.ValidationSummary(true, "", new { @class = "error" })
+</div>
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <table width="962" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td height="235" background="~/images/login_03.png">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td height="53">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="394" height="53" background="~/images/login_05.gif">
+                                    &nbsp;
+                                </td>
+                                <td width="206" background="~/images/login_06.gif">
+                                    <form action="/Account/Login" method="post">
+                                        @Html.AntiForgeryToken()
+
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="16%" height="25">
+                                                    <div align="right">
+                                                        <span class="STYLE1">用户</span>
+                                                    </div>
+                                                </td>
+                                                <td width="57%" height="25">
+                                                    <div align="center">
+                                                        <input type="text" name="UserName" id="UserName" maxlength="20" style="width: 105px;  background-color: #292929;
+                                                            border: solid 1px #7dbad7; font-size: 16px; color: #6cd0ff">
+                                                    </div>
+                                                </td>
+                                                <td width="27%" height="25">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="25">
+                                                    <div align="right">
+                                                        <span class="STYLE1">密码</span>
+                                                    </div>
+                                                </td>
+                                                <td height="25">
+                                                    <div align="center">
+                                                        <input type="password" name="Password" id="Password" maxlength="20" style="width: 105px;  background-color: #292929;
+                                                            border: solid 1px #7dbad7; font-size: 16px; color: #6cd0ff">
+                                                    </div>
+                                                </td>
+                                                <td height="25">
+                                                    <div align="left">
+                                                        <button id="btnLogin" type="submit" style="border:none;padding:4px 8px;background-color:#292929;color:#fff;cursor:pointer">
+                                                            登录
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td width="362" background="~/images/login_07.gif">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="213" background="~/images/login_08.gif" style="text-align:center;color:#fff">
+                        版本：2016-11-21
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<script src="~/easyui/jquery.min.js"></script>
+<script>
+        var valtrim = function (val) {
+            if (val != null && val != undefined && typeof val == "string") {
+                return $.trim(val.replace(/<[^>]*>/g, ""));
+            }
+            return val;
+
+        }
+      //  $("#UserName").val("terius");
+      //  $("#Password").val("1");
+     //   $("#btnLogin").click();
+
+        $("#btnLogin").on("click", function () {
+            var user = valtrim($("#UserName").val());
+            var pwd = valtrim($("#Password").val());
+            if (!user)
+            {
+                alert("用户名不能为空");
+                return false;
+            }
+            if (!pwd) {
+                alert("密码不能为空");
+                return false;
+            }
+            $("#UserName").val(user);
+            $("#Password").val(pwd);
+        });
+
+</script>
+</body>
+
+</html>

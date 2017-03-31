@@ -1,0 +1,51 @@
+/* ===============================
+ 模块： button css按钮样式  【袁修志整理】
+=============================== */
+.cssbtn { font-family: 'Microsoft YaHei'; padding: 5px 10px; font-size: 12px; text-decoration: none; font-weight: bold; line-height: 1; color: white; text-shadow: 0 -1px 1px rgba(0,0,0,.3); -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.5); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.5); -o-box-shadow: 0 1px 2px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.5); box-shadow: 0 1px 2px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.5); }
+/*.small, .normal, .medium, .big, .megabig,.button { -webkit-border-radius: 8px; -moz-border-radius: 8px; -o-border-radius: 8px; border-radius: 8px; padding: 5px 10px; }*/
+
+.cssbtn_size10 { font-size: 10px; padding: 5px 10px; }
+.cssbtn_size12 { font-size: 12px; padding: 5px 10px; }
+.cssbtn_size14 { font-size: 14px; padding: 5px 10px; }
+.cssbtn_size16 { font-size: 16px; padding: 5px 10px; }
+.cssbtn_size18 { font-size: 18px; padding: 5px 10px; }
+.cssbtn_size20 { font-size: 20px; padding: 8px 15px; }
+.cssbtn_size22 { font-size: 22px; padding: 8px 15px; }
+.cssbtn_size24 { font-size: 24px; padding: 8px 15px; }
+.cssbtn_size26 { font-size: 26px; padding: 8px 15px; }
+.cssbtn_size28 { font-size: 28px; padding: 8px 15px; }
+.cssbtn_size30 { font-size: 30px; padding: 8px 15px; }
+.cssbtn_size32 { font-size: 32px; padding: 8px 15px; }
+
+
+
+/* Blue */
+.cssbtn_blue { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#52A8E8), to(#377AD0)); background-image: -moz-linear-gradient(0% 100% 90deg, #377AD0, #52A8E8); background-color: #52A8E8; border: 1px solid #20559A; }
+    .cssbtn_blue:hover, .cssbtn_blue:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#54A1D8), to(#1967CA)); background-image: -moz-linear-gradient(0% 100% 90deg, #1967CA, #54A1D8); background-color: #52A8E8; color: white; }
+    .cssbtn_blue:active { background: #2D7CD1; color: white; }
+
+/* Green */
+.cssbtn_green { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#21AE60), to(#2E8B57)); background-image: -moz-linear-gradient(0% 100% 90deg, #2E8B57, #21AE60); background-color: #21AE60; border: 1px solid #21633D; }
+    .cssbtn_green:hover, .cssbtn_green:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#21AE60), to(#28794B)); background-image: -moz-linear-gradient(0% 100% 90deg, #28794B, #21AE60); background-color: #21AE60; color: white; }
+    .cssbtn_green:active { background: #2B8452; color: white; }
+
+/* Black */
+.cssbtn_black { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666), to(#000)); background-image: -moz-linear-gradient(0% 100% 90deg, #000, #666); background-color: #666; border: 1px solid #444; }
+    .cssbtn_black:hover, .cssbtn_black:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#444), to(#000)); background-image: -moz-linear-gradient(0% 100% 90deg, #000, #444); background-color: #444; color: white; }
+    .cssbtn_black:active { background: #555; color: white; }
+
+/* White */
+.cssbtn_white { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(#ccc)); background-image: -moz-linear-gradient(0% 100% 90deg, #ccc, #fafafa); background-color: #ccc; border: 1px solid #A6A6A6; color: #333; text-shadow: 1px 1px 1px #fff; }
+    .cssbtn_white:hover, .cssbtn_white:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#BCBCBC), to(#FCFCFC)); background-image: -moz-linear-gradient(0% 100% 90deg, #FCFCFC, #BCBCBC); background-color: #BCBCBC; color: #555; }
+    .cssbtn_white:active { background: #eee; color: #333; }
+
+/* Red */
+.cssbtn_red { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#BC1A02), to(#650500)); background-image: -moz-linear-gradient(0% 100% 90deg, #650500, #BC1A02); background-color: #A60B00; border: 1px solid #6E0A01; }
+    .cssbtn_red:hover, .cssbtn_red:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D05F4E), to(#96514D)); background-image: -moz-linear-gradient(0% 100% 90deg, #96514D, #D05F4E); background-color: #96514D; color: white; }
+    .cssbtn_red:active { background: #96514D; color: white; }
+
+
+/* Orange */
+.cssbtn_orange { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F06E24), to(#E04607)); background-image: -moz-linear-gradient(0% 100% 90deg, #E04607, #F06E24); background-color: #E04607; border: 1px solid #C43C06; }
+    .cssbtn_orange:hover, .cssbtn_orange:focus { background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F59B66), to(#EA7D52)); background-image: -moz-linear-gradient(0% 100% 90deg, #EA7D52, #F59B66); background-color: #EA7D52; color: white; }
+    .cssbtn_orange:active { background: #D8744D; color: white; }

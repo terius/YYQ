@@ -1,0 +1,142 @@
+﻿@model YYQERP.ProductModel
+@{
+    ViewBag.Title = "产品管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+    </div>
+
+    <div id="main-panel" data-options="region: 'center',title:'产品列表',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+    <div id="east_panel" data-options="region: 'east',title:'产品明细',border:true,split:true" style="width: 50%; border-bottom: none; ">
+        <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;" data-checkper="setproductdetail">
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <label>选择Bom</label>
+                <input id="BomId" name="BomId" class="easyui-combobox"
+                       data-options="prompt:'选择Bom',editable:false,hasDownArrow:true,panelHeight:200,valueField:'bomid',textField:'bomname'"
+                       style="width:250px;">
+                <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addbom();">添加</button>
+
+            </div>
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <label>选择原材料</label>
+                <input id="ElementId" name="ElementId" class="easyui-combobox"
+                       data-options="prompt:'选择原材料',editable:false,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                       style="width:250px;">
+                <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addelement();">添加</button>
+
+            </div>
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <label>选择半成品</label>
+                <input id="HalfProductId" name="HalfProductId" class="easyui-combobox"
+                       data-options="prompt:'选择半成品',editable:false,hasDownArrow:true,panelHeight:200,valueField:'productid',textField:'producttext'"
+                       style="width:250px;">
+                <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addhalfproduct();">添加</button>
+
+            </div>
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.detailgrid.do_saveProductDetail();">保存</button>
+            </div>
+        </div>
+        <table id="detailgrid"></table>
+    </div>
+
+</div>
+<div id="toolbar1" data-checkper="query">
+    <input id="SearchAliases" name="SearchAliases" class="easyui-textbox" data-options="prompt:'产品序列号',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <input id="SearchModel" name="SearchModel" class="easyui-textbox" data-options="prompt:'型号',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>产品序列号</td>
+                        <td>
+                            <input id="Aliases" name="Aliases" class="easyui-textbox required" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>型号</td>
+                        <td>
+                            <input id="ModelId" name="ModelId" class="easyui-combobox required" data-errmsg="型号不能为空"
+                                   data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
+                                   style="width:250px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>生产日期</td>
+                        <td>
+                            <input id="CreateDate" name="CreateDate" class="easyui-datebox" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>产品类型</td>
+                        <td>
+                            <select id="ItemType" name="ItemType" class="easyui-combobox required" data-errmsg="产品类型不能为空"
+                                    data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200"
+                                    style="width:250px;">
+                                <option value="2">成品</option>
+                                <option value="3">半成品</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>计量单位</td>
+                        <td>
+                            <input id="UnitTypeCode" name="UnitTypeCode" class="easyui-combobox required" data-errmsg="计量单位不能为空"
+                                   data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'unitcode',textField:'unitname'"
+                                   style="width:250px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox" style="width: 250px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Product_Index.js"></script>
+    <script type="text/javascript">
+        var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
+        + '"pagelist":"/Product/GetPageList",'
+        + '"pdetail":"/Product/GetProductDetail",'
+        + '"getListByBomId":"/Product/GetDetailByBomId",'
+        + '"getListByEleId":"/Product/GetDetailByEleId",'
+        + '"getListByProductId":"/Product/GetDetailByProductId",'
+        + '"saveProductDetail":"/Product/SaveProductDetail",'
+        + '"add":"/Product/Add",'
+        + '"edit":"/Product/Edit",'
+        + '"delete":"/Product/Delete"'
+        + '},'
+        + '"buttons":[{"ButtonCode":"add","ButtonName":"新增产品","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()","data_checkper":"add"},'
+        + '{"ButtonCode":"edit","ButtonName":"编辑产品","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()","data_checkper":"edit"},'
+            + '{"ButtonCode":"delete","ButtonName":"删除产品","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
+        km.model = JSON.parse(model_string);
+        km.modelList = @Html.Raw(Json.Encode(@Model.ModelSelectList));
+        km.unitList = @Html.Raw(Json.Encode(@Model.UnitSelectList));
+        km.eleData = @Html.Raw(Json.Encode(@Model.ElementCacheViews));
+        km.bomList = @Html.Raw(Json.Encode(@Model.BomSelectList));
+        km.halfProductList = @Html.Raw(Json.Encode(@Model.HalfProductSelectList));
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+

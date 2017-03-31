@@ -1,0 +1,7 @@
+.jnotify-item { height: auto; padding: 5px; margin: 0px auto; display: block; position: relative; top: -5px; border-radius:5px }
+
+.jnotify-item-close { float: right; margin-left: 2px; }
+
+.notify-ui-state-success { background-color:#d5f8a1; border: 1px solid green; color: green; font-size:15px; font-weight:bold }
+.notify-ui-state-error { background-color:yellow; border: 1px solid red; color: red; }
+.notify-ui-state-warning { background-color:yellow; border: 1px solid red; color: red; } 

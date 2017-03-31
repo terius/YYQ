@@ -1,0 +1,244 @@
+﻿@{
+    ViewBag.Title = "销售报表管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style="overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+    </div>
+    <div id="main-panel" data-options="region: 'center',border:true" style="border-bottom: none; border-left: none;">
+
+        <table id="maingrid"></table>
+    </div>
+</div>
+
+
+<div id="toolbar1">
+    <label>销售日期</label>
+    <input id="STime" class="easyui-datebox" data-options="prompt:'开始时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" /><label style="margin-left:5px;margin-right:5px">到</label>
+    <input id="ETime" class="easyui-datebox" data-options="prompt:'结束时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-excel',plain:true" onclick="km.maingrid.do_import();" data-checkper="import">导入销售报表</a>
+    <a href="javascript:;" class="easyui-menubutton" data-options="menu:'#exp1',iconCls:'icon-standard-page-white-excel'" data-checkper="export">导出销售报表</a>
+    @*<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-excel',plain:true" onclick="km.maingrid.do_export();">导出销售报表</a>*@
+</div>
+
+<script id="tpl_file" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formfile" method="post">
+                <input id="importfile" name="importfile" importfile"" class="easyui-filebox" data-options="prompt:'选择销售报表文件',buttonText:'选择'" style="width:300px">
+                <a href="/ExcelTemplate/销售统计模板.xlsx" class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-put'">下载模板</a>
+            </form>
+        </div>
+    </div>
+</script>
+<div id="exp1" style="width:100px;">
+    <div><a href="javascript:;" onclick="km.maingrid.do_export(1);">导出当前页</a></div>
+    <div><a href="javascript:;" onclick="km.maingrid.do_export();">导出全部</a></div>
+</div>
+
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>售后</td>
+                        <td>
+                            <input id="AfterSales" name="AfterSales" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>日期</td>
+                        <td>
+                            <input id="SaleDate" name="SaleDate" class="easyui-datebox" style="width: 200px" />
+                        </td>
+                        <td>客户等级</td>
+                        <td>
+                            <input id="CustomerLevel" name="CustomerLevel" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>公司名称</td>
+                        <td>
+                            <input id="Company" name="Company" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>销售负责人</td>
+                        <td>
+                            <input id="SaleLeader" name="SaleLeader" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>付款日期</td>
+                        <td>
+                            <input id="PayDate" name="PayDate" class="easyui-datebox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>付款方式</td>
+                        <td>
+                            <input id="PayWay" name="PayWay" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>客户分类</td>
+                        <td>
+                            <input id="CustomerType" name="CustomerType" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>机器分类</td>
+                        <td>
+                            <input id="MachineType" name="MachineType" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>型号</td>
+                        <td>
+                            <input id="Model" name="Model" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>货物名称规格</td>
+                        <td>
+                            <input id="GoodsSpec" name="GoodsSpec" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>数量</td>
+                        <td>
+                            <input id="GoodsNum" name="GoodsNum" class="easyui-numberbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>含税单价</td>
+                        <td>
+                            <input id="TaxPrice" name="TaxPrice" class="easyui-numberbox " style="width: 200px" />
+                        </td>
+
+                        <td>金额（数量*单价）</td>
+                        <td>
+                            <input id="AllTaxPrice" name="AllTaxPrice" class="easyui-numberbox" style="width: 200px" />
+                        </td>
+                        <td>物流运费</td>
+                        <td>
+                            <input id="LogisticsCost" name="LogisticsCost" class="easyui-numberbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>未税金额</td>
+                        <td>
+                            <input id="NoTaxPrice" name="NoTaxPrice" class="easyui-numberbox " style="width: 200px" />
+                        </td>
+
+                        <td>发票号码</td>
+                        <td>
+                            <input id="Invoice" name="Invoice" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>送货单号码</td>
+                        <td>
+                            <input id="DeliveryNote" name="DeliveryNote" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>结款</td>
+                        <td>
+                            <input id="Billing" name="Billing" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>机器序列号</td>
+                        <td>
+                            <input id="MachineNo" name="MachineNo" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>订单号</td>
+                        <td>
+                            <input id="OrderNo" name="OrderNo" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>客户联系人</td>
+                        <td>
+                            <input id="Contacts" name="Contacts" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>手机号码</td>
+                        <td>
+                            <input id="Phone" name="Phone" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>固定电话</td>
+                        <td>
+                            <input id="Tel" name="Tel" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>邮箱</td>
+                        <td>
+                            <input id="Email" name="Email" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>QQ号码</td>
+                        <td>
+                            <input id="QQ" name="QQ" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>公司地址</td>
+                        <td>
+                            <input id="CompanyAddress" name="CompanyAddress" class="easyui-textbox " style="width: 200px" />
+                        </td>
+
+                        <td>传真号</td>
+                        <td>
+                            <input id="Fax" name="Fax" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                        <td>提成</td>
+                        <td>
+                            <input id="Bonus" name="Bonus" class="easyui-textbox" style="width: 200px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>物流公司</td>
+                        <td>
+                            <input id="LogisticsCompany" name="LogisticsCompany" class="easyui-textbox " style="width: 200px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+
+@section Styles {
+    <style>
+        .datagrid-editable-input.datagrid-filter {
+            background-color: #e0e5dc;
+        }
+    </style>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/js/datagrid-filter")
+    <script src="~/js/Export.js"></script>
+    <script src="~/js/Sys/Sale_Index.js"></script>
+    <script type="text/javascript">
+        km.model = {
+            "urls":{"pagelist":"/Sale/GetSaleReportPageList",
+                "importFile": "/Sale/ImportFile",
+                "add": "/Sale/Add",
+                "edit": "/Sale/Edit",
+                "delete": "/Sale/Delete"
+            },
+            "buttons":[
+                    { "ButtonCode": "add", "ButtonName": "新增销售信息", "Sort": 120, "ButtonType": 1, "IconClass": "icon-standard-add", "JsEvent": "do_add()","data_checkper":"add" },
+              { "ButtonCode": "edit", "ButtonName": "编辑销售信息", "Sort": 130, "ButtonType": 1, "IconClass": "icon-standard-pencil", "JsEvent": "do_edit()", "data_checkper": "edit" },
+              { "ButtonCode": "delete", "ButtonName": "删除销售信息", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-delete", "JsEvent": "do_delete()", "data_checkper": "delete" }
+            ]};
+
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+        km.menucode = @ViewBag.MenuCode;
+    </script>
+}
+
+
+
+
+
+

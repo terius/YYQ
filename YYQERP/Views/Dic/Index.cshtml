@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "字典管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style="overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+            @*<a id="toolbar_refresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-arrow-refresh'" title="刷新" onclick="km.toolbar.do_refresh();">刷新</a>
+                <a id="toolbar_add" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-add'" title="新增" onclick="km.toolbar.do_add();">新增</a>
+                <a id="toolbar_edit" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-pencil'" title="编辑" onclick="km.toolbar.do_edit();">编辑</a>
+                <a id="toolbar_delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-delete'" title="删除" onclick="km.toolbar.do_delete();">删除</a>*@
+        </div>
+        <div id="km_toolbar_2" class="km_toolbar" style="display:none">
+            <a id="toolbar_delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'" title="取消" onclick="km.toolbar.do_undo();">取消</a>
+            <a id="toolbar_save" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'" title="保存" onclick="km.toolbar.do_save();">保存</a>
+        </div>
+    </div>
+    <div id="west_panel" data-options="region: 'west',title:'字典分类管理',border:true,split:true" style=" width: 230px; border-bottom: none; border-left:none">
+        <ul id="maintree"></ul>
+    </div>
+    <div id="main_panel" data-options="region: 'center',title:'字典分类明细',border:true" style="padding: 0px; border-top: none;  border-bottom: none; ">
+        <div id="div_content">
+            <form id="form_content" class="form_content" method="post" style="background: #fff">
+                <table id="table_content" cellpadding="2" cellspacing="0" border="0">
+                    <tr>
+                        <td class="td_title">分类代码</td>
+                        <td>
+                            <input id="Code" name="Code" class="easyui-textbox required" data-options="value:'',required:true" style="width: 250px; " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_title">分类名称</td>
+                        <td>
+                            <input id="Name" name="Name" class="easyui-textbox required" data-options="value:'',required:true" style="width: 250px; " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_title">排序</td>
+                        <td>
+                            <input id="sort" name="sort" type="text" class="easyui-numberbox required" value="1" data-options="value:'',min:1,max:999999,required:true" style="width: 250px; " />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_title">启用</td>
+                        <td>
+                            <select id="Enabled" name="Enabled" class="easyui-combobox" data-options="editable:false,hasDownArrow:false,panelHeight:60" style="width: 250px; ">
+                                <option value="0">禁用</option>
+                                <option value="1">启用</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_title">备注</td>
+                        <td colspan="3">
+                            <input id="Remark" name="Remark" class="easyui-textbox" data-options="required:false,multiline:true,height:50" style="width: 300px; " />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="east_panel" data-options="region: 'east',title:'数据字典明细',border:true,split:true" style=" width: 50%; border-bottom: none; border-right:none">
+        <table id="dictitemgrid"></table>
+    </div>
+    <div id="toolbar1">
+        <a id="btn_add_dictitem" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.dictitemgrid.add_dictitem();" data-checkper="add">添加字典</a>
+        <a id="btn_edit_dictitem" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-pencil',plain:true" onclick="km.dictitemgrid.edit_dictitem();" data-checkper="edit">编辑字典</a>
+        <a id="btn_delete_dictitem" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-delete',plain:true" onclick="km.dictitemgrid.delete_dictitem();" data-checkper="delete">删除字典</a>
+    </div>
+</div>
+<script id="tpl_add" type="text/html">
+    <div id="adddialog">
+        <form id="formadd" method="post" style="background: #fff">
+            <table cellpadding="5" cellspacing="1" border="0" style=" width:100%;background: #fff">
+                <tr>
+                    <td>字典代码</td>
+                    <td>
+                        <input id="ParentCode" name="ParentCode" type="hidden" value="" />
+                        <input id="Code" name="Code" class="easyui-textbox" data-options="value:''" style="width: 250px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>字典名称</td>
+                    <td>
+                        <input id="Name" name="Name" class="easyui-textbox" data-options="value:''" style="width: 250px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td>
+                        <input id="sort" name="sort" type="text" class="easyui-numberbox" value="100" data-options="min:1,max:999999" style="width: 250px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>启用</td>
+                    <td>
+                        <select id="Enabled" name="Enabled" class="easyui-combobox" data-options="editable:false,panelHeight:60" style="width:250px;">
+                            <option value="0">禁用</option>
+                            <option value="1">启用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td>
+                        <input id="Remark" name="Remark" class="easyui-textbox" data-options="required:false" style="width: 250px" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</script>
+
+
+@section Styles {
+    <style>
+        #toolbar1, #toolbar2 {
+            border-bottom: none;
+        }
+
+        #maintree .tree-node {
+            height: 26px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        #maintree .tree-title {
+            font-size: 12px;
+            display: inline-block;
+            text-decoration: none;
+            vertical-align: top;
+            white-space: nowrap;
+            padding: 4px 2px;
+            height: 18px;
+            line-height: 18px;
+        }
+
+        .tree-expanded, .tree-collapsed, .tree-folder, .tree-file, .tree-checkbox, .tree-indent {
+            display: inline-block;
+            width: 16px;
+            height: 18px;
+            vertical-align: top;
+            margin: 4px 0px;
+            overflow: hidden;
+        }
+
+        #table_content {
+            width: 100%;
+            background: #fff;
+            border: none;
+        }
+
+            #table_content td {
+                border-bottom: 1px solid #ccc;
+            }
+
+                #table_content td.td_title {
+                    width: 90px;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                    background: #fafafa;
+                    border-right: 1px solid #ccc;
+                }
+
+        .textbox, .textbox-text {
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .textbox-fucused {
+            box-shadow: none;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Dic_Index.js"></script>
+    <script type="text/javascript">
+
+        var model_string = '{"urls":{"list":"/Dic/GetList",'
+        + '"pagelist":"/Dic/GetPageList",'
+        + '"add":"/Dic/Add",'
+        + '"edit":"/Dic/Edit",'
+        + '"delete":"/Dic/Delete",'
+        + '"getlist_dict":"/Dic/GetDicTreeViews",'
+        + '"getpagelist_dictitem":"/Dic/GetDicChildren",'
+        + '"add_dictitem":"/Dic/Add_DictItem",'
+        + '"edit_dictitem":"/Dic/Edit_DictItem",'
+        + '"delete_dictitem":"/Dic/Delete_DictItem"},'
+        + '"buttons":['
+        //+ '{"ButtonCode":"add","ButtonName":"新增","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()"},'
+        //+ '{"ButtonCode":"edit","ButtonName":"编辑","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()"},'
+        //+ '{"ButtonCode":"delete","ButtonName":"删除","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()"},'
+        //+ '{"ButtonCode":"refresh","ButtonName":"刷新","Sort":150,"ButtonType":1,"IconClass":"icon-standard-arrow-refresh","JsEvent":"do_refresh()"}'
+            + ']}';
+        km.model = JSON.parse(model_string);
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+
+

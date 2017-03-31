@@ -1,0 +1,32 @@
+/*accordion 样式重载*/
+.accordion-header-selected { background-color: #f2f2f2 !important; }
+.accordion .accordion-header-selected .panel-title { color: #15428b !important; }
+
+/*datagrid 样式重载*/
+.datagrid-toolbar,
+.datagrid-pager { background: #f2f2f2; }
+.datagrid-header,
+.datagrid-toolbar,
+.datagrid-pager,
+.datagrid-footer-inner { border-color: #ccc; }
+    .datagrid-header td, .datagrid-body td, .datagrid-footer td { border-color: #ccc; border-style:inset; /*border-bottom:none*/ }
+        .datagrid-header td.datagrid-header-over { background: #f2f2f2; color: #000000; cursor: default; }
+.datagrid-header, .datagrid-td-rownumber { background: #f2f2f2; }
+.datagrid-header { overflow: hidden; cursor: default; border-width: 1px 0 0 0; border-style: solid; border-color: #ccc; }
+
+
+
+/*Home/Index 相关样式*/
+.layout_north { overflow: hidden; background: #f2f2f2 !important; }
+    .layout_north .layout_north_left { float: left; }
+    .layout_north .layout_north_right { float: right; margin: 5px; text-align: right; border: 0px solid red; }
+
+.layout_north_menu { float: left; margin: 5px; width: 80%; font-size: 15px; font-weight: bolder; }
+    .layout_north_menu .wnav { float: left; width: 100%; }
+
+.layout_south { height: 25px; background: #f2f2f2; }
+    .layout_south .layout_south_footer { text-align: center; line-height: 22px; }
+
+/*页面按钮工具栏样式*/
+.km_toolbar { background-color: #f2f2f2; border: 0px solid #CCC; border-left: none; border-right: none; height: 26px; line-height: 26px; padding: 3px; }
+    .km_toolbar a { float: left; }

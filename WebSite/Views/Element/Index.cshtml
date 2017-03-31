@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "原材料管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+        <div class="km_toolbar" data-checkper="export">
+            <a href="javascript:;" class="easyui-menubutton" data-options="menu:'#exp1',iconCls:'icon-standard-page-white-excel'">导出原材料</a>
+            <div id="exp1" style="width:100px;">
+                <div><a href="javascript:;" onclick="km.maingrid.do_export(1);">导出当前页</a></div>
+                <div><a href="javascript:;" onclick="km.maingrid.do_export();">导出全部</a></div>
+            </div>
+        </div>
+    </div>
+    <div id="main-panel" data-options="region: 'center',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+
+</div>
+<div id="toolbar1" data-checkper="query">
+    <input id="elementCode" class="easyui-textbox" data-options="prompt:'原材料名称或料号',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <input id="shelfCode" class="easyui-textbox" data-options="prompt:'库位',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>原材料名称</td>
+                        <td>
+                            <input id="Name" name="Name" class="easyui-textbox required" data-errmsg="原材料名称不能为空" data-options="required:true,value:''" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>原材料料号</td>
+                        <td>
+                            <input id="Code" name="Code" class="easyui-textbox required" data-errmsg="原材料料号不能为空" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>单位规格</td>
+                        <td>
+                            <select id="UnitTypeCode" name="UnitTypeCode" class="easyui-combobox required" data-errmsg="单位规格不能为空"
+                                    data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'unitcode',textField:'unitname'"
+                                    style="width:250px;"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预警数量</td>
+                        <td>
+                            <input id="WarningQuantity" name="WarningQuantity" class="easyui-numberbox" data-options="precision:2" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>单价(人民币：元)</td>
+                        <td>
+                            <input id="Price" name="Price" class="easyui-numberbox required" precision="2" data-errmsg="单价不能为空" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>库位</td>
+                        <td>
+                            <select id="ShelfId" name="ShelfId" class="easyui-combobox required" data-errmsg="库位不能为空"
+                                    data-options="required:true,editable:true,hasDownArrow:true,panelHeight:200,valueField:'shelfid',textField:'shelftext'"
+                                    style="width:250px;"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox" data-options="value:''" style="width: 300px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script id="tpl_file" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formfile" method="post">
+                <input id="importfile" name="importfile"  class="easyui-filebox" data-options="prompt:'选择原材料Excel文件',buttonText:'选择'" style="width:300px">
+                <a href="/ExcelTemplate/原材料模板.xls" class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-put'">下载模板</a>
+
+            </form>
+        </div>
+    </div>
+</script>
+<script id="tpl_file2" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formfile2" method="post">
+                <input id="importfile2" name="importfile2"  class="easyui-filebox" data-options="prompt:'选择要恢复的原材料Excel文件',buttonText:'选择'" style="width:300px">
+                <a href="/ExcelTemplate/修改库存数模板.xls" class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-put'">下载模板</a>
+
+            </form>
+        </div>
+    </div>
+</script>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Element_Index.js"></script>
+    <script type="text/javascript">
+        km.model = {
+            "urls": {
+                "list": "/Sys/Base_Button/GetList",
+                "pagelist": "/Element/GetElementPageList",
+                "add": "/Element/Add",
+                "edit": "/Element/Edit",
+                "delete": "/Element/Delete",
+                "importFile": "/Element/ImportFile",
+                "restoreFile": "/Element/RestoreFile"
+            },
+            "buttons": [
+             { "ButtonCode": "add", "ButtonName": "新增原材料", "Sort": 120, "ButtonType": 1, "IconClass": "icon-standard-add", "JsEvent": "do_add()","data_checkper":"add" },
+            { "ButtonCode": "edit", "ButtonName": "编辑原材料", "Sort": 130, "ButtonType": 1, "IconClass": "icon-standard-pencil", "JsEvent": "do_edit()", "data_checkper": "edit" },
+            { "ButtonCode": "delete", "ButtonName": "删除原材料", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-delete", "JsEvent": "do_delete()", "data_checkper": "delete" },
+            { "ButtonCode": "import", "ButtonName": "导入原材料", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_import()", "data_checkper": "import" },
+             { "ButtonCode": "import", "ButtonName": "更改原材料库存", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_restore()", "data_checkper": "restore" }
+            ]
+        };
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+
+    </script>
+}
+
+
+
+
+
+

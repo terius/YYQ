@@ -1,0 +1,106 @@
+﻿@model YYQERP.PartModel
+@{
+    ViewBag.Title = "部件管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+    
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+     
+    </div>
+    <div id="main-panel" data-options="region: 'center',title:'部件列表',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+    <div id="east_panel" data-options="region: 'east',border:true,split:true" style="width: 60%; border-bottom: none; ">
+        <div id="user_tabs" class="easyui-tabs" data-options="fit:true,border:false">
+            <div title="部件明细" data-options="iconCls:'icon-standard-plugin'">
+                <div id="north_panel" data-options="region:'north',border:false">
+                    <div class="km_toolbar" data-checkper="setpartdetail">
+                        <label>复制部件</label>
+                        <input id="PartId" name="PartId" class="easyui-combobox"
+                               data-options="prompt:'选择要复制的部件',editable:false,hasDownArrow:true,panelHeight:200,valueField:'Id',textField:'Text'"
+                               style="width:250px;">
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_copypart();">添加</button>
+
+                    </div>
+                    <div id="km_toolbar_detail" class="km_toolbar" data-checkper="setpartdetail">
+                    </div>
+                </div>
+                <table id="partDetailGrid"></table>
+            </div>
+            <div title="所属Bom" data-options="iconCls:'icon-standard-picture-empty'">
+                <table id="bomGrid"></table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>部件名称</td>
+                        <td>
+                            <input id="Name" name="Name" class="easyui-textbox required" data-options="required:true,value:''" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>部件代码</td>
+                        <td>
+                            <input id="Code" name="Code" class="easyui-textbox required" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox" style="width: 250px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+@section Styles {
+}
+
+@section Scripts {
+    @Scripts.Render("~/js/easyui-datagrid-detailview")
+    <script src="~/js/Sys/Part_Index.js"></script>
+    <script type="text/javascript">
+
+        var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
+        + '"pagelist":"/Part/GetPageList",'
+        + '"add":"/Part/Add",'
+        + '"edit":"/Part/Edit",'
+        + '"delete":"/Part/Delete",'
+        + '"partdetail":"/Part/GetPartDetail",'
+        + '"getBomByPart":"/Part/GetBomByPart",'
+        + '"getBomDetail":"/Part/GetBomDetail",'
+        + '"savepartdetail":"/Part/SavePartDetail"'
+        + '},'
+        + '"detailbuttons":['
+        + '{"ButtonCode":"appendrow","ButtonName":"添加一行","Sort":120,"ButtonType":1,"IconClass":"icon-add","JsEvent":"km.detailgrid.do_appendrow()"},'
+        + '{"ButtonCode":"removerow","ButtonName":"删除选择行","Sort":130,"ButtonType":1,"IconClass":"icon-remove","JsEvent":"km.detailgrid.do_removerow()"},'
+        //+ '{"ButtonCode":"accept","ButtonName":"接受","Sort":140,"ButtonType":1,"IconClass":"icon-standard-tick","JsEvent":"km.detailgrid.do_accept()"},'
+        + '{"ButtonCode":"save","ButtonName":"保存","Sort":150,"ButtonType":1,"IconClass":"icon-save","JsEvent":"km.detailgrid.do_save()"}'
+        + '],'
+        + '"buttons":[{"ButtonCode":"add","ButtonName":"新增部件","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()","data_checkper":"add"},'
+        + '{"ButtonCode":"edit","ButtonName":"编辑部件","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()","data_checkper":"edit"},'
+            + '{"ButtonCode":"delete","ButtonName":"删除部件","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
+        km.model = JSON.parse(model_string);
+        km.eleData = @Html.Raw(Json.Encode(@Model.ElementCacheViews));
+        km.partList = @Html.Raw(Json.Encode(@Model.PartSelectViews));
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+

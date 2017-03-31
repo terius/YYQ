@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="/Content/css/base.css" rel="stylesheet" />
+    <link href="/Content/css/cssbtn.css" rel="stylesheet" />
+    <link href="/js/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/easyui/themes/style.css" rel="stylesheet" />
+    <link href="/easyui/144/icon-all.css" rel="stylesheet" />
+    <link href="/easyui/144/plugin_extend.css" rel="stylesheet" />
+    <link href="/js/jquery.jnotify.css" rel="stylesheet" />
+    <link href="/js/showLoading.css" rel="stylesheet" />
+
+
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+    @Scripts.Render("~/js/jquery")
+</head>
+<body>
+    @RenderBody()
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    @Scripts.Render("~/js/easyuiother")
+    @*@Scripts.Render("~/js/easyui-cn")
+    @Scripts.Render("~/js/easyui-ext")
+    @Scripts.Render("~/js/easyui-tab-ext")*@
+    @Scripts.Render("~/js/jquery-ext")
+    @Scripts.Render("~/js/page")
+    @*@Scripts.Render("~/js/BaiduTemplate")
+    @Scripts.Render("~/js/utils")
+    @Scripts.Render("~/js/json2")
+    @Scripts.Render("~/js/yxz")
+    @Scripts.Render("~/js/layer")
+    @Scripts.Render("~/js/ztree")
+    @Scripts.Render("~/js/common")
+    @Scripts.Render("~/js/validate")
+    @Scripts.Render("~/js/basejs")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

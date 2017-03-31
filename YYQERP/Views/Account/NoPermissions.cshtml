@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>权限不足</title>
+    <style>
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+            background-color: #016aa9;
+            overflow: hidden;
+        }
+
+        .noper {
+            padding: 20px;
+            color: #fff;
+        }
+
+        a {
+            color: #fff;
+        }
+
+            a:hover {
+                color: Red;
+            }
+    </style>
+</head>
+<body>
+    <div class="noper">
+        对不起，您没有访问此页面的权限 @ViewBag.LastUrl
+        <div>
+            用户名：@User.Identity.Name
+            <a href="~/Account/LogOut">登出</a>
+        </div>
+    </div>
+
+</body>
+</html>

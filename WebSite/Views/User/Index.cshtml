@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "用户管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+            @*<a id="toolbar_refresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-arrow-refresh'" title="刷新" onclick="km.toolbar.do_refresh();">刷新</a>
+                <a id="toolbar_add" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-add'" title="新增" onclick="km.toolbar.do_add();">新增</a>
+                <a id="toolbar_edit" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-pencil'" title="编辑" onclick="km.toolbar.do_edit();">编辑</a>
+                <a id="toolbar_delete" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-delete'" title="删除" onclick="km.toolbar.do_delete();">删除</a>*@
+        </div>
+    </div>
+    <div id="main-panel" data-options="region: 'center',border:false" style="padding: 0px;">
+        <table id="maingrid"></table>
+    </div>
+</div>
+<div id="toolbar1" data-checkper="query">
+    <input id="keyword" class="easyui-textbox" data-options="prompt:'关键字搜索',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+
+
+<script id="tpl_add" type="text/html">
+    <div style="width: auto; height: auto">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post" action="/User/AddUser">
+                <table cellpadding="3">
+                    <tr>
+                        <td>用户名</td>
+                        <td>
+                            <input id="UserName" name="UserName" class="easyui-textbox required" data-errmsg="用户名不能为空" data-options="required:true,value:''" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>姓名</td>
+                        <td>
+                            <input id="TrueName" name="TrueName" class="easyui-textbox required" data-errmsg="姓名不能为空" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>所属角色</td>
+                        <td>
+                            <select id="RoleId" name="RoleId" class="easyui-combobox required" data-errmsg="角色不能为空"
+                                    data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
+                                    style="width:250px;"></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+
+
+
+@section Styles {
+    <style type="text/css">
+        #toolbar1, #toolbar2 {
+            border-bottom: none;
+        }
+
+        .table_content {
+            width: 100%;
+            background: #fff;
+            border: none;
+        }
+
+            .table_content td {
+                border-bottom: 1px solid #ccc;
+            }
+
+                .table_content td.td_title {
+                    width: 90px;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                    background: #fafafa;
+                    border-right: 1px solid #ccc;
+                }
+
+        .textbox, .textbox-text {
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .textbox-fucused {
+            box-shadow: none;
+        }
+    </style>
+
+}
+
+@section Scripts {
+    <script src="/js/Sys/User_Index.js"></script>
+    <script type="text/javascript">
+        km.model = {
+            "urls": {
+                "list": "/Sys/Base_Button/GetList",
+                "pagelist": "/User/GetPageList",
+                "add": "/User/AddUser",
+                "edit": "/User/EditUser",
+                "delete": "/User/DeleteUser"
+            },
+            "buttons": [
+            { "ButtonCode": "add", "ButtonName": "新增", "Sort": 120, "ButtonType": 1, "IconClass": "icon-standard-add", "JsEvent": "do_add()", "data_checkper": "add" },
+        { "ButtonCode": "edit", "ButtonName": "编辑", "Sort": 130, "ButtonType": 1, "IconClass": "icon-standard-pencil", "JsEvent": "do_edit()", "data_checkper": "edit" },
+        { "ButtonCode": "delete", "ButtonName": "删除", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-cross", "JsEvent": "do_delete()", "data_checkper": "delete" }
+            ]
+        };
+        //  km.model = JSON.parse(model_string);
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+

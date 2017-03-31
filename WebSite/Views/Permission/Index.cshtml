@@ -1,0 +1,43 @@
+﻿@model YYQERP.BomModel
+@{
+    ViewBag.Title = "权限管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="main-panel" data-options="region: 'center',title:'角色列表',border:true" style="border-bottom: none; border-left: none;">
+        <ul id="maintree" class="easyuitree"></ul>
+    </div>
+    <div id="east_panel" data-options="region: 'east',title:'角色权限',border:true,split:true" style="width: 60%; border-bottom: none; ">
+        <div id="north_panel" data-options="region:'north',border:false" >
+            <div class="km_toolbar">
+                <button id="saveDetail" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.detailgrid.do_savePermisson();" data-checkper="setper">保存</button>
+            </div>
+        </div>
+        <form id="formtree" method="post">
+            <ul id="MenuTree" class="easyui-treegrid"></ul>
+        </form>
+    </div>
+</div>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Permission_Index.js"></script>
+    <script type="text/javascript">
+
+        km.model = {
+            "urls": {
+                "list": "/Permission/GetList",
+                "getRoleMenus": "/Permission/GetRoleMenus",
+                "saveRoleMenus": "/Permission/SaveRoleMenus",
+                "saveRoleMenus2": "/Permission/SaveRoleMenus2"
+            }
+        };
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+

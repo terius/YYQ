@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试页面</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    @*@Styles.Render("~/css/base")
+        @Styles.Render("~/css/ztree")
+        @Styles.Render("~/css/easyui")
+        @Styles.Render("~/css/extend")*@
+
+    <link href="/Content/css/base.css" rel="stylesheet" />
+    <link href="/Content/css/cssbtn.css" rel="stylesheet" />
+    <link href="/js/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="/easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="/easyui/themes/style.css" rel="stylesheet" />
+    <link href="/easyui/144/icon-all.css" rel="stylesheet" />
+    <link href="/easyui/144/plugin_extend.css" rel="stylesheet" />
+    <link href="/js/jquery.jnotify.css" rel="stylesheet" />
+    <link href="/js/showLoading.css" rel="stylesheet" />
+
+    @Scripts.Render("~/js/jquery")
+    <style>
+        .headtitle {
+            font-size: 25px;
+            font-weight: 600;
+            color: #2744ce;
+            margin-left: 30px;
+            letter-spacing: 3px;
+            height: 60px;
+            line-height: 60px;
+        }
+    </style>
+
+</head>
+<body id="homebody" class="easyui-layout">
+    <div id='pageLoading' style="position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; background: #545669; text-align: center; opacity: 0.8; filter: alpha(opacity=80);">
+        <div style="z-index: 3; width: auto; height: 16px; line-height: 16px; position: absolute; top: 50%; left: 50%; margin-top: -20px; margin-left: -92px; border: 2px dashed #75186D; padding: 12px 5px 10px 30px; background: #ffffff url('/images/ajax-loader.gif') no-repeat scroll 5px center;">
+            页面拼命加载中,请稍后 ...
+        </div>
+    </div>
+    <noscript>
+        <div class="noscript">
+            <img src="/Content/images/noscript.gif" alt="抱歉，请开启脚本支持！" />
+        </div>
+    </noscript>
+    <div id="north_panel" region="north" class="layout_north" split="false" border="false" style="background:url(/images/bg.PNG) repeat !important">
+        <div class="layout_north_left">
+            <img src="/images/head.png" style="height:60px" /><span class="headtitle">一月清洁ERP管理系统</span>
+        </div>
+        <div class="layout_north_right" style="margin-top:18px">
+            <a href="javascript:void(0)" class="easyui-menubutton" data-options="menuAlign:'right',iconCls:'icon-standard-user',menu:'#mm_user'">[@ViewBag.UserRole]@ViewBag.UserName</a>
+            <div id="mm_user" style="width:120px; display:none">
+                @*<div data-options="iconCls:'icon-standard-note'" class="selfinfo">个人信息</div>
+                    <div data-options="iconCls:'icon-standard-cog'" class="myconfig">个性化设置</div>*@
+                <div data-options="iconCls:'icon-edit'" class="changepwd">修改密码</div>
+                <div class="menu-sep"></div>
+                <div data-options="iconCls:'icon-standard-cancel'" class="loginOut">安全退出</div>
+            </div>
+        </div>
+
+    </div>
+    <div id="west_panel" region="west" split="true" title="导航菜单" minwidth="30" maxwidth="200" style="width: 160px;">
+        <div id="wnav">
+            <div style="text-align: center; "><img src="/images/ajax-loader.gif" /><br>导航菜单加载中...</div>
+        </div>
+    </div>
+
+    <div id="south_panel" region="south" split="false" class="layout_south">
+        <div class="layout_south_footer">Copyright &copy; Terius All Rights Reserved &nbsp; 版本：v2016-10-18-01<span id="span_checklogin"></span></div>
+    </div>
+
+    <div id="main_panel" region="center" style="background: #eee; padding:0; overflow-y:auto">
+        <div id="tabs" class="easyui-tabs" fit="true" border="false" data-options="tools:'#tab-tools'" style=" padding:0">
+
+        </div>
+    </div>
+    <div id="tab-tools" style=" border-top:none; border-right:none">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-arrow-refresh'" title="刷新当前打开的Tab标签选项卡" onclick="wrapper.tabRefresh();"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-shape-group'" title="在新的窗口打开当前Tab标签选项卡" onclick="wrapper.jumpOpen();"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-arrow-out'" title="全屏切换" onclick="wrapper.setFullScreen(this);"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-standard-cross'" title="关闭所有Tab标签选项卡" onclick="wrapper.tabCloseAll();"></a>
+    </div>
+
+    <div id="div-password-edit">
+        <form id="form-password-edit" name="form-password-edit" style="font-size: 12px; width: 300px; margin: 0 auto; padding: 5px; box-shadow: 0 0 30px #DDDDDD;">
+            <table cellpadding="0px" cellspacing="0px" border="0" style="border-collapse: collapse; width: 100%; margin: 0 auto; box-shadow: 0 0 30px #DDDDDD;">
+                <tr>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px; width: 80px; height: 32px;">
+                        当前用户
+                    </td>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px;">
+                        [@ViewBag.UserRole]@ViewBag.UserName
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px; width: 80px; height: 32px;">
+                        新密码
+                    </td>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px;">
+                        <input id="newpassword" name="newpassword" class="easyui-textbox" data-options="type:'password'" value="" style="width: 98%; height: 25px;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px; width: 100px; height: 32px;">
+                        确认密码
+                    </td>
+                    <td style="border: 1px #DDDDDD solid; padding-left: 5px;">
+                        <input id="confirmpassword" name="confirmpassword" class="easyui-textbox" data-options="type:'password'" value="" style="width: 98%; height: 25px;" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="notity"></div>
+    <input id="hd_navigation" type="hidden" value="tree" />
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    @*@Scripts.Render("~/js/easyui-cn")
+    @Scripts.Render("~/js/easyui-ext")
+    @Scripts.Render("~/js/easyui-tab-ext")*@
+    @Scripts.Render("~/js/easyuiother")
+    @Scripts.Render("~/js/jquery-ext")
+    @Scripts.Render("~/js/home")
+    @*@Scripts.Render("~/js/BaiduTemplate")
+    @Scripts.Render("~/js/utils")
+    @Scripts.Render("~/js/layer")
+    @Scripts.Render("~/js/ztree")
+    @Scripts.Render("~/js/common")
+    @Scripts.Render("~/js/page/home")*@
+    <script>
+        function closes() {
+            $("#pageLoading").fadeOut("fast", function () { $(this).remove(); });
+        }
+        var pc;
+        $.parser.onComplete = function () {
+            if (pc) clearTimeout(pc);
+            pc = setTimeout(closes, 1000);
+            closes();
+        }
+
+        //   yyq.init_Home_Index();
+    </script>
+</body>
+
+</html>

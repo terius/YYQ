@@ -1,0 +1,114 @@
+﻿@model YYQERP.BomModel
+@{
+    ViewBag.Title = "Bom管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+    </div>
+    <div id="main-panel" data-options="region: 'center',title:'Bom列表',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+    <div id="east_panel" data-options="region: 'east',title:'Bom明细',border:true,split:true" style="width: 60%; border-bottom: none; ">
+        <div id="north_panel" data-options="region:'north',border:false" data-checkper="setbomdetail">
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <label>添加部件</label>
+                <input id="PartId" name="PartId" class="easyui-combobox"
+                       data-options="prompt:'选择部件',editable:false,hasDownArrow:true,panelHeight:200,valueField:'partid',textField:'partname'"
+                       style="width:250px;">
+                <button id="add_part" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addpart();">添加</button>
+
+            </div>
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <label>添加原材料</label>
+                <input id="ElementId" name="ElementId" class="easyui-combobox"
+                       data-options="prompt:'选择原材料',editable:false,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                       style="width:250px;">
+                <button id="add_element" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addelement();">添加</button>
+
+            </div>
+            <div id="km_toolbar_detail" class="km_toolbar">
+                <button id="saveDetail" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.detailgrid.do_savebomdetail();">保存</button>
+                <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-page-white-excel'" onclick="km.detailgrid.do_export();" data-checkper="export">导出Bom明细</button>
+              
+            </div>
+        </div>
+        <table id="bomDetailGrid"></table>
+    </div>
+</div>
+<div id="toolbar1" data-checkper="query">
+    <input id="SearchModel" name="SearchModel" class="easyui-combobox"
+           data-options="prompt:'所属型号',editable:true,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
+           style="width:250px;">
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>Bom名称</td>
+                        <td>
+                            <input id="Name" name="Name" class="easyui-textbox required" data-options="required:true,value:''" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>所属型号</td>
+                        <td>
+                            <input id="ModelId" name="ModelId" class="easyui-combobox required" data-errmsg="型号不能为空"
+                                   data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
+                                   style="width:250px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox" style="width: 500px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Bom_Index.js"></script>
+    <script type="text/javascript">
+
+        var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
+        + '"pagelist":"/Bom/GetPageList",'
+        + '"add":"/Bom/Add",'
+        + '"edit":"/Bom/Edit",'
+        + '"delete":"/Bom/Delete",'
+        + '"bomdetail":"/Bom/GetBomDetail",'
+        + '"savebomdetail":"/Bom/SaveBomDetail",'
+        + '"getpartdetailele":"/Bom/GetPartDetail",'
+        + '"geteledetailforbom":"/Bom/GetEleDetailForBom"'
+        + '},'
+        + '"detailbuttons":['
+        + '{"ButtonCode":"appendrow","ButtonName":"添加一行","Sort":120,"ButtonType":1,"IconClass":"icon-add","JsEvent":"do_appendrow()"},'
+        + '{"ButtonCode":"removerow","ButtonName":"删除选择行","Sort":130,"ButtonType":1,"IconClass":"icon-remove","JsEvent":"do_removerow()"},'
+        + '{"ButtonCode":"accept","ButtonName":"接受","Sort":140,"ButtonType":1,"IconClass":"icon-standard-tick","JsEvent":"do_accept()"},'
+        + '{"ButtonCode":"save","ButtonName":"保存","Sort":150,"ButtonType":1,"IconClass":"icon-save","JsEvent":"do_save()"}'
+        + '],'
+        + '"buttons":[{"ButtonCode":"add","ButtonName":"新增Bom","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()","data_checkper":"add"},'
+        + '{"ButtonCode":"edit","ButtonName":"编辑Bom","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()","data_checkper":"edit"},'
+            + '{"ButtonCode":"delete","ButtonName":"删除Bom","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
+        km.model = JSON.parse(model_string);
+        km.eleData = @Html.Raw(Json.Encode(@Model.ElementCacheViews));
+        km.modelList = @Html.Raw(Json.Encode(@Model.ModelSelectList));
+        km.partList = @Html.Raw(Json.Encode(@Model.PartSelectList));
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+

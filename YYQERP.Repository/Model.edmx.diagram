@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eaf69e2f191d4ec99363342d31095c29" Name="Diagram1" >
+        <EntityTypeShape EntityType="YYQERPModel.UserSet" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="YYQERPModel.RoleSet" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="YYQERPModel.MenuSet" Width="1.5" PointX="6.5" PointY="3" />
+        <EntityTypeShape EntityType="YYQERPModel.RoleMenuSet" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="YYQERPModel.FK_RoleMenuSet_MenuSet" />
+        <AssociationConnector Association="YYQERPModel.FK_RoleMenuSet_RoleSet" />
+        <EntityTypeShape EntityType="YYQERPModel.DicSet" Width="1.5" PointX="0.875" PointY="7.125" />
+        <EntityTypeShape EntityType="YYQERPModel.ModelSet" Width="1.5" PointX="12.75" PointY="7.625" />
+        <EntityTypeShape EntityType="YYQERPModel.ShelfSet" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="YYQERPModel.ElementSet" Width="1.5" PointX="2.625" PointY="10.5" />
+        <EntityTypeShape EntityType="YYQERPModel.BomDetailSet" Width="1.5" PointX="5.75" PointY="11" />
+        <EntityTypeShape EntityType="YYQERPModel.BomSet" Width="1.5" PointX="3.75" PointY="15.75" />
+        <EntityTypeShape EntityType="YYQERPModel.PartDetailSet" Width="1.5" PointX="8.75" PointY="11.125" />
+        <EntityTypeShape EntityType="YYQERPModel.PartSet" Width="1.5" PointX="6.5" PointY="15.375" />
+        <AssociationConnector Association="YYQERPModel.FK_BomSet_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_BomSet_ModelSet" />
+        <AssociationConnector Association="YYQERPModel.FK_ElementSet_ShelfSet" />
+        <AssociationConnector Association="YYQERPModel.FK_PartSet_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_PartDetailSet_PartSet" />
+        <AssociationConnector Association="YYQERPModel.FK_UserSet_RoleSet" />
+        <AssociationConnector Association="YYQERPModel.FK_BomSet_ModelSet1" />
+        <EntityTypeShape EntityType="YYQERPModel.ProductDetailSet" Width="1.5" PointX="11.625" PointY="12.125" />
+        <AssociationConnector Association="YYQERPModel.FK_ProductDetailSet_BomSet" />
+        <AssociationConnector Association="YYQERPModel.FK_ProductDetailSet_ElementSet" />
+        <EntityTypeShape EntityType="YYQERPModel.StockInSet" Width="1.5" PointX="10" PointY="6.375" />
+        <EntityTypeShape EntityType="YYQERPModel.StockSet" Width="1.5" PointX="18.125" PointY="9.25" />
+        <AssociationConnector Association="YYQERPModel.FK_StockIn_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockSet_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockIn_ShelfSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockSet_ShelfSet" />
+        <EntityTypeShape EntityType="YYQERPModel.ProductSet" Width="2.25" PointX="15" PointY="7" />
+        <AssociationConnector Association="YYQERPModel.FK_ProductSet_ModelSet" />
+        <AssociationConnector Association="YYQERPModel.FK_ProductDetailSet_HalfProductSet" />
+        <AssociationConnector Association="YYQERPModel.FK_ProductDetailSet_ProductSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockSet_ProductSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockInSet_ProductSet" />
+        <EntityTypeShape EntityType="YYQERPModel.StockOutSet" Width="1.5" PointX="11.875" PointY="2.75" />
+        <AssociationConnector Association="YYQERPModel.FK_StockOutSet_BomSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockOutSet_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockOutSet_ProductSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockOutSet_ShelfSet" />
+        <EntityTypeShape EntityType="YYQERPModel.MenuOperSet" Width="1.5" PointX="8.75" PointY="4.375" />
+        <EntityTypeShape EntityType="YYQERPModel.OperSet" Width="1.5" PointX="6.5" PointY="20.25" />
+        <EntityTypeShape EntityType="YYQERPModel.RoleMenuOperSet" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="YYQERPModel.FK_MenuOperSet_MenuSet" />
+        <AssociationConnector Association="YYQERPModel.FK_MenuOperSet_OperSet" />
+        <AssociationConnector Association="YYQERPModel.FK_RoleMenuOperSet_OperSet" />
+        <AssociationConnector Association="YYQERPModel.FK_RoleMenuOperSet_RoleMenuSet" />
+        <EntityTypeShape EntityType="YYQERPModel.PickMainSet" Width="1.5" PointX="6.5" PointY="23.625" />
+        <EntityTypeShape EntityType="YYQERPModel.PickSet" Width="1.5" PointX="8.75" PointY="15.875" />
+        <AssociationConnector Association="YYQERPModel.FK_PickSet_BomSet" />
+        <AssociationConnector Association="YYQERPModel.FK_PickSet_ElementSet" />
+        <AssociationConnector Association="YYQERPModel.FK_PickSet_PickMainSet" />
+        <AssociationConnector Association="YYQERPModel.FK_StockOutSet_PickSet" />
+        <EntityTypeShape EntityType="YYQERPModel.CustomerSet" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="YYQERPModel.SaleReportSet" Width="1.5" PointX="14.75" PointY="12.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

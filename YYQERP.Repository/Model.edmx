@@ -1,0 +1,2327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YYQERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BomDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BomId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" Nullable="false" />
+          <Property Name="PartCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BomSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CustomerSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contacts" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="QQ" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyAddress" Type="varchar" MaxLength="100" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="Addtime" Type="date" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DicSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentCode" Type="varchar" MaxLength="50" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="sort" Type="int" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ElementSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UnitTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="Price" Type="money" />
+          <Property Name="ShelfId" Type="int" Nullable="false" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="WarningQuantity" Type="float" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="PickQuantity" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuOperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="OperId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParentCode" Type="varchar" MaxLength="50" />
+          <Property Name="Url" Type="varchar" MaxLength="100" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+          <Property Name="MenuLevel" Type="int" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="IconClass" Type="varchar" MaxLength="50" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ShowInMenu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Stype" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PartDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PartSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PickMainSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="IsFeedback" Type="bit" Nullable="false" />
+          <Property Name="StockOutTime" Type="datetime" />
+          <Property Name="StockOutUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PickSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElementId" Type="int" Nullable="false" />
+          <Property Name="BomId" Type="int" />
+          <Property Name="PartCode" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="400" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="IsFeedback" Type="bit" Nullable="false" />
+          <Property Name="StockOutQuantity" Type="float" Nullable="false" />
+          <Property Name="StockOutTime" Type="datetime" />
+          <Property Name="StockOutUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" Nullable="false" />
+          <Property Name="BomId" Type="int" />
+          <Property Name="HalfProductId" Type="int" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="Aliases" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="UnitTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleMenuOperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleMenuId" Type="int" Nullable="false" />
+          <Property Name="OperId" Type="int" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RoleMenuSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RoleSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SaleReportSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AfterSales" Type="varchar" MaxLength="200" />
+          <Property Name="SaleDate" Type="date" />
+          <Property Name="CustomerLevel" Type="varchar" MaxLength="200" />
+          <Property Name="Company" Type="varchar" MaxLength="200" />
+          <Property Name="SaleLeader" Type="varchar" MaxLength="200" />
+          <Property Name="PayDate" Type="varchar" MaxLength="200" />
+          <Property Name="PayWay" Type="varchar" MaxLength="200" />
+          <Property Name="CustomerType" Type="varchar" MaxLength="200" />
+          <Property Name="MachineType" Type="varchar" MaxLength="200" />
+          <Property Name="Model" Type="varchar" MaxLength="200" />
+          <Property Name="GoodsSpec" Type="varchar" MaxLength="200" />
+          <Property Name="GoodsNum" Type="int" />
+          <Property Name="TaxPrice" Type="money" />
+          <Property Name="AllTaxPrice" Type="money" />
+          <Property Name="LogisticsCost" Type="money" />
+          <Property Name="NoTaxPrice" Type="money" />
+          <Property Name="Invoice" Type="varchar" MaxLength="200" />
+          <Property Name="DeliveryNote" Type="varchar" MaxLength="200" />
+          <Property Name="Billing" Type="varchar" MaxLength="200" />
+          <Property Name="MachineNo" Type="varchar" MaxLength="200" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Contacts" Type="nvarchar" MaxLength="300" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="Tel" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="QQ" Type="varchar" MaxLength="200" />
+          <Property Name="CompanyAddress" Type="varchar" MaxLength="200" />
+          <Property Name="Fax" Type="varchar" MaxLength="200" />
+          <Property Name="Bonus" Type="varchar" MaxLength="200" />
+          <Property Name="LogisticsCompany" Type="varchar" MaxLength="200" />
+          <Property Name="Addtime" Type="date" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="GroupGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ShelfSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="StockInSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElementId" Type="int" />
+          <Property Name="ShelfId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="GroupGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="StockOutSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElementId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="BomId" Type="int" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="ShelfId" Type="int" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="GroupGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="200" />
+          <Property Name="PickId" Type="int" />
+        </EntityType>
+        <EntityType Name="StockSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShelfId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ItemType" Type="int" Nullable="false" />
+          <Property Name="FirstInTime" Type="datetime" Nullable="false" />
+          <Property Name="LastInTime" Type="datetime" />
+          <Property Name="LastOutTime" Type="datetime" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="UnitTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="LastInQuantity" Type="float" Nullable="false" />
+          <Property Name="LastOutQuantity" Type="float" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrueName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="ModifyTime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BomDetailSet_BomSet">
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="1" />
+          <End Role="BomDetailSet" Type="Self.BomDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomDetailSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BomDetailSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="BomDetailSet" Type="Self.BomDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BomSet_ModelSet1">
+          <End Role="ModelSet" Type="Self.ModelSet" Multiplicity="1" />
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomSet">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElementSet_ShelfSet">
+          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ElementSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuOperSet_MenuSet">
+          <End Role="MenuSet" Type="Self.MenuSet" Multiplicity="1" />
+          <End Role="MenuOperSet" Type="Self.MenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuOperSet">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuOperSet_OperSet">
+          <End Role="OperSet" Type="Self.OperSet" Multiplicity="1" />
+          <End Role="MenuOperSet" Type="Self.MenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuOperSet">
+              <PropertyRef Name="OperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartDetailSet_PartSet">
+          <End Role="PartSet" Type="Self.PartSet" Multiplicity="1" />
+          <End Role="PartDetailSet" Type="Self.PartDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartDetailSet">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="PartDetailSet" Type="Self.PartDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickSet_BomSet">
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="0..1" />
+          <End Role="PickSet" Type="Self.PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="PickSet" Type="Self.PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickSet_PickMainSet">
+          <End Role="PickMainSet" Type="Self.PickMainSet" Multiplicity="1" />
+          <End Role="PickSet" Type="Self.PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PickMainSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_BomSet">
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="0..1" />
+          <End Role="ProductDetailSet" Type="Self.ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="ProductDetailSet" Type="Self.ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_HalfProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
+          <End Role="ProductDetailSet" Type="Self.ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="HalfProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="1" />
+          <End Role="ProductDetailSet" Type="Self.ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSet_ModelSet">
+          <End Role="ModelSet" Type="Self.ModelSet" Multiplicity="1" />
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSet">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuOperSet_OperSet">
+          <End Role="OperSet" Type="Self.OperSet" Multiplicity="1" />
+          <End Role="RoleMenuOperSet" Type="Self.RoleMenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuOperSet">
+              <PropertyRef Name="OperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuOperSet_RoleMenuSet">
+          <End Role="RoleMenuSet" Type="Self.RoleMenuSet" Multiplicity="1" />
+          <End Role="RoleMenuOperSet" Type="Self.RoleMenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuOperSet">
+              <PropertyRef Name="RoleMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuSet_MenuSet">
+          <End Role="MenuSet" Type="Self.MenuSet" Multiplicity="1" />
+          <End Role="RoleMenuSet" Type="Self.RoleMenuSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuSet">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuSet_RoleSet">
+          <End Role="RoleSet" Type="Self.RoleSet" Multiplicity="1" />
+          <End Role="RoleMenuSet" Type="Self.RoleMenuSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuSet">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockIn_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="StockInSet" Type="Self.StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockIn_ShelfSet">
+          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1" />
+          <End Role="StockInSet" Type="Self.StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
+          <End Role="StockInSet" Type="Self.StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_BomSet">
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="0..1" />
+          <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_PickSet">
+          <End Role="PickSet" Type="Self.PickSet" Multiplicity="0..1" />
+          <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PickSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="PickId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
+          <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ShelfSet">
+          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1" />
+          <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="StockSet" Type="Self.StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
+          <End Role="StockSet" Type="Self.StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ShelfSet">
+          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1" />
+          <End Role="StockSet" Type="Self.StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSet_RoleSet">
+          <End Role="RoleSet" Type="Self.RoleSet" Multiplicity="1" />
+          <End Role="UserSet" Type="Self.UserSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSet">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YYQERPModelStoreContainer">
+          <EntitySet Name="BomDetailSet" EntityType="Self.BomDetailSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BomSet" EntityType="Self.BomSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerSet" EntityType="Self.CustomerSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DicSet" EntityType="Self.DicSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ElementSet" EntityType="Self.ElementSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuOperSet" EntityType="Self.MenuOperSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuSet" EntityType="Self.MenuSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelSet" EntityType="Self.ModelSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperSet" EntityType="Self.OperSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartDetailSet" EntityType="Self.PartDetailSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartSet" EntityType="Self.PartSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PickMainSet" EntityType="Self.PickMainSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PickSet" EntityType="Self.PickSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetailSet" EntityType="Self.ProductDetailSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSet" EntityType="Self.ProductSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMenuOperSet" EntityType="Self.RoleMenuOperSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMenuSet" EntityType="Self.RoleMenuSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleSet" EntityType="Self.RoleSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleReportSet" EntityType="Self.SaleReportSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShelfSet" EntityType="Self.ShelfSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockInSet" EntityType="Self.StockInSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockOutSet" EntityType="Self.StockOutSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockSet" EntityType="Self.StockSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSet" EntityType="Self.UserSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BomDetailSet_BomSet" Association="Self.FK_BomDetailSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="BomDetailSet" EntitySet="BomDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BomDetailSet_ElementSet" Association="Self.FK_BomDetailSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="BomDetailSet" EntitySet="BomDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BomSet_ModelSet1" Association="Self.FK_BomSet_ModelSet1">
+            <End Role="ModelSet" EntitySet="ModelSet" />
+            <End Role="BomSet" EntitySet="BomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElementSet_ShelfSet" Association="Self.FK_ElementSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="ElementSet" EntitySet="ElementSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuOperSet_MenuSet" Association="Self.FK_MenuOperSet_MenuSet">
+            <End Role="MenuSet" EntitySet="MenuSet" />
+            <End Role="MenuOperSet" EntitySet="MenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuOperSet_OperSet" Association="Self.FK_MenuOperSet_OperSet">
+            <End Role="OperSet" EntitySet="OperSet" />
+            <End Role="MenuOperSet" EntitySet="MenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartDetailSet_PartSet" Association="Self.FK_PartDetailSet_PartSet">
+            <End Role="PartSet" EntitySet="PartSet" />
+            <End Role="PartDetailSet" EntitySet="PartDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartSet_ElementSet" Association="Self.FK_PartSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="PartDetailSet" EntitySet="PartDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickSet_BomSet" Association="Self.FK_PickSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickSet_ElementSet" Association="Self.FK_PickSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickSet_PickMainSet" Association="Self.FK_PickSet_PickMainSet">
+            <End Role="PickMainSet" EntitySet="PickMainSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_BomSet" Association="Self.FK_ProductDetailSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_ElementSet" Association="Self.FK_ProductDetailSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_HalfProductSet" Association="Self.FK_ProductDetailSet_HalfProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_ProductSet" Association="Self.FK_ProductDetailSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSet_ModelSet" Association="Self.FK_ProductSet_ModelSet">
+            <End Role="ModelSet" EntitySet="ModelSet" />
+            <End Role="ProductSet" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuOperSet_OperSet" Association="Self.FK_RoleMenuOperSet_OperSet">
+            <End Role="OperSet" EntitySet="OperSet" />
+            <End Role="RoleMenuOperSet" EntitySet="RoleMenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuOperSet_RoleMenuSet" Association="Self.FK_RoleMenuOperSet_RoleMenuSet">
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+            <End Role="RoleMenuOperSet" EntitySet="RoleMenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuSet_MenuSet" Association="Self.FK_RoleMenuSet_MenuSet">
+            <End Role="MenuSet" EntitySet="MenuSet" />
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuSet_RoleSet" Association="Self.FK_RoleMenuSet_RoleSet">
+            <End Role="RoleSet" EntitySet="RoleSet" />
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_ElementSet" Association="Self.FK_StockIn_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_ShelfSet" Association="Self.FK_StockIn_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInSet_ProductSet" Association="Self.FK_StockInSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_BomSet" Association="Self.FK_StockOutSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ElementSet" Association="Self.FK_StockOutSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_PickSet" Association="Self.FK_StockOutSet_PickSet">
+            <End Role="PickSet" EntitySet="PickSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ProductSet" Association="Self.FK_StockOutSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ShelfSet" Association="Self.FK_StockOutSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ElementSet" Association="Self.FK_StockSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ProductSet" Association="Self.FK_StockSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ShelfSet" Association="Self.FK_StockSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSet_RoleSet" Association="Self.FK_UserSet_RoleSet">
+            <End Role="RoleSet" EntitySet="RoleSet" />
+            <End Role="UserSet" EntitySet="UserSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YYQERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="YYQERPEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="UserSet" EntityType="YYQERPModel.UserSet" />
+          <EntitySet Name="RoleSet" EntityType="YYQERPModel.RoleSet" />
+          <EntitySet Name="MenuSet" EntityType="YYQERPModel.MenuSet" />
+          <EntitySet Name="RoleMenuSet" EntityType="YYQERPModel.RoleMenuSet" />
+          <AssociationSet Name="FK_RoleMenuSet_MenuSet" Association="YYQERPModel.FK_RoleMenuSet_MenuSet">
+            <End Role="MenuSet" EntitySet="MenuSet" />
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuSet_RoleSet" Association="YYQERPModel.FK_RoleMenuSet_RoleSet">
+            <End Role="RoleSet" EntitySet="RoleSet" />
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+          </AssociationSet>
+          <EntitySet Name="DicSet" EntityType="YYQERPModel.DicSet" />
+          <EntitySet Name="ModelSet" EntityType="YYQERPModel.ModelSet" />
+          <EntitySet Name="ShelfSet" EntityType="YYQERPModel.ShelfSet" />
+          <EntitySet Name="ElementSet" EntityType="YYQERPModel.ElementSet" />
+          <EntitySet Name="BomDetailSet" EntityType="YYQERPModel.BomDetailSet" />
+          <EntitySet Name="BomSet" EntityType="YYQERPModel.BomSet" />
+          <EntitySet Name="PartDetailSet" EntityType="YYQERPModel.PartDetailSet" />
+          <EntitySet Name="PartSet" EntityType="YYQERPModel.PartSet" />
+          <AssociationSet Name="FK_BomSet_ElementSet" Association="YYQERPModel.FK_BomSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="BomDetailSet" EntitySet="BomDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BomSet_ModelSet" Association="YYQERPModel.FK_BomSet_ModelSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="BomDetailSet" EntitySet="BomDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElementSet_ShelfSet" Association="YYQERPModel.FK_ElementSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="ElementSet" EntitySet="ElementSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartSet_ElementSet" Association="YYQERPModel.FK_PartSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="PartDetailSet" EntitySet="PartDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartDetailSet_PartSet" Association="YYQERPModel.FK_PartDetailSet_PartSet">
+            <End Role="PartSet" EntitySet="PartSet" />
+            <End Role="PartDetailSet" EntitySet="PartDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSet_RoleSet" Association="YYQERPModel.FK_UserSet_RoleSet">
+            <End Role="RoleSet" EntitySet="RoleSet" />
+            <End Role="UserSet" EntitySet="UserSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BomSet_ModelSet1" Association="YYQERPModel.FK_BomSet_ModelSet1">
+            <End Role="ModelSet" EntitySet="ModelSet" />
+            <End Role="BomSet" EntitySet="BomSet" />
+          </AssociationSet>
+          <EntitySet Name="ProductDetailSet" EntityType="YYQERPModel.ProductDetailSet" />
+          <AssociationSet Name="FK_ProductDetailSet_BomSet" Association="YYQERPModel.FK_ProductDetailSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_ElementSet" Association="YYQERPModel.FK_ProductDetailSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <EntitySet Name="StockInSet" EntityType="YYQERPModel.StockInSet" />
+          <EntitySet Name="StockSet" EntityType="YYQERPModel.StockSet" />
+          <AssociationSet Name="FK_StockIn_ElementSet" Association="YYQERPModel.FK_StockIn_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ElementSet" Association="YYQERPModel.FK_StockSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockIn_ShelfSet" Association="YYQERPModel.FK_StockIn_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ShelfSet" Association="YYQERPModel.FK_StockSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <EntitySet Name="ProductSet" EntityType="YYQERPModel.ProductSet" />
+          <AssociationSet Name="FK_ProductSet_ModelSet" Association="YYQERPModel.FK_ProductSet_ModelSet">
+            <End Role="ModelSet" EntitySet="ModelSet" />
+            <End Role="ProductSet" EntitySet="ProductSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_HalfProductSet" Association="YYQERPModel.FK_ProductDetailSet_HalfProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDetailSet_ProductSet" Association="YYQERPModel.FK_ProductDetailSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="ProductDetailSet" EntitySet="ProductDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockSet_ProductSet" Association="YYQERPModel.FK_StockSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockSet" EntitySet="StockSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockInSet_ProductSet" Association="YYQERPModel.FK_StockInSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockInSet" EntitySet="StockInSet" />
+          </AssociationSet>
+          <EntitySet Name="StockOutSet" EntityType="YYQERPModel.StockOutSet" />
+          <AssociationSet Name="FK_StockOutSet_BomSet" Association="YYQERPModel.FK_StockOutSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ElementSet" Association="YYQERPModel.FK_StockOutSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ProductSet" Association="YYQERPModel.FK_StockOutSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_ShelfSet" Association="YYQERPModel.FK_StockOutSet_ShelfSet">
+            <End Role="ShelfSet" EntitySet="ShelfSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <EntitySet Name="MenuOperSet" EntityType="YYQERPModel.MenuOperSet" />
+          <EntitySet Name="OperSet" EntityType="YYQERPModel.OperSet" />
+          <EntitySet Name="RoleMenuOperSet" EntityType="YYQERPModel.RoleMenuOperSet" />
+          <AssociationSet Name="FK_MenuOperSet_MenuSet" Association="YYQERPModel.FK_MenuOperSet_MenuSet">
+            <End Role="MenuSet" EntitySet="MenuSet" />
+            <End Role="MenuOperSet" EntitySet="MenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuOperSet_OperSet" Association="YYQERPModel.FK_MenuOperSet_OperSet">
+            <End Role="OperSet" EntitySet="OperSet" />
+            <End Role="MenuOperSet" EntitySet="MenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuOperSet_OperSet" Association="YYQERPModel.FK_RoleMenuOperSet_OperSet">
+            <End Role="OperSet" EntitySet="OperSet" />
+            <End Role="RoleMenuOperSet" EntitySet="RoleMenuOperSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenuOperSet_RoleMenuSet" Association="YYQERPModel.FK_RoleMenuOperSet_RoleMenuSet">
+            <End Role="RoleMenuSet" EntitySet="RoleMenuSet" />
+            <End Role="RoleMenuOperSet" EntitySet="RoleMenuOperSet" />
+          </AssociationSet>
+          <EntitySet Name="PickMainSet" EntityType="YYQERPModel.PickMainSet" />
+          <EntitySet Name="PickSet" EntityType="YYQERPModel.PickSet" />
+          <AssociationSet Name="FK_PickSet_BomSet" Association="YYQERPModel.FK_PickSet_BomSet">
+            <End Role="BomSet" EntitySet="BomSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickSet_ElementSet" Association="YYQERPModel.FK_PickSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickSet_PickMainSet" Association="YYQERPModel.FK_PickSet_PickMainSet">
+            <End Role="PickMainSet" EntitySet="PickMainSet" />
+            <End Role="PickSet" EntitySet="PickSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOutSet_PickSet" Association="YYQERPModel.FK_StockOutSet_PickSet">
+            <End Role="PickSet" EntitySet="PickSet" />
+            <End Role="StockOutSet" EntitySet="StockOutSet" />
+          </AssociationSet>
+          <EntitySet Name="CustomerSet" EntityType="YYQERPModel.CustomerSet" />
+          <EntitySet Name="SaleReportSet" EntityType="YYQERPModel.SaleReportSet" />
+          </EntityContainer>
+        <EntityType Name="UserSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrueName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RoleSet" Relationship="YYQERPModel.FK_UserSet_RoleSet" FromRole="UserSet" ToRole="RoleSet" />
+        </EntityType>
+        <EntityType Name="RoleSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RoleMenuSet" Relationship="YYQERPModel.FK_RoleMenuSet_RoleSet" FromRole="RoleSet" ToRole="RoleMenuSet" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserSet" Relationship="YYQERPModel.FK_UserSet_RoleSet" FromRole="RoleSet" ToRole="UserSet" />
+        </EntityType>
+        <EntityType Name="MenuSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ParentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuLevel" Type="Int32" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RoleMenuSet" Relationship="YYQERPModel.FK_RoleMenuSet_MenuSet" FromRole="MenuSet" ToRole="RoleMenuSet" />
+          <Property Name="IconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShowInMenu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MenuOperSet" Relationship="YYQERPModel.FK_MenuOperSet_MenuSet" FromRole="MenuSet" ToRole="MenuOperSet" />
+        </EntityType>
+        <EntityType Name="RoleMenuSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuSet" Relationship="YYQERPModel.FK_RoleMenuSet_MenuSet" FromRole="RoleMenuSet" ToRole="MenuSet" />
+          <NavigationProperty Name="RoleSet" Relationship="YYQERPModel.FK_RoleMenuSet_RoleSet" FromRole="RoleMenuSet" ToRole="RoleSet" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RoleMenuOperSet" Relationship="YYQERPModel.FK_RoleMenuOperSet_RoleMenuSet" FromRole="RoleMenuSet" ToRole="RoleMenuOperSet" />
+        </EntityType>
+        <Association Name="FK_RoleMenuSet_MenuSet">
+          <End Type="YYQERPModel.MenuSet" Role="MenuSet" Multiplicity="1" />
+          <End Type="YYQERPModel.RoleMenuSet" Role="RoleMenuSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuSet">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuSet_RoleSet">
+          <End Type="YYQERPModel.RoleSet" Role="RoleSet" Multiplicity="1" />
+          <End Type="YYQERPModel.RoleMenuSet" Role="RoleMenuSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuSet">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DicSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="sort" Type="Int32" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ModelSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Stype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BomSet" Relationship="YYQERPModel.FK_BomSet_ModelSet1" FromRole="ModelSet" ToRole="BomSet" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_ProductSet_ModelSet" FromRole="ModelSet" ToRole="ProductSet" />
+        </EntityType>
+        <EntityType Name="ShelfSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_ElementSet_ShelfSet" FromRole="ShelfSet" ToRole="ElementSet" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StockInSet" Relationship="YYQERPModel.FK_StockIn_ShelfSet" FromRole="ShelfSet" ToRole="StockInSet" />
+          <NavigationProperty Name="StockSet" Relationship="YYQERPModel.FK_StockSet_ShelfSet" FromRole="ShelfSet" ToRole="StockSet" />
+          <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_ShelfSet" FromRole="ShelfSet" ToRole="StockOutSet" />
+        </EntityType>
+        <EntityType Name="ElementSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShelfId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BomDetailSet" Relationship="YYQERPModel.FK_BomSet_ElementSet" FromRole="ElementSet" ToRole="BomDetailSet" />
+          <NavigationProperty Name="ShelfSet" Relationship="YYQERPModel.FK_ElementSet_ShelfSet" FromRole="ElementSet" ToRole="ShelfSet" />
+          <NavigationProperty Name="PartDetailSet" Relationship="YYQERPModel.FK_PartSet_ElementSet" FromRole="ElementSet" ToRole="PartDetailSet" />
+          <Property Name="UnitTypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductDetailSet" Relationship="YYQERPModel.FK_ProductDetailSet_ElementSet" FromRole="ElementSet" ToRole="ProductDetailSet" />
+          <NavigationProperty Name="StockInSet" Relationship="YYQERPModel.FK_StockIn_ElementSet" FromRole="ElementSet" ToRole="StockInSet" />
+          <NavigationProperty Name="StockSet" Relationship="YYQERPModel.FK_StockSet_ElementSet" FromRole="ElementSet" ToRole="StockSet" />
+          <Property Name="WarningQuantity" Type="Double" Nullable="false" />
+          <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_ElementSet" FromRole="ElementSet" ToRole="StockOutSet" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PickSet" Relationship="YYQERPModel.FK_PickSet_ElementSet" FromRole="ElementSet" ToRole="PickSet" />
+          <Property Name="PickQuantity" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BomDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BomId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" Nullable="false" />
+          <Property Name="PartCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_BomSet_ElementSet" FromRole="BomDetailSet" ToRole="ElementSet" />
+          <NavigationProperty Name="BomSet" Relationship="YYQERPModel.FK_BomSet_ModelSet" FromRole="BomDetailSet" ToRole="BomSet" />
+        </EntityType>
+        <EntityType Name="BomSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BomDetailSet" Relationship="YYQERPModel.FK_BomSet_ModelSet" FromRole="BomSet" ToRole="BomDetailSet" />
+          <NavigationProperty Name="ModelSet" Relationship="YYQERPModel.FK_BomSet_ModelSet1" FromRole="BomSet" ToRole="ModelSet" />
+          <NavigationProperty Name="ProductDetailSet" Relationship="YYQERPModel.FK_ProductDetailSet_BomSet" FromRole="BomSet" ToRole="ProductDetailSet" />
+          <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_BomSet" FromRole="BomSet" ToRole="StockOutSet" />
+          <NavigationProperty Name="PickSet" Relationship="YYQERPModel.FK_PickSet_BomSet" FromRole="BomSet" ToRole="PickSet" />
+        </EntityType>
+        <EntityType Name="PartDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_PartSet_ElementSet" FromRole="PartDetailSet" ToRole="ElementSet" />
+          <NavigationProperty Name="PartSet" Relationship="YYQERPModel.FK_PartDetailSet_PartSet" FromRole="PartDetailSet" ToRole="PartSet" />
+        </EntityType>
+        <EntityType Name="PartSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Remark" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PartDetailSet" Relationship="YYQERPModel.FK_PartDetailSet_PartSet" FromRole="PartSet" ToRole="PartDetailSet" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_BomSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="1" />
+          <End Type="YYQERPModel.BomDetailSet" Role="BomDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BomSet_ModelSet">
+          <End Type="YYQERPModel.BomSet" Role="BomSet" Multiplicity="1" />
+          <End Type="YYQERPModel.BomDetailSet" Role="BomDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomDetailSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElementSet_ShelfSet">
+          <End Type="YYQERPModel.ShelfSet" Role="ShelfSet" Multiplicity="1" />
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ElementSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="1" />
+          <End Type="YYQERPModel.PartDetailSet" Role="PartDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartDetailSet_PartSet">
+          <End Type="YYQERPModel.PartSet" Role="PartSet" Multiplicity="1" />
+          <End Type="YYQERPModel.PartDetailSet" Role="PartDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartDetailSet">
+              <PropertyRef Name="PartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSet_RoleSet">
+          <End Type="YYQERPModel.RoleSet" Role="RoleSet" Multiplicity="1" />
+          <End Type="YYQERPModel.UserSet" Role="UserSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSet">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BomSet_ModelSet1">
+          <End Type="YYQERPModel.ModelSet" Role="ModelSet" Multiplicity="1" />
+          <End Type="YYQERPModel.BomSet" Role="BomSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BomSet">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" Nullable="false" />
+          <Property Name="BomId" Type="Int32" />
+          <Property Name="HalfProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BomSet" Relationship="YYQERPModel.FK_ProductDetailSet_BomSet" FromRole="ProductDetailSet" ToRole="BomSet" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_ProductDetailSet_ElementSet" FromRole="ProductDetailSet" ToRole="ElementSet" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_ProductDetailSet_HalfProductSet" FromRole="ProductDetailSet" ToRole="ProductSet" />
+          <NavigationProperty Name="ProductSet1" Relationship="YYQERPModel.FK_ProductDetailSet_ProductSet" FromRole="ProductDetailSet" ToRole="ProductSet" />
+          </EntityType>
+        <Association Name="FK_ProductDetailSet_BomSet">
+          <End Type="YYQERPModel.BomSet" Role="BomSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.ProductDetailSet" Role="ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="1" />
+          <End Type="YYQERPModel.ProductDetailSet" Role="ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockInSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElementId" Type="Int32" />
+          <Property Name="ShelfId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="GroupGuid" Type="Guid" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_StockIn_ElementSet" FromRole="StockInSet" ToRole="ElementSet" />
+          <NavigationProperty Name="ShelfSet" Relationship="YYQERPModel.FK_StockIn_ShelfSet" FromRole="StockInSet" ToRole="ShelfSet" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_StockInSet_ProductSet" FromRole="StockInSet" ToRole="ProductSet" />
+          <Property Name="Reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StockSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShelfId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <Property Name="FirstInTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastInTime" Type="DateTime" Precision="3" />
+          <Property Name="LastOutTime" Type="DateTime" Precision="3" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="UnitTypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastInQuantity" Type="Double" Nullable="false" />
+          <Property Name="LastOutQuantity" Type="Double" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_StockSet_ElementSet" FromRole="StockSet" ToRole="ElementSet" />
+          <NavigationProperty Name="ShelfSet" Relationship="YYQERPModel.FK_StockSet_ShelfSet" FromRole="StockSet" ToRole="ShelfSet" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_StockSet_ProductSet" FromRole="StockSet" ToRole="ProductSet" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_StockIn_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockInSet" Role="StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockSet" Role="StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockIn_ShelfSet">
+          <End Type="YYQERPModel.ShelfSet" Role="ShelfSet" Multiplicity="1" />
+          <End Type="YYQERPModel.StockInSet" Role="StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ShelfSet">
+          <End Type="YYQERPModel.ShelfSet" Role="ShelfSet" Multiplicity="1" />
+          <End Type="YYQERPModel.StockSet" Role="StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="Aliases" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <Property Name="UnitTypeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModelSet" Relationship="YYQERPModel.FK_ProductSet_ModelSet" FromRole="ProductSet" ToRole="ModelSet" />
+          <NavigationProperty Name="HalfProductDetailSet" Relationship="YYQERPModel.FK_ProductDetailSet_HalfProductSet" FromRole="ProductSet" ToRole="ProductDetailSet" />
+          <NavigationProperty Name="ProductDetailSet" Relationship="YYQERPModel.FK_ProductDetailSet_ProductSet" FromRole="ProductSet" ToRole="ProductDetailSet" />
+          <NavigationProperty Name="StockSet" Relationship="YYQERPModel.FK_StockSet_ProductSet" FromRole="ProductSet" ToRole="StockSet" />
+          <NavigationProperty Name="StockInSet" Relationship="YYQERPModel.FK_StockInSet_ProductSet" FromRole="ProductSet" ToRole="StockInSet" />
+          <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_ProductSet" FromRole="ProductSet" ToRole="StockOutSet" />
+        </EntityType>
+        <Association Name="FK_ProductSet_ModelSet">
+          <End Type="YYQERPModel.ModelSet" Role="ModelSet" Multiplicity="1" />
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSet">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_HalfProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.ProductDetailSet" Role="ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="HalfProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDetailSet_ProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="1" />
+          <End Type="YYQERPModel.ProductDetailSet" Role="ProductDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetailSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockSet_ProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockSet" Role="StockSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockInSet_ProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockInSet" Role="StockInSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockInSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockOutSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElementId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="BomId" Type="Int32" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="ShelfId" Type="Int32" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ItemType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BomSet" Relationship="YYQERPModel.FK_StockOutSet_BomSet" FromRole="StockOutSet" ToRole="BomSet" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_StockOutSet_ElementSet" FromRole="StockOutSet" ToRole="ElementSet" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_StockOutSet_ProductSet" FromRole="StockOutSet" ToRole="ProductSet" />
+          <NavigationProperty Name="ShelfSet" Relationship="YYQERPModel.FK_StockOutSet_ShelfSet" FromRole="StockOutSet" ToRole="ShelfSet" />
+          <Property Name="GroupGuid" Type="Guid" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PickId" Type="Int32" />
+          <NavigationProperty Name="PickSet" Relationship="YYQERPModel.FK_StockOutSet_PickSet" FromRole="StockOutSet" ToRole="PickSet" />
+        </EntityType>
+        <Association Name="FK_StockOutSet_BomSet">
+          <End Type="YYQERPModel.BomSet" Role="BomSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockOutSet" Role="StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockOutSet" Role="StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockOutSet" Role="StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_ShelfSet">
+          <End Type="YYQERPModel.ShelfSet" Role="ShelfSet" Multiplicity="1" />
+          <End Type="YYQERPModel.StockOutSet" Role="StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShelfSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="ShelfId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MenuOperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="OperId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuSet" Relationship="YYQERPModel.FK_MenuOperSet_MenuSet" FromRole="MenuOperSet" ToRole="MenuSet" />
+          <NavigationProperty Name="OperSet" Relationship="YYQERPModel.FK_MenuOperSet_OperSet" FromRole="MenuOperSet" ToRole="OperSet" />
+        </EntityType>
+        <EntityType Name="OperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MenuOperSet" Relationship="YYQERPModel.FK_MenuOperSet_OperSet" FromRole="OperSet" ToRole="MenuOperSet" />
+          <NavigationProperty Name="RoleMenuOperSet" Relationship="YYQERPModel.FK_RoleMenuOperSet_OperSet" FromRole="OperSet" ToRole="RoleMenuOperSet" />
+        </EntityType>
+        <EntityType Name="RoleMenuOperSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleMenuId" Type="Int32" Nullable="false" />
+          <Property Name="OperId" Type="Int32" Nullable="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OperSet" Relationship="YYQERPModel.FK_RoleMenuOperSet_OperSet" FromRole="RoleMenuOperSet" ToRole="OperSet" />
+          <NavigationProperty Name="RoleMenuSet" Relationship="YYQERPModel.FK_RoleMenuOperSet_RoleMenuSet" FromRole="RoleMenuOperSet" ToRole="RoleMenuSet" />
+        </EntityType>
+        <Association Name="FK_MenuOperSet_MenuSet">
+          <End Type="YYQERPModel.MenuSet" Role="MenuSet" Multiplicity="1" />
+          <End Type="YYQERPModel.MenuOperSet" Role="MenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuOperSet">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuOperSet_OperSet">
+          <End Type="YYQERPModel.OperSet" Role="OperSet" Multiplicity="1" />
+          <End Type="YYQERPModel.MenuOperSet" Role="MenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuOperSet">
+              <PropertyRef Name="OperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuOperSet_OperSet">
+          <End Type="YYQERPModel.OperSet" Role="OperSet" Multiplicity="1" />
+          <End Type="YYQERPModel.RoleMenuOperSet" Role="RoleMenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuOperSet">
+              <PropertyRef Name="OperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenuOperSet_RoleMenuSet">
+          <End Type="YYQERPModel.RoleMenuSet" Role="RoleMenuSet" Multiplicity="1" />
+          <End Type="YYQERPModel.RoleMenuOperSet" Role="RoleMenuOperSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMenuSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleMenuOperSet">
+              <PropertyRef Name="RoleMenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PickMainSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Purpose" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeedback" Type="Boolean" Nullable="false" />
+          <Property Name="StockOutTime" Type="DateTime" Precision="3" />
+          <Property Name="StockOutUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PickSet" Relationship="YYQERPModel.FK_PickSet_PickMainSet" FromRole="PickMainSet" ToRole="PickSet" />
+        </EntityType>
+        <EntityType Name="PickSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElementId" Type="Int32" Nullable="false" />
+          <Property Name="BomId" Type="Int32" />
+          <Property Name="PartCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Purpose" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeedback" Type="Boolean" Nullable="false" />
+          <Property Name="StockOutQuantity" Type="Double" Nullable="false" />
+          <Property Name="StockOutTime" Type="DateTime" Precision="3" />
+          <Property Name="StockOutUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BomSet" Relationship="YYQERPModel.FK_PickSet_BomSet" FromRole="PickSet" ToRole="BomSet" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_PickSet_ElementSet" FromRole="PickSet" ToRole="ElementSet" />
+          <NavigationProperty Name="PickMainSet" Relationship="YYQERPModel.FK_PickSet_PickMainSet" FromRole="PickSet" ToRole="PickMainSet" />
+          <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_PickSet" FromRole="PickSet" ToRole="StockOutSet" />
+        </EntityType>
+        <Association Name="FK_PickSet_BomSet">
+          <End Type="YYQERPModel.BomSet" Role="BomSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.PickSet" Role="PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BomSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="BomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="1" />
+          <End Type="YYQERPModel.PickSet" Role="PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickSet_PickMainSet">
+          <End Type="YYQERPModel.PickMainSet" Role="PickMainSet" Multiplicity="1" />
+          <End Type="YYQERPModel.PickSet" Role="PickSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PickMainSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PickSet">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOutSet_PickSet">
+          <End Type="YYQERPModel.PickSet" Role="PickSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.StockOutSet" Role="StockOutSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PickSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOutSet">
+              <PropertyRef Name="PickId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contacts" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QQ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="0" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SaleReportSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AfterSales" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SaleDate" Type="DateTime" Precision="0" />
+          <Property Name="CustomerLevel" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SaleLeader" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PayDate" Type="String" />
+          <Property Name="PayWay" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MachineType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsSpec" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsNum" Type="Int32" />
+          <Property Name="TaxPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AllTaxPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LogisticsCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NoTaxPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Invoice" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryNote" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Billing" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MachineNo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Contacts" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QQ" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Bonus" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LogisticsCompany" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Addtime" Type="DateTime" Precision="0" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GroupGuid" Type="Guid" Nullable="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YYQERPModelStoreContainer" CdmEntityContainer="YYQERPEntities" >
+          <EntitySetMapping Name="UserSet">
+            <EntityTypeMapping TypeName="YYQERPModel.UserSet">
+              <MappingFragment StoreEntitySet="UserSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleSet">
+            <EntityTypeMapping TypeName="YYQERPModel.RoleSet">
+              <MappingFragment StoreEntitySet="RoleSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuSet">
+            <EntityTypeMapping TypeName="YYQERPModel.MenuSet">
+              <MappingFragment StoreEntitySet="MenuSet">
+                <ScalarProperty Name="ShowInMenu" ColumnName="ShowInMenu" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMenuSet">
+            <EntityTypeMapping TypeName="YYQERPModel.RoleMenuSet">
+              <MappingFragment StoreEntitySet="RoleMenuSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DicSet">
+            <EntityTypeMapping TypeName="YYQERPModel.DicSet">
+              <MappingFragment StoreEntitySet="DicSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="sort" ColumnName="sort" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelSet">
+            <EntityTypeMapping TypeName="YYQERPModel.ModelSet">
+              <MappingFragment StoreEntitySet="ModelSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Stype" ColumnName="Stype" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShelfSet">
+            <EntityTypeMapping TypeName="YYQERPModel.ShelfSet">
+              <MappingFragment StoreEntitySet="ShelfSet">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ElementSet">
+            <EntityTypeMapping TypeName="YYQERPModel.ElementSet">
+              <MappingFragment StoreEntitySet="ElementSet">
+                <ScalarProperty Name="PickQuantity" ColumnName="PickQuantity" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="WarningQuantity" ColumnName="WarningQuantity" />
+                <ScalarProperty Name="UnitTypeCode" ColumnName="UnitTypeCode" />
+                <ScalarProperty Name="ShelfId" ColumnName="ShelfId" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BomDetailSet">
+            <EntityTypeMapping TypeName="YYQERPModel.BomDetailSet">
+              <MappingFragment StoreEntitySet="BomDetailSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PartCode" ColumnName="PartCode" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="BomId" ColumnName="BomId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BomSet">
+            <EntityTypeMapping TypeName="YYQERPModel.BomSet">
+              <MappingFragment StoreEntitySet="BomSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartDetailSet">
+            <EntityTypeMapping TypeName="YYQERPModel.PartDetailSet">
+              <MappingFragment StoreEntitySet="PartDetailSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="PartId" ColumnName="PartId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartSet">
+            <EntityTypeMapping TypeName="YYQERPModel.PartSet">
+              <MappingFragment StoreEntitySet="PartSet">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetailSet">
+            <EntityTypeMapping TypeName="YYQERPModel.ProductDetailSet">
+              <MappingFragment StoreEntitySet="ProductDetailSet">
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="HalfProductId" ColumnName="HalfProductId" />
+                <ScalarProperty Name="BomId" ColumnName="BomId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockInSet">
+            <EntityTypeMapping TypeName="YYQERPModel.StockInSet">
+              <MappingFragment StoreEntitySet="StockInSet">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="GroupGuid" ColumnName="GroupGuid" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ShelfId" ColumnName="ShelfId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockSet">
+            <EntityTypeMapping TypeName="YYQERPModel.StockSet">
+              <MappingFragment StoreEntitySet="StockSet">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="LastOutQuantity" ColumnName="LastOutQuantity" />
+                <ScalarProperty Name="LastInQuantity" ColumnName="LastInQuantity" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="UnitTypeCode" ColumnName="UnitTypeCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="LastOutTime" ColumnName="LastOutTime" />
+                <ScalarProperty Name="LastInTime" ColumnName="LastInTime" />
+                <ScalarProperty Name="FirstInTime" ColumnName="FirstInTime" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="ShelfId" ColumnName="ShelfId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSet">
+            <EntityTypeMapping TypeName="YYQERPModel.ProductSet">
+              <MappingFragment StoreEntitySet="ProductSet">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="UnitTypeCode" ColumnName="UnitTypeCode" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Aliases" ColumnName="Aliases" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockOutSet">
+            <EntityTypeMapping TypeName="YYQERPModel.StockOutSet">
+              <MappingFragment StoreEntitySet="StockOutSet">
+                <ScalarProperty Name="PickId" ColumnName="PickId" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="GroupGuid" ColumnName="GroupGuid" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="ShelfId" ColumnName="ShelfId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BomId" ColumnName="BomId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuOperSet">
+            <EntityTypeMapping TypeName="YYQERPModel.MenuOperSet">
+              <MappingFragment StoreEntitySet="MenuOperSet">
+                <ScalarProperty Name="OperId" ColumnName="OperId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperSet">
+            <EntityTypeMapping TypeName="YYQERPModel.OperSet">
+              <MappingFragment StoreEntitySet="OperSet">
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMenuOperSet">
+            <EntityTypeMapping TypeName="YYQERPModel.RoleMenuOperSet">
+              <MappingFragment StoreEntitySet="RoleMenuOperSet">
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="OperId" ColumnName="OperId" />
+                <ScalarProperty Name="RoleMenuId" ColumnName="RoleMenuId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PickMainSet">
+            <EntityTypeMapping TypeName="YYQERPModel.PickMainSet">
+              <MappingFragment StoreEntitySet="PickMainSet">
+                <ScalarProperty Name="StockOutUserName" ColumnName="StockOutUserName" />
+                <ScalarProperty Name="StockOutTime" ColumnName="StockOutTime" />
+                <ScalarProperty Name="IsFeedback" ColumnName="IsFeedback" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PickSet">
+            <EntityTypeMapping TypeName="YYQERPModel.PickSet">
+              <MappingFragment StoreEntitySet="PickSet">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="StockOutUserName" ColumnName="StockOutUserName" />
+                <ScalarProperty Name="StockOutTime" ColumnName="StockOutTime" />
+                <ScalarProperty Name="StockOutQuantity" ColumnName="StockOutQuantity" />
+                <ScalarProperty Name="IsFeedback" ColumnName="IsFeedback" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PartCode" ColumnName="PartCode" />
+                <ScalarProperty Name="BomId" ColumnName="BomId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerSet">
+            <EntityTypeMapping TypeName="YYQERPModel.CustomerSet">
+              <MappingFragment StoreEntitySet="CustomerSet">
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="QQ" ColumnName="QQ" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleReportSet">
+            <EntityTypeMapping TypeName="YYQERPModel.SaleReportSet">
+              <MappingFragment StoreEntitySet="SaleReportSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="GroupGuid" ColumnName="GroupGuid" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="LogisticsCompany" ColumnName="LogisticsCompany" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="QQ" ColumnName="QQ" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
+                <ScalarProperty Name="Billing" ColumnName="Billing" />
+                <ScalarProperty Name="DeliveryNote" ColumnName="DeliveryNote" />
+                <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+                <ScalarProperty Name="NoTaxPrice" ColumnName="NoTaxPrice" />
+                <ScalarProperty Name="LogisticsCost" ColumnName="LogisticsCost" />
+                <ScalarProperty Name="AllTaxPrice" ColumnName="AllTaxPrice" />
+                <ScalarProperty Name="TaxPrice" ColumnName="TaxPrice" />
+                <ScalarProperty Name="GoodsNum" ColumnName="GoodsNum" />
+                <ScalarProperty Name="GoodsSpec" ColumnName="GoodsSpec" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="MachineType" ColumnName="MachineType" />
+                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
+                <ScalarProperty Name="PayWay" ColumnName="PayWay" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="SaleLeader" ColumnName="SaleLeader" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="CustomerLevel" ColumnName="CustomerLevel" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="AfterSales" ColumnName="AfterSales" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

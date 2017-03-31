@@ -1,0 +1,33 @@
+﻿@charset "utf-8";
+/*
+    此文件是公共的框架现用插件的样式扩展（如:easyui、zTree）
+    需要放在所有插件的最后面.
+    */
+
+
+/*手风琴菜单样式重写*/
+.ul_list, .accordion ul { list-style-type: none; margin: 0px; padding: 5px 1px; }
+    .ul_list li, .accordion ul li { padding: 0px; margin-left: 0px; }
+        .ul_list li a, .accordion ul li a { line-height: 24px; cursor: pointer; }
+        .ul_list li div, .accordion ul li div { margin: 2px 0px; padding-left: 10px; padding-top: 2px; border: 1px solid #fff; }
+            .ul_list li.hover, .accordion ul li div.hover { border: 1px dashed #D69C00; background: #FFE88C; cursor: pointer; }
+                .accordion ul li div.hover a { color: #D16C00; text-decoration: none; }
+            .ul_list li.selected, .accordion ul li div.selected { border: 1px solid #D69C00; background: #FFE88C; cursor: default; }
+                .ul_list li.selected a, a.accordion ul li div.selected a { color: #D16C00; font-weight: bold; }
+    .ul_list li { border: 1px solid #fff; margin-bottom: 1px; }
+
+/*ztree 部分样式重写*/
+.ztree li span.button { margin: 3px 0px; }
+    .ztree li span.button.ico_docu { margin: 2px 0px; }
+.ztree li a { margin: 0px 6px 3px 0px; height: 24px; line-height: 24px; text-decoration: none; border: 1px dashed #fff; }
+    .ztree li a.curSelectedNode { margin: 0px 6px 3px 0px; height: 24px; line-height: 24px; text-decoration: none; color: #4B114B; border: 1px dashed green; background: #FFFF00; }
+    .ztree li a:hover { margin: 0px 6px 3px 0px; height: 24px; line-height: 24px; text-decoration: none; color: #4B114B; border: 1px dashed green; background: #FFFF00; }
+
+/*图标选择 相关样式  按钮和菜单页面已经使用*/
+.iconbox { float: left; width: 24px; height: 24px; border: 1px solid #ccc; padding: 5px; margin: 0px 0px 10px 10px; }
+    .iconbox:hover { border: 1px solid red; cursor: pointer; }
+.icon_selected { border: 1px solid red; }
+
+
+
+

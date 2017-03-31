@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "库存警告页";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;">
+    <div id="main-panel" data-options="region: 'center',title:'库存预警信息',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+    <div id="east_panel" data-options="region: 'east',title:'详细信息',border:true,split:true" style="width: 30%; border-bottom: none; ">
+    </div>
+
+</div>
+<div id="toolbar1">
+    <input id="keyword" class="easyui-textbox" data-options="prompt:'原材料名称或库位',value:''" style="border:1px solid #f2f2f2;width:200px; height:26px" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Main_Index.js"></script>
+    <script type="text/javascript">
+        var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
+        + '"pagelist":"/Main/GetPageList",'
+        + '"stockdetail":"/Stock/GetStockDetail"},'
+        + '"buttons":[{"ButtonCode":"stockin","ButtonName":"来料入仓","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_stockin()"},'
+        + '{"ButtonCode":"stockedit","ButtonName":"库存管理","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_stockedit()"},'
+            + '{"ButtonCode":"stockout","ButtonName":"材料出仓","Sort":140,"ButtonType":1,"IconClass":"icon-standard-cross","JsEvent":"do_stockout()"}]}';
+        km.model = JSON.parse(model_string);
+    </script>
+}
+
+
+
+
+
+

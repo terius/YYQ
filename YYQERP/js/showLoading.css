@@ -1,0 +1,20 @@
+.loading-indicator {
+	height: 40px;
+	width: 120px;
+	/*background:#fff  url( 'images/loading.gif' );*/
+    background:#fff  url( 'images/ajax-loader.gif' );
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	border:1px solid #808080;
+	padding-left:40px;
+	line-height:40px;
+	font-size:12px;
+	/*font-weight:bold;*/
+	padding-right:10px; border-radius:5px
+}
+
+.loading-indicator-overlay {
+	background-color: #000000;
+	opacity: 0.3;
+	filter: alpha(opacity = 30);
+}

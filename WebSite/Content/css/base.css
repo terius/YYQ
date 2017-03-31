@@ -1,0 +1,129 @@
+﻿@charset "utf-8";
+
+/*全局样式*/
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, address, big, cite, code, del, em, font, img, ins, small, strong, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-size: 12px;
+    font-family: 'Microsoft YaHei';
+    padding: 0px;
+    margin: 0px;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+select, input, img, select {
+    vertical-align: middle;
+}
+
+a {
+    color: Black;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: Red;
+        text-decoration: none;
+    }
+
+.clear_all {
+    clear: both;
+}
+
+.noscript {
+    position: absolute;
+    z-index: 999;
+    height: 2046px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: white;
+    text-align: center;
+}
+
+
+
+/*terius add*/
+#toolbar1, #toolbar2 {
+    border-bottom: none;
+    padding: 5px;
+}
+
+.table_content {
+    width: 100%;
+    background: #fff;
+    border: none;
+}
+
+    .table_content td {
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+    }
+
+        .table_content td.td_title {
+            width: 90px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            background: #fafafa;
+            border-right: 1px solid #ccc;
+        }
+
+.textbox, .textbox-text {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.textbox-fucused {
+    box-shadow: none;
+}
+
+
+.easyuitree .tree-node {
+    height: 26px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.easyuitree .tree-title {
+    font-size: 12px;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    padding: 4px 2px;
+    height: 18px;
+    line-height: 18px;
+}
+
+.tree-title {
+    padding: 4px 2px !important;
+}
+
+.tree-expanded, .tree-collapsed, .tree-folder, .tree-file, .tree-checkbox, .tree-indent {
+    display: inline-block;
+    width: 16px;
+    height: 18px;
+    vertical-align: top;
+    margin: 4px 0px;
+    overflow: hidden;
+}
+
+
+.datagrid-body .datagrid-row-editing {
+    background-color: #ff6a00 !important;
+}
+
+.datagrid-row-checked {
+    background-color: #0081c2;
+    color: #fff;
+}

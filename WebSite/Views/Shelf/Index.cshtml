@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "库位管理界面";
+}
+<div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;" data-checkper="query">
+    <div id="north_panel" data-options="region:'north',border:false">
+        <div id="km_toolbar" class="km_toolbar">
+        </div>
+    </div>
+    <div id="main-panel" data-options="region: 'center',border:true" style="border-bottom: none; border-left: none;">
+        <table id="maingrid"></table>
+    </div>
+
+</div>
+<div id="toolbar1" data-checkper="query">
+    <input id="SearchCode" name="SearchCode" class="easyui-textbox" data-options="prompt:'库位',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+</div>
+<script id="tpl_add" type="text/html">
+    <div id="ele_add" style="width: auto; height: auto;">
+        <div style="padding: 10px 30px">
+            <form id="formadd" method="post">
+                <table cellpadding="3">
+                    <tr>
+                        <td>库位</td>
+                        <td>
+                            <input id="Code" name="Code" class="easyui-textbox required" data-options="required:true" style="width: 250px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注</td>
+                        <td>
+                            <input id="Remark" name="Remark" class="easyui-textbox" style="width: 250px" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</script>
+@section Styles {
+}
+
+@section Scripts {
+    <script src="~/js/Sys/Shelf_Index.js"></script>
+    <script type="text/javascript">
+        var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
+        + '"pagelist":"/Shelf/GetPageList",'
+        + '"add":"/Shelf/Add",'
+        + '"edit":"/Shelf/Edit",'
+        + '"delete":"/Shelf/Delete"'
+        + '},'
+        + '"buttons":[{"ButtonCode":"add","ButtonName":"新增库位","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()","data_checkper":"add"},'
+        + '{"ButtonCode":"edit","ButtonName":"编辑库位","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()","data_checkper":"edit"},'
+            + '{"ButtonCode":"delete","ButtonName":"删除库位","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
+        km.model = JSON.parse(model_string);
+        km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
+    </script>
+}
+
+
+
+
+
+
