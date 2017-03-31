@@ -2154,6 +2154,7 @@
     <Content Include="ExcelTemplate\原材料模板.xls" />
     <Content Include="ExcelTemplate\销售统计模板.xlsx" />
     <Content Include="ExcelTemplate\修改库存数模板.xls" />
+    <Content Include="ExcelTemplate\送货单模板.xlsx" />
     <None Include="Properties\PublishProfiles\web1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -2205,6 +2206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Output\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Common\" />
   </ItemGroup>

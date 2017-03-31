@@ -231,6 +231,36 @@ namespace YYQERP.Infrastructure.Helpers
         }
 
 
+
+        public static void ExportInvoice(string modelExlPath,string downExlPath)
+        {
+            XSSFWorkbook workbook;
+            //读入刚复制的要导出的excel文件
+            using (FileStream file = new FileStream(modelExlPath, FileMode.Open, FileAccess.Read))
+            {
+                workbook = new XSSFWorkbook(file);
+                file.Close();
+            }
+            ISheet sheet1 = workbook.GetSheetAt(0);
+            //取模板excel中第二行第二列的单元格样式
+            ICellStyle cellstyle = workbook.CreateCellStyle();
+            //开始向excel表格中写入数据
+            ICell cell = sheet1.GetRow(1).GetCell(1);
+            cell.CellStyle = cellstyle;
+           // cell.CellStyle.Alignment = HorizontalAlignment.Center;
+            IRichTextString rts = new XSSFRichTextString(cell.StringCellValue + "TestWriting");
+            IFont  font = workbook.CreateFont();
+          //  font.FontHeightInPoints = 20;
+            font.Boldweight = 700;
+            rts.ApplyFont(0, 3, font);
+            cell.SetCellValue(rts);
+            //创建文件
+            FileStream files = new FileStream(downExlPath, FileMode.Create);
+            workbook.Write(files);
+            files.Close();
+        }
+
+
         //public static string  ExportSaleReport()
         //{
 

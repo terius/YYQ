@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using YYQERP.Infrastructure;
-using YYQERP.Infrastructure.UnitOfWork;
-using YYQERP.Infrastructure.Domain;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
-using YYQERP.Infrastructure.Logging;
+using YYQERP.Infrastructure.Domain;
+using YYQERP.Infrastructure.UnitOfWork;
 
 
 namespace YYQERP.Repository
