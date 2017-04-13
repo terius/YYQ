@@ -1,14 +1,11 @@
 ﻿using PagedList;
-using YYQERP.Infrastructure.Domain;
-using YYQERP.Infrastructure.Helpers;
-using YYQERP.Infrastructure.UnitOfWork;
-using YYQERP.Services.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using YYQERP.Infrastructure.Domain;
+using YYQERP.Infrastructure.Helpers;
+using YYQERP.Infrastructure.UnitOfWork;
 
 namespace YYQERP.Services.Implementations
 {

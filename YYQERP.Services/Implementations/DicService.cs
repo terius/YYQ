@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YYQERP.Cache;
 using YYQERP.Infrastructure;
 using YYQERP.Infrastructure.Domain;
 using YYQERP.Infrastructure.Enums;
-using YYQERP.Infrastructure.Querying;
 using YYQERP.Infrastructure.UnitOfWork;
 using YYQERP.Repository;
 using YYQERP.Services.Interfaces;
