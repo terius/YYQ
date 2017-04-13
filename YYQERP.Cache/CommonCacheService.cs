@@ -1,14 +1,11 @@
 ﻿
-using YYQERP.Cache.CacheStorage;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YYQERP.Infrastructure.Domain;
-using YYQERP.Repository;
+using YYQERP.Cache.CacheStorage;
 using YYQERP.Infrastructure;
+using YYQERP.Infrastructure.Domain;
 using YYQERP.Infrastructure.Enums;
+using YYQERP.Repository;
 
 
 namespace YYQERP.Cache
