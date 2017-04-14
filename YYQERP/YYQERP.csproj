@@ -753,6 +753,7 @@
     <Content Include="easyui\144\icon-standard\16x16\help.png" />
     <Content Include="easyui\144\icon-standard\16x16\hmenu-asc.gif" />
     <Content Include="easyui\144\icon-standard\16x16\hmenu-desc.gif" />
+    <Content Include="easyui\144\icon-standard\16x16\home.png" />
     <Content Include="easyui\144\icon-standard\16x16\hourglass-add.png" />
     <Content Include="easyui\144\icon-standard\16x16\hourglass-delete.png" />
     <Content Include="easyui\144\icon-standard\16x16\hourglass-go.png" />

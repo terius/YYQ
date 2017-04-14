@@ -10,7 +10,7 @@ using YYQERP.Services.Interfaces;
 
 namespace YYQERP.Controllers
 {
-   
+
     public class AccountController : Controller
     {
 
@@ -24,16 +24,16 @@ namespace YYQERP.Controllers
         // GET: Account
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
         [AllowAnonymous]
         public ActionResult Login()
         {
-            string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
-            string destFile = Server.MapPath("~/Output/" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
-            ExcelHelper.ExportInvoice(excelFile, destFile);
+            //   string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
+            //  string destFile = Server.MapPath("~/Output/" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx");
+            //  ExcelHelper.ExportInvoice(excelFile, destFile);
             return View();
         }
 
@@ -89,7 +89,7 @@ namespace YYQERP.Controllers
             return View();
         }
 
-     
+
 
 
 
