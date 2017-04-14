@@ -49,5 +49,7 @@ namespace YYQERP.Repository
         public virtual DbSet<PickSet> PickSet { get; set; }
         public virtual DbSet<CustomerSet> CustomerSet { get; set; }
         public virtual DbSet<SaleReportSet> SaleReportSet { get; set; }
+        public virtual DbSet<DeliveryDetailSet> DeliveryDetailSet { get; set; }
+        public virtual DbSet<DeliverySet> DeliverySet { get; set; }
     }
 }

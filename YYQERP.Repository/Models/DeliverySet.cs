@@ -2,7 +2,8 @@
 
 namespace YYQERP.Repository
 {
-    public partial class OperSet : EntityBase<int>, IEntity
+    public partial class DeliverySet : EntityBase<int>, IEntity
     {
+     
     }
 }

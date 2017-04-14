@@ -146,6 +146,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\PickController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
@@ -2084,6 +2085,7 @@
     <Content Include="js\Sys\Permission_Index.js" />
     <Content Include="js\Sys\Dic_Index.js" />
     <Content Include="js\Sys\Bom_Index.js" />
+    <Content Include="js\Sys\Delivery_Index.js" />
     <Content Include="js\Sys\Product_Index.js" />
     <Content Include="js\Sys\Sale_Index.js" />
     <Content Include="js\Sys\Shelf_Index.js" />
@@ -2204,6 +2206,7 @@
     <Content Include="Views\Pick\Index.cshtml" />
     <Content Include="Views\Pick\PickOut.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Delivery\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

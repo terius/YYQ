@@ -22,6 +22,7 @@ namespace YYQERP.Repository
             this.StockSet = new HashSet<StockSet>();
             this.StockInSet = new HashSet<StockInSet>();
             this.StockOutSet = new HashSet<StockOutSet>();
+            this.DeliveryDetailSet = new HashSet<DeliveryDetailSet>();
         }
     
         //public int Id { get; set; }
@@ -49,5 +50,7 @@ namespace YYQERP.Repository
         public virtual ICollection<StockInSet> StockInSet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOutSet> StockOutSet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeliveryDetailSet> DeliveryDetailSet { get; set; }
     }
 }

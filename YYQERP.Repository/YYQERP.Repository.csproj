@@ -65,6 +65,12 @@
     <Compile Include="DataContextStorage\HttpDataContextStorageContainer.cs" />
     <Compile Include="DataContextStorage\IDataContextStorageContainer.cs" />
     <Compile Include="DataContextStorage\ThreadDataContextStorageContainer.cs" />
+    <Compile Include="DeliveryDetailSet.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliverySet.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DicSet.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -97,6 +103,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerSet.cs" />
+    <Compile Include="Models\DeliveryDetailSet.cs" />
     <Compile Include="Models\SaleReportSet.cs" />
     <Compile Include="Models\PickMainSet.cs" />
     <Compile Include="Models\PickSet.cs" />
@@ -120,6 +127,7 @@
     <Compile Include="Models\MenuSet.cs" />
     <Compile Include="Models\RoleSet.cs" />
     <Compile Include="Models\UserRoleSet.cs" />
+    <Compile Include="Models\DeliverySet.cs" />
     <Compile Include="Models\UserSet.cs" />
     <Compile Include="OperSet.cs">
       <DependentUpon>Model.tt</DependentUpon>

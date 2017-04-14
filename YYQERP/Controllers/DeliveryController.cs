@@ -8,14 +8,14 @@ using YYQERP.Services.Views;
 
 namespace YYQERP.Controllers
 {
-    public class PickController : BaseController
+    public class DeliveryController : BaseController
     {
 
         private readonly IPickService _pickService;
         private readonly ICommonCacheService _cacheService;
         private readonly IGoodsService _goodsService;
 
-        public PickController(IPickService pickService, ICommonCacheService cacheService, IGoodsService goodsService)
+        public DeliveryController(IPickService pickService, ICommonCacheService cacheService, IGoodsService goodsService)
         {
             _pickService = pickService;
             _cacheService = cacheService;
@@ -77,50 +77,7 @@ namespace YYQERP.Controllers
         }
 
 
-        #region 发料
-        public ActionResult PickOut()
-        {
-            ViewBag.Pers = GetUserOpers();
-            var model = new PickOutModel();
-            model.UserSelectList = _cacheService.GetCache_User();
-            return View(model);
-        }
-
-        public ActionResult GetPickOutPageList(Search_PickOut_Request request)
-        {
-            var list = _pickService.SearchPickOut(request);
-            var json = Json(list, JsonRequestBehavior.AllowGet);
-            return json;
-        }
-
-        public ActionResult GetPickDetail_ForAdd(int parentid)
-        {
-            var list = _pickService.GetPickDetail_ForAdd(parentid);
-            var json = Json(list, JsonRequestBehavior.AllowGet);
-            return json;
-        }
-
-        public string SavePickDetail(int parentid)
-        {
-            var pgInfo = GetInfoByStream<List<PickOut_ForAdd_View>>();
-            var res = _pickService.SavePickOut(pgInfo, LoginUserName, parentid);
-            return res.Message;
-        }
-
-
-        public string DeletePick(int id)
-        {
-            var msg = _pickService.DeletePick(id);
-            return msg;
-        }
-
-
-        public FileResult ExportExcel(Export_PickOut_Request request)
-        {
-            var data = JsonHelper.DeserializeObj<List<PickOut_ForAdd_View>>(Server.UrlDecode(request.ExpData));
-            return Export<PickOut_ForAdd_View>(data, request.Columns, request.ColumnTitles, request.FileName);
-        }
-        #endregion
+      
 
 
     }

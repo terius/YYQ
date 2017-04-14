@@ -48,6 +48,38 @@
           <Property Name="Addtime" Type="date" />
           <Property Name="AddUserName" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="DeliveryDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeliveryId" Type="int" Nullable="false" />
+          <Property Name="ElementId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DeliverySet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="Addtime" Type="datetime" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrderNo" Type="varchar" MaxLength="50" />
+          <Property Name="OrderTime" Type="datetime" />
+          <Property Name="TotalAmount" Type="money" />
+          <Property Name="TotalAmountUp" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddUserName" Type="varchar" MaxLength="50" />
+          <Property Name="Modifytime" Type="datetime" />
+          <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="DicSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -282,7 +314,7 @@
           <Property Name="OrderNo" Type="nvarchar" MaxLength="200" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Contacts" Type="nvarchar" MaxLength="300" />
-          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="200" />
           <Property Name="Tel" Type="varchar" MaxLength="200" />
           <Property Name="Email" Type="varchar" MaxLength="200" />
           <Property Name="QQ" Type="varchar" MaxLength="200" />
@@ -290,7 +322,7 @@
           <Property Name="Fax" Type="varchar" MaxLength="200" />
           <Property Name="Bonus" Type="varchar" MaxLength="200" />
           <Property Name="LogisticsCompany" Type="varchar" MaxLength="200" />
-          <Property Name="Addtime" Type="date" />
+          <Property Name="Addtime" Type="datetime" />
           <Property Name="AddUserName" Type="varchar" MaxLength="50" />
           <Property Name="GroupGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Modifytime" Type="datetime" />
@@ -380,7 +412,9 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_BomDetailSet_BomSet">
-          <End Role="BomSet" Type="Self.BomSet" Multiplicity="1" />
+          <End Role="BomSet" Type="Self.BomSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BomDetailSet" Type="Self.BomDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BomSet">
@@ -412,6 +446,42 @@
             </Principal>
             <Dependent Role="BomSet">
               <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryDetailSet_DeliverySet">
+          <End Role="DeliverySet" Type="Self.DeliverySet" Multiplicity="1" />
+          <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliverySet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryDetailSet_ElementSet">
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryDetailSet_ProductSet">
+          <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
+          <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -767,6 +837,8 @@
           <EntitySet Name="BomDetailSet" EntityType="Self.BomDetailSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BomSet" EntityType="Self.BomSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerSet" EntityType="Self.CustomerSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryDetailSet" EntityType="Self.DeliveryDetailSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliverySet" EntityType="Self.DeliverySet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DicSet" EntityType="Self.DicSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ElementSet" EntityType="Self.ElementSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuOperSet" EntityType="Self.MenuOperSet" Schema="dbo" store:Type="Tables" />
@@ -799,6 +871,18 @@
           <AssociationSet Name="FK_BomSet_ModelSet1" Association="Self.FK_BomSet_ModelSet1">
             <End Role="ModelSet" EntitySet="ModelSet" />
             <End Role="BomSet" EntitySet="BomSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryDetailSet_DeliverySet" Association="Self.FK_DeliveryDetailSet_DeliverySet">
+            <End Role="DeliverySet" EntitySet="DeliverySet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryDetailSet_ElementSet" Association="Self.FK_DeliveryDetailSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet" Association="Self.FK_DeliveryDetailSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
           </AssociationSet>
           <AssociationSet Name="FK_ElementSet_ShelfSet" Association="Self.FK_ElementSet_ShelfSet">
             <End Role="ShelfSet" EntitySet="ShelfSet" />
@@ -1074,6 +1158,20 @@
           </AssociationSet>
           <EntitySet Name="CustomerSet" EntityType="YYQERPModel.CustomerSet" />
           <EntitySet Name="SaleReportSet" EntityType="YYQERPModel.SaleReportSet" />
+          <EntitySet Name="DeliveryDetailSet" EntityType="YYQERPModel.DeliveryDetailSet" />
+          <EntitySet Name="DeliverySet" EntityType="YYQERPModel.DeliverySet" />
+          <AssociationSet Name="FK_DeliveryDetailSet_DeliverySet" Association="YYQERPModel.FK_DeliveryDetailSet_DeliverySet">
+            <End Role="DeliverySet" EntitySet="DeliverySet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryDetailSet_ElementSet" Association="YYQERPModel.FK_DeliveryDetailSet_ElementSet">
+            <End Role="ElementSet" EntitySet="ElementSet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet" Association="YYQERPModel.FK_DeliveryDetailSet_ProductSet">
+            <End Role="ProductSet" EntitySet="ProductSet" />
+            <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserSet">
           <Key>
@@ -1238,6 +1336,7 @@
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PickSet" Relationship="YYQERPModel.FK_PickSet_ElementSet" FromRole="ElementSet" ToRole="PickSet" />
           <Property Name="PickQuantity" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_ElementSet" FromRole="ElementSet" ToRole="DeliveryDetailSet" />
         </EntityType>
         <EntityType Name="BomDetailSet">
           <Key>
@@ -1544,6 +1643,7 @@
           <NavigationProperty Name="StockSet" Relationship="YYQERPModel.FK_StockSet_ProductSet" FromRole="ProductSet" ToRole="StockSet" />
           <NavigationProperty Name="StockInSet" Relationship="YYQERPModel.FK_StockInSet_ProductSet" FromRole="ProductSet" ToRole="StockInSet" />
           <NavigationProperty Name="StockOutSet" Relationship="YYQERPModel.FK_StockOutSet_ProductSet" FromRole="ProductSet" ToRole="StockOutSet" />
+          <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_ProductSet" FromRole="ProductSet" ToRole="DeliveryDetailSet" />
         </EntityType>
         <Association Name="FK_ProductSet_ModelSet">
           <End Type="YYQERPModel.ModelSet" Role="ModelSet" Multiplicity="1" />
@@ -1865,7 +1965,7 @@
           <Property Name="CustomerLevel" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="SaleLeader" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PayDate" Type="String" />
+          <Property Name="PayDate" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="PayWay" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CustomerType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="MachineType" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -1883,7 +1983,7 @@
           <Property Name="OrderNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Tel" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="QQ" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -1891,12 +1991,84 @@
           <Property Name="Fax" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Bonus" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LogisticsCompany" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Addtime" Type="DateTime" Precision="0" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
           <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GroupGuid" Type="Guid" Nullable="false" />
           <Property Name="Modifytime" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="DeliveryDetailSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeliveryId" Type="Int32" Nullable="false" />
+          <Property Name="ElementId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DeliverySet" Relationship="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" FromRole="DeliveryDetailSet" ToRole="DeliverySet" />
+          <NavigationProperty Name="ElementSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_ElementSet" FromRole="DeliveryDetailSet" ToRole="ElementSet" />
+          <NavigationProperty Name="ProductSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_ProductSet" FromRole="DeliveryDetailSet" ToRole="ProductSet" />
+        </EntityType>
+        <EntityType Name="DeliverySet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Addtime" Type="DateTime" Precision="3" />
+          <Property Name="Customer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderTime" Type="DateTime" Precision="3" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmountUp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modifytime" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" FromRole="DeliverySet" ToRole="DeliveryDetailSet" />
+        </EntityType>
+        <Association Name="FK_DeliveryDetailSet_DeliverySet">
+          <End Type="YYQERPModel.DeliverySet" Role="DeliverySet" Multiplicity="1" />
+          <End Type="YYQERPModel.DeliveryDetailSet" Role="DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliverySet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryDetailSet_ElementSet">
+          <End Type="YYQERPModel.ElementSet" Role="ElementSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.DeliveryDetailSet" Role="DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ElementSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="ElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryDetailSet_ProductSet">
+          <End Type="YYQERPModel.ProductSet" Role="ProductSet" Multiplicity="0..1" />
+          <End Type="YYQERPModel.DeliveryDetailSet" Role="DeliveryDetailSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryDetailSet">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2297,6 +2469,40 @@
                 <ScalarProperty Name="CustomerLevel" ColumnName="CustomerLevel" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="AfterSales" ColumnName="AfterSales" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryDetailSet">
+            <EntityTypeMapping TypeName="YYQERPModel.DeliveryDetailSet">
+              <MappingFragment StoreEntitySet="DeliveryDetailSet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliverySet">
+            <EntityTypeMapping TypeName="YYQERPModel.DeliverySet">
+              <MappingFragment StoreEntitySet="DeliverySet">
+                <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
+                <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
+                <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="TotalAmountUp" ColumnName="TotalAmountUp" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Addtime" ColumnName="Addtime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
