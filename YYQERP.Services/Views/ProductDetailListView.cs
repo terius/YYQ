@@ -26,4 +26,13 @@ namespace YYQERP.Services.Views
 
         public int IsSelect { get; set; }
     }
+
+
+    public class ProductView
+    {
+        public int Id { get; set; }
+        public string Model { get; set; }
+
+        public string Name { get; set; }
+    }
 }

@@ -62,10 +62,10 @@
         <EntityTypeShape EntityType="YYQERPModel.CustomerSet" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="YYQERPModel.SaleReportSet" Width="1.5" PointX="14.75" PointY="12.75" />
         <EntityTypeShape EntityType="YYQERPModel.DeliveryDetailSet" Width="1.5" PointX="21" PointY="9.75" />
-        <EntityTypeShape EntityType="YYQERPModel.DeliverySet" Width="1.5" PointX="18.75" PointY="4.5" />
-        <AssociationConnector Association="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" />
         <AssociationConnector Association="YYQERPModel.FK_DeliveryDetailSet_ElementSet" />
         <AssociationConnector Association="YYQERPModel.FK_DeliveryDetailSet_ProductSet" />
+        <EntityTypeShape EntityType="YYQERPModel.DeliverySet" Width="1.5" PointX="14.375" PointY="1" />
+        <AssociationConnector Association="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,7 +25,7 @@ namespace YYQERP.Repository
         public Nullable<System.DateTime> Addtime { get; set; }
         public string Customer { get; set; }
         public string OrderNo { get; set; }
-        public Nullable<System.DateTime> OrderTime { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public string TotalAmountUp { get; set; }
         public string Sender { get; set; }

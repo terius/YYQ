@@ -72,7 +72,7 @@ namespace YYQERP
 
 
 
-            bundles.Add(new ScriptBundle("~/js/easyui-datagrid-detailview").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js/easyui-datagrid-detailview").Include(
     "~/easyui/datagrid-detailview.js"));
             bundles.Add(new ScriptBundle("~/js/easyui-datagrid-groupview").Include(
   "~/easyui/datagrid-groupview.js"));

@@ -21,6 +21,8 @@ namespace YYQERP.Services.Interfaces
         IEnumerable GetBomSelectList();
         IList<Default_SelectItem> GetProductSelectListForStockIn();
 
+        IList<Default_SelectItem> GetProductSelectListForDelivery();
+
 
         //原材料方法
         Search_Element_Response SearchElement(Search_Element_Request request, bool isPage = true);
@@ -105,6 +107,8 @@ namespace YYQERP.Services.Interfaces
         IList<ProductDetailListView> GetElementListByHalfProductId_In_ProductDetail(int productId);
 
         CEDResponse SaveProductDetail(IList<ProductDetailListView> list, string currUserName, int productId);
+
+      
 
         //领料方法
         IList<Pick_ForAdd_View> GetListByBomId_For_PickAdd(int bomid, int num);

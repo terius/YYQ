@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using YYQERP.Infrastructure;
+using YYQERP.Services.Views;
 
 namespace YYQERP
 {
-    public class PickModel
+    public class DeliveryViewModel
     {
         public IList<ElementCacheView> ElementSelectList { get; set; }
 
-        public IList<BomCacheView> BomSelectList { get; set; }
 
-        public IList<PartCacheView> PartSelectList { get; set; }
+        public IList<Default_SelectItem>  ProductSelectList { get; set; }
     }
 }

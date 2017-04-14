@@ -301,33 +301,10 @@ namespace YYQERP.Services
         }
 
 
-        private static string ToStringWithtime(this DateTime dt)
-        {
-            return dt.ToString("yyyy-MM-dd HH:mm:ss");
-        }
+     
 
-        private static string ToStringWithtime(this DateTime? dt)
-        {
-            if (dt == null || dt.Value == DateTime.MinValue || dt.Value == DateTime.MaxValue)
-            {
-                return "";
-            }
-            return dt.Value.ToString("yyyy-MM-dd HH:mm:ss");
-        }
 
-        private static string ToStringWithDate(this DateTime dt)
-        {
-            return dt.ToString("yyyy-MM-dd");
-        }
-
-        private static string ToStringWithDate(this DateTime? dt)
-        {
-            if (dt == null || dt.Value == DateTime.MinValue || dt.Value == DateTime.MaxValue)
-            {
-                return "";
-            }
-            return dt.Value.ToString("yyyy-MM-dd");
-        }
+    
 
 
         public static DicView ConvertTo_DicView(this DicSet source)
@@ -1753,5 +1730,112 @@ namespace YYQERP.Services
         }
 
         #endregion
+
+
+
+        #region 送货单
+
+        public static IList<DeliveryListView> Convert_Delivery_To_DeliveryListView_List(this IList<DeliverySet> source,
+            IList<DicView> unitList, IList<UserCacheView> userList)
+        {
+            var dest = new List<DeliveryListView>();
+            DeliveryListView view;
+            DeliveryDetailView detailView;
+            foreach (var item in source)
+            {
+                view = new DeliveryListView();
+                view.Addtime = item.Addtime.ToStringWithtime();
+                view.AddUserName = GetUserTrueName(item.AddUserName, userList);
+                view.Customer = item.Customer;
+                view.Id = item.Id;
+                view.Manager = item.Manager;
+                view.OrderNo = item.OrderNo;
+                view.OrderDate = item.OrderDate.ToStringWithDate();
+                view.Remark = item.Remark;
+                view.Sender = item.Sender;
+                view.TotalAmount = item.TotalAmount.ToStringText();
+                view.Details = new List<DeliveryDetailView>();
+                foreach (var detail in item.DeliveryDetailSet)
+                {
+                    detailView = new DeliveryDetailView();
+                    detailView.Type = detail.ElementId.HasValue ? "原材料" : "成品";
+                    if (detailView.Type == "原材料")
+                    {
+                        detailView.Model = detail.ElementSet.Name;
+                    }
+                    else
+                    {
+                        detailView.Model = detail.ProductSet.ModelSet.Name;
+                    }
+                    detailView.Quantity = detail.Quantity.ToStringText();
+                    detailView.Remark = detail.Remark;
+                    detailView.Price = detail.Price.ToStringText();
+                    detailView.TotalPrice = detail.TotalPrice.ToStringText();
+                    detailView.Unit = unitList.GetName(detail.UnitTypeCode);
+                    view.Details.Add(detailView);
+                    //detailView.TotalPrice = detail.
+
+
+                }
+                dest.Add(view);
+                //dest.Add(item.ConvertTo_PickListView(unitList, partList, userList));
+            }
+            return dest;
+        }
+        #endregion
+
+
+
+
+        #region 转换方法
+        private static string ToStringText(this decimal? price)
+        {
+          return price.HasValue ? string.Format("{0:C2}", price.Value) : "";
+        }
+
+        private static string ToStringText(this decimal price)
+        {
+            return  string.Format("{0:C2}", price);
+        }
+
+        private static string ToStringText(this double? data)
+        {
+            return data.HasValue ? data.ToString() : "";
+        }
+
+        private static string GetName(this IList<DicView> list,string code)
+        {
+            return list.Where(d => d.Code == code).Select(d=>d.Name).FirstOrDefault();
+        }
+
+        private static string ToStringWithtime(this DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private static string ToStringWithtime(this DateTime? dt)
+        {
+            if (dt == null || dt.Value == DateTime.MinValue || dt.Value == DateTime.MaxValue)
+            {
+                return "";
+            }
+            return dt.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private static string ToStringWithDate(this DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd");
+        }
+
+        private static string ToStringWithDate(this DateTime? dt)
+        {
+            if (dt == null || dt.Value == DateTime.MinValue || dt.Value == DateTime.MaxValue)
+            {
+                return "";
+            }
+            return dt.Value.ToString("yyyy-MM-dd");
+        }
+        #endregion
+
     }
 }

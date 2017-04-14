@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using YYQERP.Cache;
-using YYQERP.Infrastructure.Helpers;
 using YYQERP.Services.Interfaces;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
@@ -11,13 +10,13 @@ namespace YYQERP.Controllers
     public class DeliveryController : BaseController
     {
 
-        private readonly IPickService _pickService;
+        private readonly IDeliveryService _deliveryService;
         private readonly ICommonCacheService _cacheService;
         private readonly IGoodsService _goodsService;
 
-        public DeliveryController(IPickService pickService, ICommonCacheService cacheService, IGoodsService goodsService)
+        public DeliveryController(IDeliveryService deliveryService, ICommonCacheService cacheService, IGoodsService goodsService)
         {
-            _pickService = pickService;
+            _deliveryService = deliveryService;
             _cacheService = cacheService;
             _goodsService = goodsService;
         }
@@ -26,58 +25,27 @@ namespace YYQERP.Controllers
         {
 
             ViewBag.Pers = GetUserOpers();
-            var model = new PickModel();
+            var model = new DeliveryViewModel();
             model.ElementSelectList = _cacheService.GetCache_Element();
-            model.BomSelectList = _cacheService.GetCache_Bom();
-            model.PartSelectList = _cacheService.GetCache_Part();
+            model.ProductSelectList = _goodsService.GetProductSelectListForDelivery();
             return View(model);
         }
 
-        public ActionResult GetPickPageList(Search_Pick_Request request)
+        public ActionResult GetPageList(Search_Delivery_Request request)
         {
-            var list = _pickService.SearchPick(request);
+            var list = _deliveryService.SearchDelivery(request);
             var json = Json(list, JsonRequestBehavior.AllowGet);
             return json;
         }
 
-        public string GetPickDetail(int id)
+
+        public ActionResult GetTemplate()
         {
-            var html = _pickService.GetPickDetailHtml(id);
-            return html;
+            Delivery_Add_View view = new Delivery_Add_View();
+            view.Details = new List<DeliveryDetail_ForAdd_View>();
+            return Json(view, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetAddTemplate()
-        {
-            IList<Pick_ForAdd_View> list = new List<Pick_ForAdd_View>();
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetListByBomId_For_Add(int bomid, int num)
-        {
-            var list = _goodsService.GetListByBomId_For_PickAdd(bomid, num);
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GetListByPartId_For_Add(int partid, int num)
-        {
-            var list = _goodsService.GetListByPartId_For_PickAdd(partid, num);
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult GetByEleId_For_Add(int eleid)
-        {
-            var info = _goodsService.GetViewByEleId_For_PickAdd(eleid);
-            return Json(info, JsonRequestBehavior.AllowGet);
-        }
-
-        public string SavePick(string purpose)
-        {
-            var pgInfo = GetInfoByStream<List<Pick_ForAdd_View>>();
-            var res = _pickService.SavePick(pgInfo, LoginUserName, purpose);
-            return res.Message;
-        }
-
-
-      
 
 
     }

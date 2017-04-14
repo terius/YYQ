@@ -23,9 +23,13 @@ namespace YYQERP.Repository
         public Nullable<System.DateTime> Modifytime { get; set; }
         public string AddUserName { get; set; }
         public string ModifyUserName { get; set; }
+        public string Remark { get; set; }
+        public string UnitTypeCode { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
     
-        public virtual DeliverySet DeliverySet { get; set; }
         public virtual ElementSet ElementSet { get; set; }
         public virtual ProductSet ProductSet { get; set; }
+        public virtual DeliverySet DeliverySet { get; set; }
     }
 }

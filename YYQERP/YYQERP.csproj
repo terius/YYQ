@@ -156,6 +156,7 @@
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ControlModels\DeliveryViewModel.cs" />
     <Compile Include="ControlModels\PickOutModel.cs" />
     <Compile Include="ControlModels\ProductModel.cs" />
     <Compile Include="ControlModels\StockInModel.cs" />

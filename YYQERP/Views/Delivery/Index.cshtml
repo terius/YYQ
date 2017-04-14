@@ -1,46 +1,49 @@
-﻿@model YYQERP.PickModel
+﻿@model DeliveryViewModel
 @{
     ViewBag.Title = "送货单管理界面";
 }
 <div class="easyui-layout" data-options="fit:true" style=" overflow:hidden;">
     <div id="main-panel" data-options="region: 'center',title:'领料信息',border:true" style="border-bottom: none; border-left: none;">
         <div id="user_tabs" class="easyui-tabs" data-options="fit:true,border:false">
-            <div title="领料记录" data-options="iconCls:'icon-standard-plugin'" data-checkper="query">
+            <div title="送货单记录" data-options="iconCls:'icon-standard-plugin'" data-checkper="query">
                 <table id="dgList"></table>
             </div>
-            <div title="申请领料" data-options="iconCls:'icon-standard-plugin'">
-                <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;" data-checkper="addpick">
+            <div title="新增送货单" data-options="iconCls:'icon-standard-plugin'">
+                <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;">
+
                     <div class="km_toolbar">
-                        <label>选择Bom</label>
-                        <input id="BomId" name="BomId" class="easyui-combobox"
-                               data-options="prompt:'选择Bom',editable:true,hasDownArrow:true,panelHeight:200,valueField:'Id',textField:'Name'"
-                               style="width:250px;">
-                        <label style="margin-left:5px">数量</label>
-                        <input id="BomNum" name="BomNum" class="easyui-numberbox" data-options="prompt:'Bom数量',value:'1'" style="width:40px" />
-                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addbom();">添加</button>
+                        <label class="caption">客户</label>
+                        <input id="Customer" name="Customer" class="easyui-textbox" data-options="prompt:'客户',value:''" style="width:300px" />
                     </div>
                     <div class="km_toolbar">
-                        <label>选择部件</label>
-                        <input id="PartId" name="PartId" class="easyui-combobox"
-                               data-options="prompt:'选择部件',editable:true,hasDownArrow:true,panelHeight:200,valueField:'Id',textField:'Text'"
-                               style="width:250px;">
-                        <label style="margin-left:5px">数量</label>
-                        <input id="PartNum" name="PartNum" class="easyui-numberbox" data-options="prompt:'部件数量',value:'1'" style="width:40px" />
-
-                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addpart();">添加</button>
+                        <label class="caption">订单号</label>
+                        <input id="OrderNo" name="OrderNo" class="easyui-textbox" data-options="prompt:'订单号',value:''" style="width:300px" />
 
                     </div>
                     <div class="km_toolbar">
-                        <label>选择原材料</label>
+                        <label class="caption">订单日期</label>
+                        <input id="OrderDate" class="easyui-datebox" data-options="prompt:'订单日期',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+                    </div>
+                    <div class="km_toolbar">
+                        <label class="caption">总价</label>
+                        <label>¥</label><input id="TotalAmount" name="TotalAmount" class="easyui-numberbox" data-options="prompt:'总价',value:'1'" style="width:80px" /><label>元</label>
+                    </div>
+                    <div class="km_toolbar">
+                        <label class="caption">选择成品</label>
+                        <input id="ProductId" name="ProductId" class="easyui-combobox"
+                               data-options="prompt:'选择成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
+                               style="width:250px;">
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addprod();">添加</button>
+
+                    </div>
+                    <div class="km_toolbar">
+                        <label class="caption">选择原材料</label>
                         <input id="ElementId" name="ElementId" class="easyui-combobox"
                                data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
                                style="width:250px;">
                         <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addelement();">添加</button>
-
                     </div>
                     <div class="km_toolbar">
-                        <label style="margin-left:5px">领料目的</label>
-                        <input id="Purpose" name="Purpose" class="easyui-textbox" data-options="prompt:'领料目的',value:''" style="width:300px" />
                         <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.addgrid.do_savepick();">提交</button>
                         <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-basket-remove'" onclick="km.addgrid.do_clear();">清空列表</button>
                     </div>
@@ -51,12 +54,12 @@
 
         </div>
     </div>
-    <div id="east_panel" data-options="region: 'east',title:'详细信息',border:true,split:true" style="width: 30%; border-bottom: none; ">
-    </div>
+    @*<div id="east_panel" data-options="region: 'east',title:'详细信息',border:true,split:true" style="width: 30%; border-bottom: none; ">
+    </div>*@
 </div>
 <div id="toolbar1">
-    <input id="STime" class="easyui-datebox" data-options="prompt:'开始时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
-    <input id="ETime" class="easyui-datebox" data-options="prompt:'结束时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <input id="STime" class="easyui-datebox" data-options="prompt:'打印开始时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+    <input id="ETime" class="easyui-datebox" data-options="prompt:'打印结束时间',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
     <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
 </div>
 
@@ -65,28 +68,31 @@
         .errorstock {
             background-color: red !important;
         }
+
+        .caption {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+        }
     </style>
 }
 
 @section Scripts {
-    @Scripts.Render("~/js/easyui-datagrid-groupview")
+    @*@Scripts.Render("~/js/easyui-datagrid-groupview")*@
+    @Scripts.Render("~/bundles/js/easyui-datagrid-detailview")
     <script src="~/js/Sys/Delivery_Index.js"></script>
     <script type="text/javascript">
         km.model = {
-            "urls":{"pagelist":"/Delivery/GetPageList",
-                "GetPickDetail":"/Delivery/GetPickDetail",
-                "GetAddTemplate":"/Delivery/GetAddTemplate",
-                "GetListByBomId_For_Add":"/Delivery/GetListByBomId_For_Add",
-                "GetListByPartId_For_Add":"/Delivery/GetListByPartId_For_Add",
-                "GetByEleId_For_Add":"/Delivery/GetByEleId_For_Add",
-                "SavePick":"/Delivery/SavePick",
-                DeletePick:"/Delivery/DeletePick"
+            "urls":{
+                pagelist:"/Delivery/GetPageList",
+                getAddTemp:"/Delivery/GetTemplate"
+               
             },
             "buttons":[
             ]};
         km.eleList = @Html.Raw(Json.Encode(@Model.ElementSelectList));
-        km.bomList = @Html.Raw(Json.Encode(@Model.BomSelectList));
-        km.partList = @Html.Raw(Json.Encode(@Model.PartSelectList));
+        km.prodList = @Html.Raw(Json.Encode(@Model.ProductSelectList));
+      //  com.showLog( km.eleList);
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
     </script>
 }

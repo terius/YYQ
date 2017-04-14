@@ -1659,6 +1659,17 @@ namespace YYQERP.Services.Implementations
             return selecters;
         }
 
+        public IList<Default_SelectItem> GetProductSelectListForDelivery()
+        {
+            var list = _productRepository.GetDbQuerySet().ToList();
+            IList<Default_SelectItem> selecters = new List<Default_SelectItem>();
+            foreach (var item in list)
+            {
+                selecters.Add(new Default_SelectItem { id = item.Id, text = item.Aliases + "【" + item.ModelSet.Name + "】" });
+            }
+            return selecters;
+        }
+
         public StockIn_ForAdd_ByProductView GetStockInAddItemByProductId(int pid)
         {
             var info = _productRepository.Single(pid);

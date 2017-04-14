@@ -17,7 +17,6 @@
 
 namespace YYQERP.DependencyResolution
 {
-    using StructureMap;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
     using System.Data.Entity;
@@ -72,7 +71,7 @@ namespace YYQERP.DependencyResolution
             For<IGoodsService>().Use<GoodsService>();
             For<IPickService>().Use<PickService>();
             For<ISaleService>().Use<SaleService>();
-           
+            For<IDeliveryService>().Use<DeliveryService>();
         }
 
         #endregion

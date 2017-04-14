@@ -88,6 +88,7 @@
     <Compile Include="Implementations\BaseService.cs" />
     <Compile Include="Implementations\DicService.cs" />
     <Compile Include="Implementations\GoodsService.cs" />
+    <Compile Include="Implementations\DeliveryService.cs" />
     <Compile Include="Implementations\PickService.cs" />
     <Compile Include="Implementations\SaleService.cs" />
     <Compile Include="Implementations\StockService.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Interfaces\IGoodsService.cs" />
     <Compile Include="Interfaces\IMenuService.cs" />
     <Compile Include="Interfaces\IDicService.cs" />
+    <Compile Include="Interfaces\IDeliveryService.cs" />
     <Compile Include="Interfaces\IPickService.cs" />
     <Compile Include="Interfaces\ISaleService.cs" />
     <Compile Include="Interfaces\IStockService.cs" />
@@ -116,6 +118,8 @@
     <Compile Include="Messages\Search_Bom_Response.cs" />
     <Compile Include="Messages\Search_PickOut_Request.cs" />
     <Compile Include="Messages\Search_PickOut_Response.cs" />
+    <Compile Include="Messages\Search_Delivery_Request.cs" />
+    <Compile Include="Messages\Search_Delivery_Response.cs" />
     <Compile Include="Messages\Search_Product_Request.cs" />
     <Compile Include="Messages\Search_Product_Response.cs" />
     <Compile Include="Messages\Search_SaleReport_Request.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\CommonView.cs" />
+    <Compile Include="Views\Delivery_View.cs" />
     <Compile Include="Views\Pick_View.cs" />
     <Compile Include="Views\RoleMenuTreeView.cs" />
     <Compile Include="Views\RoleTreeView.cs" />

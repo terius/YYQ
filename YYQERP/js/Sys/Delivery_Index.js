@@ -23,60 +23,60 @@ km.maingrid = function () {
     }
     return {
         init: function () {
-            var FormatOper = function (val, row, index) {
-                var isFeedback = row.IsFeedback;
-                if (isFeedback === "否") {
-                    return "<button  style=\"color:red\"  onclick=\"km.maingrid.deleteDetailRow(" + row.Id + ");\">删除</button>";
-                }
-                return "";
-            }
-            var QuantityWarning = function (value, row, index) {
-                if (row.ShowWarn == 1) {
-                    return 'background-color:#f24b21;color:#fff;';
-                }
-            }
-
-            var checkCanDel = function () {
-                for (var i = 0; i < km.pers.length; i++) {
-                    if ("delete" == km.pers[i]) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-         
-
-            var ShowDetail = function (id) {
-                $.get(km.model.urls["GetPickDetail"], { id: id }, function (html) {
-                    document.getElementById("east_panel").innerHTML = html;
-                })
-            }
-
             $grid.datagrid(km.gridOption({
                 fitColumns: true,
                 queryParams: { STime: "", ETime: "" },
                 url: km.model.urls["pagelist"],
                 columns: [[
-                    { field: 'Addtime', title: '申请时间', width: 150, align: 'left', sortable: true },
-                    { field: 'AddUserName', title: '申请人', width: 100, align: 'left', sortable: true },
-                    { field: 'ElementName', title: '零件名称', width: 200, align: 'left', sortable: true },
-                    { field: 'BomName', title: '所属Bom', width: 100, align: 'left', sortable: true },
-                    { field: 'PartName', title: '所属部件', width: 100, align: 'left', sortable: true },
-                    { field: 'Quantity', title: '申请数量', width: 100, align: 'left', sortable: true },
-                    { field: 'IsFeedback', title: '是否已发料', width: 100, align: 'left', sortable: true },
-                    { field: 'StockOutQuantity', title: '发料数量', width: 100, align: 'left', sortable: true },
-                    { field: 'delete', title: '操作', width: 100, align: 'left', formatter: FormatOper, hidden: !checkCanDel() }
+                    { field: 'Addtime', title: '打印时间', width: 100, align: 'left', sortable: true },
+                    { field: 'Customer', title: '客户', width: 100, align: 'left', sortable: true },
+                    { field: 'OrderNo', title: '订单号', width: 100, align: 'left', sortable: true },
+                    { field: 'OrderDate', title: '订单日期', width: 100, align: 'left', sortable: true },
+                    { field: 'TotalAmount', title: '总价', width: 100, align: 'left', sortable: true },
+                    { field: 'Sender', title: '发货人', width: 100, align: 'left', sortable: true },
+                    { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
+                    { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true }
+                   
                 ]],
                 toolbar: '#toolbar1',
-                view: groupview,
-                groupField: 'ParentId',
-                groupFormatter: function (value, rows) {
-                    return '<div style="background:yellow;padding:0 10px">申请时间：' + rows[0].Addtime + '          申请目的：' + (rows[0].Purpose || "") + '</div>';
+                view: detailview,
+                detailFormatter: function (index, row) {
+                    return '<div style="padding:10px"><table class="ddv"></table></div>';
                 },
-                onClickRow: function (index, row) {
-                    ShowDetail(row.Id);
+                onExpandRow: function (index, row) {
+                    var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');
+                    ddv.datagrid({
+                        data:row.Details,
+                        fitColumns: true,
+                        singleSelect: true,
+                        rownumbers: true,
+                        loadMsg: '',
+                        height: 'auto',
+                        columns: [[
+                            { field: 'Type', title: '类型', width: 100,align: 'left' },
+                            { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
+                            { field: 'Quantity', title: '数量', width: 100, align: 'left' },
+                            { field: 'Unit', title: '单位', width: 100, align: 'left' },
+                            { field: 'Price', title: '单价', width: 100, align: 'left' },
+                            { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
+                            { field: 'Remark', title: '备注', width: 100, align: 'left' }
+                        ]],
+                        onResize: function () {
+                            $grid.datagrid('fixDetailRowHeight', index);
+                        },
+                        onLoadSuccess: function () {
+                            setTimeout(function () {
+                                $grid.datagrid('fixDetailRowHeight', index);
+                            }, 0);
+                        }
+                    });
+                    $grid.datagrid('fixDetailRowHeight', index);
                 }
+                //groupField: 'ParentId',
+                //groupFormatter: function (value, rows) {
+                //    return '<div style="background:yellow;padding:0 10px">申请时间：' + rows[0].Addtime + '          申请目的：' + (rows[0].Purpose || "") + '</div>';
+                //}
+              
 
             }));
 
@@ -88,26 +88,7 @@ km.maingrid = function () {
             var etime = com.trim($("#ETime").datebox("getValue"));
 
             reload({ STime: stime, ETime: etime });
-        },
-
-        deleteDetailRow: function (id) {
-            //  var index = this.jq.datagrid('getRowIndex', row);
-            if (confirm("是否删除此条申请记录？")) {
-                $.get(km.model.urls["DeletePick"], { id: id }, function (msg) {
-
-                    if (msg == "") {
-                        com.message('s', "删除成功");
-                        reload();
-                    }
-                    else {
-                        com.message('e', msg);
-                    }
-
-                })
-            }
-
         }
-
 
 
     }
@@ -201,9 +182,8 @@ km.addgrid = function () {
                 method: 'get',
                 onClickRow: onClickRow,
                 checkOnSelect: false,
-                url: km.model.urls["GetAddTemplate"],
+                url: km.model.urls["getAddTemp"],
                 columns: [[
-                        { field: 'IsSelect', title: '选择', width: 20, align: 'left', checkbox: true },
                         { field: 'ElementName', title: '原材料', width: 200, align: 'left' },
                         { field: 'BomName', title: 'Bom', width: 220, align: 'left' },
                         { field: 'PartName', title: '部件', width: 120, align: 'left' },
@@ -217,36 +197,12 @@ km.addgrid = function () {
 
             });//end grid init
 
-            $("#BomId").combobox('loadData', km.bomList);
+          
             $("#ElementId").combobox('loadData', km.eleList);
-            $("#PartId").combobox('loadData', km.partList);
+            $("#ProductId").combobox('loadData', km.prodList);
         },
-        do_addbom: function () {
-            var bomid = $("#BomId").combobox("getValue");
-
-            if (bomid) {
-                do_accept();
-                var isExist = CheckExistByBom(bomid);
-                if (isExist) {
-                    com.message('e', "请勿重复添加Bom");
-                    return false;
-                }
-                var num = $("#BomNum").val() || 1;
-                $.getJSON(km.model.urls["GetListByBomId_For_Add"], {
-                    bomid: bomid, num: num
-                }, function (data) {
-                    //  alert(JSON.stringify(data));
-                    var indexMax = $grid.datagrid('getRows').length - 1;
-                    for (var i = 0; i < data.length; i++) {
-                        $grid.datagrid('appendRow', data[i]);
-                        indexMax++;
-                        if (data[i]['IsSelect'] == 1) $grid.datagrid('checkRow', indexMax);
-                    }
-
-                });
-            }
-        },
-        do_addpart: function () {
+     
+        do_addprod: function () {
             var partid = $("#PartId").combobox("getValue");
 
             if (partid) {
