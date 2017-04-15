@@ -49,6 +49,7 @@ namespace YYQERP.Controllers
         public ActionResult GetAddTemplate()
         {
             IList<Pick_ForAdd_View> list = new List<Pick_ForAdd_View>();
+            string aa = JsonHelper.SerializeObj(list);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

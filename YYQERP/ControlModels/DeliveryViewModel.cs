@@ -9,6 +9,6 @@ namespace YYQERP
         public IList<ElementCacheView> ElementSelectList { get; set; }
 
 
-        public IList<Default_SelectItem>  ProductSelectList { get; set; }
+        public IList<Default_SelectItem> ProductSelectList { get; set; }
     }
 }

@@ -36,7 +36,7 @@ km.maingrid = function () {
                     { field: 'Sender', title: '发货人', width: 100, align: 'left', sortable: true },
                     { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
                     { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true }
-                   
+
                 ]],
                 toolbar: '#toolbar1',
                 view: detailview,
@@ -46,14 +46,14 @@ km.maingrid = function () {
                 onExpandRow: function (index, row) {
                     var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');
                     ddv.datagrid({
-                        data:row.Details,
+                        data: row.Details,
                         fitColumns: true,
                         singleSelect: true,
                         rownumbers: true,
                         loadMsg: '',
                         height: 'auto',
                         columns: [[
-                            { field: 'Type', title: '类型', width: 100,align: 'left' },
+                            { field: 'Type', title: '类型', width: 100, align: 'left' },
                             { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
                             { field: 'Quantity', title: '数量', width: 100, align: 'left' },
                             { field: 'Unit', title: '单位', width: 100, align: 'left' },
@@ -76,7 +76,7 @@ km.maingrid = function () {
                 //groupFormatter: function (value, rows) {
                 //    return '<div style="background:yellow;padding:0 10px">申请时间：' + rows[0].Addtime + '          申请目的：' + (rows[0].Purpose || "") + '</div>';
                 //}
-              
+
 
             }));
 
@@ -119,12 +119,12 @@ km.addgrid = function () {
         window.location.reload();
     }
 
-    var CheckExistByBom = function (bomid) {
+    var CheckProductIsDup = function (pid) {
 
         var gridData = $grid.datagrid("getData");
         if (gridData.total > 0) {
             for (var i = 0; i < gridData.rows.length; i++) {
-                if (bomid == gridData.rows[i].BomId) {
+                if (pid == gridData.rows[i].ProductId) {
                     return true;
                 }
             }
@@ -144,13 +144,11 @@ km.addgrid = function () {
         return false;
     }
 
-    var QuantityError = function (value, row, index) {
-        if (value === "未入库" || row.Quantity > value) {
-            return 'background-color:#ffee00;color:red;';
-        }
-    }
+
 
     var onClickRow = function (index) {
+
+        //  alert("onClickRow : " + index)
         if (editIndex != index) {
             if (endEditing()) {
                 $grid.datagrid('selectRow', index)
@@ -173,53 +171,83 @@ km.addgrid = function () {
         }
         return "";
     }
+    var FormatOper = function (val, row, index) {
+        return "<button   style=\"color:red\"  onclick=\"km.addgrid.do_deleteRow()\">删除</button>";
+
+    }
+
+
+    var onClickCell = function (index, field, value) {
+        if (field == "delete") {
+            if (deleteButtonClick) {
+                deleteButtonClick = false;
+                $grid.datagrid("deleteRow", index).datagrid("unselectAll");
+            }
+            //    com.showLog("index:" + index + "  field:" + field + "   value:" + value);
+
+        }
+    }
+    var deleteButtonClick = false;
+    var onEndEdit = function (index, row, changes) {
+        com.showLog(changes);
+    }
 
     return {
         init: function () {
+
+            //       public Nullable<int> ElementId { get; set; }
+            //public Nullable<int> ProductId { get; set; }
+            //public double Quantity { get; set; }
+
+            //public string Remark { get; set; }
+            //public string UnitTypeCode { get; set; }
+            //public decimal Price { get; set; }
+            //public decimal TotalPrice { get; set; }
             $grid.datagrid({
                 iconCls: 'icon-edit',
-                singleSelect: false,
+                singleSelect: true,
                 method: 'get',
                 onClickRow: onClickRow,
-                checkOnSelect: false,
-                url: km.model.urls["getAddTemp"],
+                onClickCell: onClickCell,
+                onEndEdit:onEndEdit,
+                //      checkOnSelect: false,
+                //url: km.model.urls["getAddTemp"],
                 columns: [[
-                        { field: 'ElementName', title: '原材料', width: 200, align: 'left' },
-                        { field: 'BomName', title: 'Bom', width: 220, align: 'left' },
-                        { field: 'PartName', title: '部件', width: 120, align: 'left' },
-                        { field: 'Quantity', title: '申请数量', width: 80, align: 'left', editor: { type: 'numberbox', options: { required: true, precision: 2 } } },
-                        { field: 'UnitName', title: '数量单位', width: 40, align: 'left' },
-                        { field: 'StockQuantity', title: '库存数量', width: 80, align: 'left', styler: QuantityError },
-                        //{ field: 'ElementId', title: '原材料Id', width: 1, align: 'left', hidden: true },
-                        //{ field: 'BomId', title: 'BomId', width: 1, align: 'left', hidden: true },
-                        //{ field: 'ShelfId', title: '库位Id', width: 1, align: 'left', hidden: true }
+                        { field: 'Type', title: '类型', width: 100, align: 'left' },
+                        { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
+                        { field: 'Quantity', title: '数量', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true} } },
+                        { field: 'Unit', title: '单位', width: 100, align: 'left' },
+                        { field: 'Price', title: '单价', width: 100, align: 'left' },
+                        { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
+                        { field: 'Remark', title: '备注', width: 300, align: 'left', editor: { type: 'textbox' } },
+                        { field: 'delete', title: '操作', width: 300, align: 'left', formatter: FormatOper },
+
                 ]]
 
             });//end grid init
 
-          
+
             $("#ElementId").combobox('loadData', km.eleList);
             $("#ProductId").combobox('loadData', km.prodList);
         },
-     
+
         do_addprod: function () {
-            var partid = $("#PartId").combobox("getValue");
+            var productId = $("#ProductId").combobox("getValue");
 
-            if (partid) {
+            if (productId) {
                 do_accept();
+                var isExist = CheckProductIsDup(productId);
+                if (isExist) {
+                    com.message('e', "请勿重复添加成品");
+                    return false;
+                }
 
-                var num = $("#PartNum").val() || 1;
-                $.getJSON(km.model.urls["GetListByPartId_For_Add"], {
-                    partid: partid, num: num
+                $.getJSON(km.model.urls["addProductItem"], {
+                    pid: productId
                 }, function (data) {
-                    //  alert(JSON.stringify(data));
-                    var indexMax = $grid.datagrid('getRows').length - 1;
-                    for (var i = 0; i < data.length; i++) {
-                        $grid.datagrid('appendRow', data[i]);
-                        indexMax++;
-                        if (data[i]['IsSelect'] == 1) $grid.datagrid('checkRow', indexMax);
+                    if (data) {
+                        $grid.datagrid('appendRow', data);
                     }
-
                 });
             }
         },
@@ -232,20 +260,18 @@ km.addgrid = function () {
                 //    com.message('e', "请勿重复添加原材料");
                 //    return false;
                 //}
-                $.getJSON(km.model.urls["GetByEleId_For_Add"], {
+                $.getJSON(km.model.urls["addElementItem"], {
                     eleid: eleid
                 }, function (row) {
-                    //  alert(JSON.stringify(data));
-                    var indexMax = $grid.datagrid('getRows').length;
                     if (row) {
                         $grid.datagrid('appendRow', row);
-                        if (row['IsSelect'] == 1) $grid.datagrid('checkRow', indexMax);
                     }
                 });
             }
         },
         do_savepick: function () {
             do_accept();
+            return;
             var addDatas = $grid.datagrid('getChecked');
             var msg = checkSave(addDatas);
             if (msg != "") {
@@ -267,6 +293,11 @@ km.addgrid = function () {
         },
         do_clear: function () {
             $grid.datagrid("reload");
+        },
+        do_deleteRow: function () {
+            if (confirm("是否删除此条记录？")) {
+                deleteButtonClick = true;
+            }
         }
 
     }

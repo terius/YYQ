@@ -1816,5 +1816,26 @@ namespace YYQERP.Services.Implementations
         }
         #endregion
 
+        #region 送货单方法
+        public DeliveryDetail_ForAdd_View AddProductItem_For_Delivery(int pid)
+        {
+            var info = _productRepository.GetDbQuerySet().FirstOrDefault(d => d.Id == pid);
+            var dicList = _cacheService.GetCache_Unit();
+            var modelList = _cacheService.GetCache_Model();
+            var views = info.Convert_Product_To_DeliveryDetail_ForAdd_View(dicList, modelList);
+            return views;
+        }
+
+
+        public DeliveryDetail_ForAdd_View AddElementItem_For_Delivery(int eleid)
+        {
+            var eleInfo = GetInfoByID(eleid);
+            var dicList = _cacheService.GetCache_Dic();
+            var view = eleInfo.Convert_Element_To_DeliveryDetail_ForAdd_View(dicList);
+            return view;
+        }
+
+        #endregion
+
     }
 }

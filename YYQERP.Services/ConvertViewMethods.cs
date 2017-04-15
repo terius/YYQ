@@ -256,7 +256,7 @@ namespace YYQERP.Services
             view.StockQuantity = stockService.GetStockQuantity(itemid, source.ShelfId, isProduct);
             view.ShowWarn = GetShowWarn(view.StockQuantity, source.ElementSet);
             view.Reason = source.Reason;
-          
+
             return view;
         }
 
@@ -301,10 +301,10 @@ namespace YYQERP.Services
         }
 
 
-     
 
 
-    
+
+
 
 
         public static DicView ConvertTo_DicView(this DicSet source)
@@ -1622,7 +1622,7 @@ namespace YYQERP.Services
         }
         public static IList<SaleReportView> SaleReportSet_To_SaleReportViews(this IEnumerable<SaleReportSet> source)
         {
-          
+
             var dest = new List<SaleReportView>();
             foreach (var item in source)
             {
@@ -1782,6 +1782,47 @@ namespace YYQERP.Services
             }
             return dest;
         }
+
+
+        public static DeliveryDetail_ForAdd_View Convert_Product_To_DeliveryDetail_ForAdd_View(this ProductSet source,
+            IList<DicView> dicList, IList<ModelCacheView> modelList)
+        {
+            var dest = new DeliveryDetail_ForAdd_View();
+            if (source == null)
+            {
+                return dest;
+            }
+            dest.Model = modelList.GetModelText(source.ModelId);
+            dest.Price = source.Price.HasValue ? source.Price.Value : 0;
+            dest.ProductId = source.Id;
+            dest.Type = "成品";
+            dest.Unit = dicList.GetName(source.UnitTypeCode);
+            dest.UnitTypeCode = source.UnitTypeCode;
+        
+
+            return dest;
+
+        }
+
+        public static DeliveryDetail_ForAdd_View Convert_Element_To_DeliveryDetail_ForAdd_View(this ElementSet source,
+          IList<DicView> dicList)
+        {
+            var dest = new DeliveryDetail_ForAdd_View();
+            if (source == null)
+            {
+                return dest;
+            }
+            dest.Model = source.Name;
+            dest.Price = source.Price.HasValue ? source.Price.Value : 0;
+            dest.ProductId = source.Id;
+            dest.Type = "原材料";
+            dest.Unit = dicList.GetName(source.UnitTypeCode);
+            dest.UnitTypeCode = source.UnitTypeCode;
+
+
+            return dest;
+
+        }
         #endregion
 
 
@@ -1790,12 +1831,12 @@ namespace YYQERP.Services
         #region 转换方法
         private static string ToStringText(this decimal? price)
         {
-          return price.HasValue ? string.Format("{0:C2}", price.Value) : "";
+            return price.HasValue ? string.Format("{0:C2}", price.Value) : "";
         }
 
         private static string ToStringText(this decimal price)
         {
-            return  string.Format("{0:C2}", price);
+            return string.Format("{0:C2}", price);
         }
 
         private static string ToStringText(this double? data)
@@ -1803,9 +1844,9 @@ namespace YYQERP.Services
             return data.HasValue ? data.ToString() : "";
         }
 
-        private static string GetName(this IList<DicView> list,string code)
+        private static string GetName(this IList<DicView> list, string code)
         {
-            return list.Where(d => d.Code == code).Select(d=>d.Name).FirstOrDefault();
+            return list.Where(d => d.Code == code).Select(d => d.Name).FirstOrDefault();
         }
 
         private static string ToStringWithtime(this DateTime dt)
@@ -1834,6 +1875,12 @@ namespace YYQERP.Services
                 return "";
             }
             return dt.Value.ToString("yyyy-MM-dd");
+        }
+
+        private static string GetModelText(this IList<ModelCacheView> list, int id)
+        {
+            var info = list.FirstOrDefault(d => d.Id == id);
+            return info == null ? "" : (info.Name + "【" + info.Code + "】");
         }
         #endregion
 

@@ -114,5 +114,10 @@ namespace YYQERP.Services.Interfaces
         IList<Pick_ForAdd_View> GetListByBomId_For_PickAdd(int bomid, int num);
         IList<Pick_ForAdd_View> GetListByPartId_For_PickAdd(int partid, int num);
         Pick_ForAdd_View GetViewByEleId_For_PickAdd(int eleid);
+
+        //送货单方法
+        DeliveryDetail_ForAdd_View AddProductItem_For_Delivery(int bomid);
+
+        DeliveryDetail_ForAdd_View AddElementItem_For_Delivery(int eleid);
     }
 }

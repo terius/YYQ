@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using YYQERP.Cache;
+using YYQERP.Infrastructure.Helpers;
 using YYQERP.Services.Interfaces;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
@@ -43,10 +44,21 @@ namespace YYQERP.Controllers
         {
             Delivery_Add_View view = new Delivery_Add_View();
             view.Details = new List<DeliveryDetail_ForAdd_View>();
+            string aa = JsonHelper.SerializeObj(view);
             return Json(view, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult AddProductItem(int pid)
+        {
+            var view = _goodsService.AddProductItem_For_Delivery(pid);
+            return Json(view, JsonRequestBehavior.AllowGet);
+        }
 
+        public ActionResult AddElementItem(int eleid)
+        {
+            var view = _goodsService.AddElementItem_For_Delivery(eleid);
+            return Json(view, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }
