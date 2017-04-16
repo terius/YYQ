@@ -285,7 +285,7 @@ com.jqFormOption = {
     //},
     //success: function (result) {
     //    loading.fadeOut();
-      
+
     //}
 
 
@@ -304,8 +304,16 @@ com.CheckError = function (win) {
             var errmsg = $(em).data("errmsg");
             if (!errmsg) {
                 errmsg = $(em).parent().prev("td").text();
+
                 if (!errmsg) {
-                    errmsg = "必填项不能为空";
+                    errmsg = $(em).prev(".caption").text();
+                    if (errmsg) {
+                        errmsg += "不能为空";
+                    }
+                    else {
+                        errmsg = "必填项不能为空";
+                    }
+
                 }
                 else {
                     errmsg += "不能为空";
@@ -364,7 +372,7 @@ com.SaveAjaxInfos = function (params, url, success_msg, callback) {
 }
 
 com.CheckPer = function () {
-    com.showLog(km.pers);
+  //  com.showLog(km.pers);
     var list = $("[data-checkper]");
     list.each(function () {
         var cper = $(this).data("checkper");

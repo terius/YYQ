@@ -10,5 +10,8 @@ namespace YYQERP
 
 
         public IList<Default_SelectItem> ProductSelectList { get; set; }
+
+
+        public Delivery_Add_View AddView { get; set; }
     }
 }

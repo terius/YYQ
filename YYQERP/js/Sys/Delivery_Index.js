@@ -3,7 +3,7 @@
 "use strict";
 km.init = function () {
     com.initbuttons($('#km_toolbar'), km.model.buttons);
-    km.init_parent_model();
+    // km.init_parent_model();
     km.maingrid.init();
     km.addgrid.init();
     com.CheckPer();
@@ -115,7 +115,7 @@ km.addgrid = function () {
     }
 
     var do_aftersave = function () {
-        com.message('s', "申请领料保存成功");
+        com.message('s', "新增送货单成功");
         window.location.reload();
     }
 
@@ -161,12 +161,19 @@ km.addgrid = function () {
     }
 
     var checkSave = function (data) {
-        if (!data || data.length <= 0) {
-            return "申请列表不能为空";
+        if (!data || data.rows.length <= 0) {
+            return "送货单列表不能为空";
         }
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].Quantity <= 0) {
-                return "原材料：" + data[i].ElementName + "申请数量不能为0";
+        var row;
+        //com.showLog(data);
+        for (var i = 0; i < data.rows.length; i++) {
+            row = data.rows[i];
+            if (row.Quantity <= 0) {
+                return row.Type + row.Model + "数量不能为0";
+            }
+
+            if (row.Price <= 0) {
+                return row.Type + row.Model + "单价不能为0";
             }
         }
         return "";
@@ -189,7 +196,13 @@ km.addgrid = function () {
     }
     var deleteButtonClick = false;
     var onEndEdit = function (index, row, changes) {
-        com.showLog(changes);
+        var num = parseInt(row.Quantity);
+        var price = parseInt(row.Price);
+        row.TotalPrice = num * price;
+    }
+
+    var validateForm = function () {
+        return $("#formadd").form('enableValidation').form('validate');
     }
 
     return {
@@ -209,15 +222,15 @@ km.addgrid = function () {
                 method: 'get',
                 onClickRow: onClickRow,
                 onClickCell: onClickCell,
-                onEndEdit:onEndEdit,
+                onEndEdit: onEndEdit,
                 //      checkOnSelect: false,
                 //url: km.model.urls["getAddTemp"],
                 columns: [[
                         { field: 'Type', title: '类型', width: 100, align: 'left' },
                         { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
-                        { field: 'Quantity', title: '数量', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true} } },
+                        { field: 'Quantity', title: '数量', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
                         { field: 'Unit', title: '单位', width: 100, align: 'left' },
-                        { field: 'Price', title: '单价', width: 100, align: 'left' },
+                        { field: 'Price', title: '单价', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
                         { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
                         { field: 'Remark', title: '备注', width: 300, align: 'left', editor: { type: 'textbox' } },
                         { field: 'delete', title: '操作', width: 300, align: 'left', formatter: FormatOper },
@@ -269,24 +282,39 @@ km.addgrid = function () {
                 });
             }
         },
-        do_savepick: function () {
+        do_saveadd: function () {
             do_accept();
-            return;
-            var addDatas = $grid.datagrid('getChecked');
+
+            var addDatas = $grid.datagrid('getData');
             var msg = checkSave(addDatas);
             if (msg != "") {
                 com.message('e', msg);
                 return false;
             }
+            var rs = validateForm();
+            if (!rs) {
+                return false;
+            }
 
-            com.message('c', ' <span style="color:red">是否确定要申请？ </span>', function (b, msg, a) {
-                if (b) {
+            //if (com.CheckError($("#north_panel")))
+            //{
+            //    return false;
+            //}
 
+            com.message('c', ' <span style="color:red">是否确定要添加送货单？ </span>', function (yes) {
+                if (yes) {
+                    km.addView.Remark = $("#Remark").textbox("getValue");
+                    km.addView.Customer = $("#Customer").textbox("getValue");
+                    km.addView.OrderNo = $("#OrderNo").textbox("getValue");
+                    km.addView.OrderDate = $("#OrderDate").datebox("getValue");
+                    //     km.addView.TotalAmount = $("#OrderDate").datebox("getValue");
+                    km.addView.Sender = $("#Sender").textbox("getValue");
+                    km.addView.Manager = $("#Manager").textbox("getValue");
+                    km.addView.Details = addDatas.rows;
+                  //  com.showLog(km.addView);
+                 
+                    com.SaveAjaxInfos(km.addView, km.model.urls["saveAdd"], "", do_aftersave);
 
-                    if (addDatas && addDatas.length > 0) {
-                        var purpose = encodeURI(com.trim($("#Purpose").val()));
-                        com.SaveAjaxInfos(addDatas, km.model.urls["SavePick"] + "?purpose=" + purpose, "", do_aftersave);
-                    }
                 }
             });
 

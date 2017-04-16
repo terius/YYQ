@@ -29,6 +29,8 @@ namespace YYQERP.Controllers
             var model = new DeliveryViewModel();
             model.ElementSelectList = _cacheService.GetCache_Element();
             model.ProductSelectList = _goodsService.GetProductSelectListForDelivery();
+            model.AddView = new Delivery_Add_View();
+            model.AddView.Details = new List<DeliveryDetail_ForAdd_View>();
             return View(model);
         }
 
@@ -44,7 +46,7 @@ namespace YYQERP.Controllers
         {
             Delivery_Add_View view = new Delivery_Add_View();
             view.Details = new List<DeliveryDetail_ForAdd_View>();
-            string aa = JsonHelper.SerializeObj(view);
+           
             return Json(view, JsonRequestBehavior.AllowGet);
         }
 
@@ -59,6 +61,13 @@ namespace YYQERP.Controllers
             var view = _goodsService.AddElementItem_For_Delivery(eleid);
             return Json(view, JsonRequestBehavior.AllowGet);
         }
+
+        //public string SaveAdd(string purpose)
+        //{
+        //    var pgInfo = GetInfoByStream<List<Pick_ForAdd_View>>();
+        //    var res = _pickService.SavePick(pgInfo, LoginUserName, purpose);
+        //    return res.Message;
+        //}
 
     }
 }
