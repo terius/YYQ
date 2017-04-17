@@ -7,6 +7,7 @@ km.init = function () {
     km.maingrid.init();
     km.addgrid.init();
     com.CheckPer();
+    $("#SerialNo").textbox('setValue', km.maxNo);
 }
 
 com.addCheckSpan();
@@ -21,6 +22,11 @@ km.maingrid = function () {
         $grid.datagrid('reload', defaults);
 
     }
+
+    var FormatOper = function (val, row, index) {
+        return "<button   style=\"color:blue\"  onclick=\"km.maingrid.do_print(" + row.Id + ")\">打印</button>";
+
+    }
     return {
         init: function () {
             $grid.datagrid(km.gridOption({
@@ -31,11 +37,13 @@ km.maingrid = function () {
                     { field: 'Addtime', title: '打印时间', width: 100, align: 'left', sortable: true },
                     { field: 'Customer', title: '客户', width: 100, align: 'left', sortable: true },
                     { field: 'OrderNo', title: '订单号', width: 100, align: 'left', sortable: true },
+                    { field: 'SerialNo', title: '流水号', width: 100, align: 'left', sortable: true },
                     { field: 'OrderDate', title: '订单日期', width: 100, align: 'left', sortable: true },
                     { field: 'TotalAmount', title: '总价', width: 100, align: 'left', sortable: true },
                     { field: 'Sender', title: '发货人', width: 100, align: 'left', sortable: true },
                     { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
-                    { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true }
+                    { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true },
+                    { field: 'print', title: '打印', width: 50, align: 'left', formatter: FormatOper }
 
                 ]],
                 toolbar: '#toolbar1',
@@ -88,6 +96,10 @@ km.maingrid = function () {
             var etime = com.trim($("#ETime").datebox("getValue"));
 
             reload({ STime: stime, ETime: etime });
+        },
+        do_print: function (id) {
+            com.ExportToExcel(km.model.urls["exportExcel"], { id: id });
+
         }
 
 
@@ -277,8 +289,8 @@ km.addgrid = function () {
                     pid: productId
                 }, function (data) {
                     if (data) {
-                       // com.showLog(data);
-                      
+                        // com.showLog(data);
+
                         $grid.datagrid('appendRow', data);
                     }
                 });
@@ -330,6 +342,7 @@ km.addgrid = function () {
                     //     km.addView.TotalAmount = $("#OrderDate").datebox("getValue");
                     km.addView.Sender = $("#Sender").textbox("getValue");
                     km.addView.Manager = $("#Manager").textbox("getValue");
+                    km.addView.SerialNo = $("#SerialNo").textbox("getValue");
                     km.addView.Details = addDatas.rows;
                     //  com.showLog(km.addView);
 

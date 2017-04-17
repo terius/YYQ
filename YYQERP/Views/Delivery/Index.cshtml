@@ -23,17 +23,22 @@
 
                         </div>
                         <div class="km_toolbar">
+                            <label class="caption">流水号</label>
+                            <input id="SerialNo" name="SerialNo" class="easyui-textbox required" data-options="prompt:'流水号',value:'',required:true" style="width:200px" />
+
+                        </div>
+                        <div class="km_toolbar">
                             <label class="caption">订单日期</label>
                             <input id="OrderDate" class="easyui-datebox required" data-options="prompt:'订单日期',value:'',required:true" style="border:1px solid #f2f2f2;width:200px; height:100%" />
                         </div>
-                     
+
                         <div class="km_toolbar">
                             <label class="caption">发货人</label>
-                            <input id="Sender" name="Sender" class="easyui-textbox" data-options="prompt:'Sender',value:''" style="width:200px" />
+                            <input id="Sender" name="Sender" class="easyui-textbox" data-options="prompt:'发货人',value:''" style="width:200px" />
                         </div>
                         <div class="km_toolbar">
                             <label class="caption">经办人</label>
-                            <input id="Manager" name="Manager" class="easyui-textbox" data-options="prompt:'Sender',value:''" style="width:200px" />
+                            <input id="Manager" name="Manager" class="easyui-textbox" data-options="prompt:'经办人',value:''" style="width:200px" />
                         </div>
                         <div class="km_toolbar">
                             <label class="caption">备注</label>
@@ -60,10 +65,10 @@
                             <label>¥</label>
                             <label id="TotalAmount"></label>
                             @*<input id="TotalAmount" name="TotalAmount" class="easyui-numberbox required"
-            data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
+                                data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
                             <label>元</label>
                         </div>
-                    
+
                         <div class="km_toolbar">
                             <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.addgrid.do_saveadd();">提交</button>
                             <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-basket-remove'" onclick="km.addgrid.do_clear();">清空列表</button>
@@ -112,7 +117,8 @@
                 getAddTemp:"/Delivery/GetTemplate",
                 addProductItem:"/Delivery/AddProductItem",
                 addElementItem:"/Delivery/AddElementItem",
-                saveAdd:"/Delivery/SaveAdd"
+                saveAdd:"/Delivery/SaveAdd",
+                exportExcel:"/Delivery/ExportExcel"
 
             },
             "buttons":[
@@ -120,7 +126,9 @@
         km.eleList = @Html.Raw(Json.Encode(@Model.ElementSelectList));
         km.prodList = @Html.Raw(Json.Encode(@Model.ProductSelectList));
         km.addView = @Html.Raw(Json.Encode(@Model.AddView));
-      //  com.showLog( km.addView);
+        km.maxNo="@Model.MaxSerialNo";
+       
+       //   com.showLog( km.addView);
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
     </script>
 }

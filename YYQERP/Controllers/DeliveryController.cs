@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using YYQERP.Cache;
+using YYQERP.Infrastructure.Helpers;
 using YYQERP.Services.Interfaces;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
@@ -30,6 +32,7 @@ namespace YYQERP.Controllers
             model.ProductSelectList = _goodsService.GetProductSelectListForDelivery();
             model.AddView = new Delivery_Add_View();
             model.AddView.Details = new List<DeliveryDetail_ForAdd_View>();
+            model.MaxSerialNo = _deliveryService.GetMaxSerialNo();
             return View(model);
         }
 
@@ -67,7 +70,17 @@ namespace YYQERP.Controllers
             _deliveryService.SaveAdd(addInfo);
             //  var res = _pickService.SavePick(pgInfo, LoginUserName, purpose);
             //  return res.Message;
-           
+
+        }
+
+        public FileResult ExportExcel(int id)
+        {
+            string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
+            string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            string destFile = Server.MapPath("~/Output/" + fileName);
+            var info = _deliveryService.GetDeliveryForPrint(id);
+            ExcelHelper.ExportInvoice(excelFile, destFile, info);
+            return File(destFile, "application/ms-excel", fileName);
         }
 
     }

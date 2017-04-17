@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using YYQERP.Cache;
+using YYQERP.Infrastructure;
 using YYQERP.Infrastructure.Domain;
 using YYQERP.Infrastructure.Enums;
 using YYQERP.Infrastructure.Helpers;
@@ -69,6 +70,10 @@ namespace YYQERP.Services.Implementations
             int id = 0;
             ElementType type = ElementType.Element;
             string msg = "";
+            if (CheckSerialNoDup(addInfo.SerialNo))
+            {
+                throw new Exception("流水号:" + addInfo.SerialNo + "重复");
+            }
             foreach (var item in addInfo.Details)
             {
                 id = item.ElementId.HasValue ? item.ElementId.Value : item.ProductId.Value;
@@ -89,6 +94,7 @@ namespace YYQERP.Services.Implementations
             info.OrderNo = addInfo.OrderNo;
             info.Remark = addInfo.Remark;
             info.Sender = addInfo.Sender;
+            info.SerialNo = addInfo.SerialNo;
             info.DeliveryDetailSet = new List<DeliveryDetailSet>();
             DeliveryDetailSet detail;
             decimal allPrice = 0;
@@ -137,8 +143,8 @@ namespace YYQERP.Services.Implementations
                 stockOutInfo.ElementId = item2.ElementId;
                 stockOutInfo.ProductId = item2.ProductId;
                 stockOutInfo.Quantity = item2.Quantity;
-                stockOutInfo.Reason = "送货单出货，客户：" + info.Customer + " 订单号：" + info.OrderNo 
-                    + "  订单日期：" + info.OrderDate.Value.ToString("yyyy-MM-dd");
+                stockOutInfo.Reason = "送货单出货，客户：" + info.Customer + " 订单号：" + info.OrderNo
+                    + "  订单日期：" + info.OrderDate.ToString("yyyy-MM-dd");
                 stockOutInfo.Remark = item2.Remark;
                 stockOutInfo.ShelfId = stockInfo.ShelfId;
                 stockOutInfo.GroupGuid = newGuid;
@@ -154,7 +160,31 @@ namespace YYQERP.Services.Implementations
         }
 
 
+        private bool CheckSerialNoDup(string sno)
+        {
+            return _Repository.GetDbQuerySet().Any(d => d.SerialNo == sno);
+        }
 
+        public string GetMaxSerialNo()
+        {
+            string nowString = DateTime.Now.ToString("yyyyMMdd");
+            var maxNo = _Repository.GetDbQuerySet().Where(d => d.SerialNo.Contains(nowString)).Max(d => d.SerialNo);
+            int itemp = 0;
+            string lastNo = "001";
+            if (int.TryParse(maxNo.Substring(maxNo.Length - 3), out itemp))
+            {
+                lastNo = (itemp + 1).ToString().PadLeft(3, '0');
+            }
+            return nowString + lastNo;
+        }
+
+
+        public DeliveryForPrint GetDeliveryForPrint(int id)
+        {
+            var info = GetInfoByID(id);
+            var unitList = _cacheService.GetCache_Unit();
+            return info.Convert_Delivery_To_DeliveryForPrint(unitList);
+        }
 
 
     }

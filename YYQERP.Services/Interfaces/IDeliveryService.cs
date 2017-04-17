@@ -1,4 +1,5 @@
-﻿using YYQERP.Repository;
+﻿using YYQERP.Infrastructure;
+using YYQERP.Repository;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
 
@@ -9,5 +10,9 @@ namespace YYQERP.Services.Interfaces
         Search_Delivery_Response SearchDelivery(Search_Delivery_Request request);
 
         void SaveAdd(Delivery_Add_View addInfo);
+
+        string GetMaxSerialNo();
+
+        DeliveryForPrint GetDeliveryForPrint(int id);
     }
 }

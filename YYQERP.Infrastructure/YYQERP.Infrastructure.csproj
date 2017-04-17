@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonExtMethod.cs" />
+    <Compile Include="CommonViews\DeliveryForPrint.cs" />
     <Compile Include="CommonViews\ModelCacheView.cs" />
     <Compile Include="CommonViews\ElementCacheView.cs" />
     <Compile Include="CommonViews\DicView.cs" />

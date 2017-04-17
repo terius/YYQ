@@ -232,7 +232,7 @@ namespace YYQERP.Infrastructure.Helpers
 
 
 
-        public static void ExportInvoice(string modelExlPath,string downExlPath)
+        public static void ExportInvoice(string modelExlPath, string downExlPath, DeliveryForPrint info)
         {
             XSSFWorkbook workbook;
             //读入刚复制的要导出的excel文件
@@ -242,22 +242,68 @@ namespace YYQERP.Infrastructure.Helpers
                 file.Close();
             }
             ISheet sheet1 = workbook.GetSheetAt(0);
-            //取模板excel中第二行第二列的单元格样式
-            ICellStyle cellstyle = workbook.CreateCellStyle();
-            //开始向excel表格中写入数据
-            ICell cell = sheet1.GetRow(1).GetCell(1);
-            cell.CellStyle = cellstyle;
-           // cell.CellStyle.Alignment = HorizontalAlignment.Center;
-            IRichTextString rts = new XSSFRichTextString(cell.StringCellValue + "TestWriting");
-            IFont  font = workbook.CreateFont();
-          //  font.FontHeightInPoints = 20;
+            //粗体字体
+            IFont font = workbook.CreateFont();
+            font.FontName = "宋体";
+            //  font.FontHeightInPoints = 20;
             font.Boldweight = 700;
+
+            ICell cell = sheet1.GetRow(0).GetCell(7);
+            cell.CellStyle.Alignment = HorizontalAlignment.Center;
+            cell.CellStyle.VerticalAlignment = VerticalAlignment.Center;
+            cell.SetCellValue("NO." + info.SerialNo);
+
+            //  ICellStyle cellstyle = workbook.CreateCellStyle();
+            //客户
+            cell = sheet1.GetRow(1).GetCell(1);
+            //  cell.CellStyle = cellstyle;
+            // cell.CellStyle.Alignment = HorizontalAlignment.Center;
+            IRichTextString rts = new XSSFRichTextString(cell.StringCellValue + info.Customer);
             rts.ApplyFont(0, 3, font);
             cell.SetCellValue(rts);
+            //订单号
+            cell = sheet1.GetRow(1).GetCell(3);
+            rts = new XSSFRichTextString(cell.StringCellValue + info.OrderNo);
+            rts.ApplyFont(0, 5, font);
+            cell.SetCellValue(rts);
+            //订单日期
+            cell = sheet1.GetRow(1).GetCell(6);
+            cell.CellStyle.SetFont(font);
+            cell.CellStyle.Alignment = HorizontalAlignment.Right;
+            cell.SetCellValue(info.OrderDate);
+
+            int index = 3;
+            foreach (var item in info.Details)
+            {
+                cell = sheet1.GetRow(index).GetCell(1);
+                cell.SetCellValue(item.Model);
+                cell = sheet1.GetRow(index).GetCell(3);
+                cell.SetCellValue(item.Quantity);
+                cell = sheet1.GetRow(index).GetCell(4);
+                cell.SetCellValue(item.Unit);
+                cell = sheet1.GetRow(index).GetCell(5);
+                cell.SetCellValue(item.Price);
+                cell = sheet1.GetRow(index).GetCell(6);
+                cell.SetCellValue(item.TotalPrice);
+                cell = sheet1.GetRow(index).GetCell(7);
+                cell.SetCellValue(item.Remark);
+                index++;
+            }
+            cell = sheet1.GetRow(10).GetCell(3);
+            cell.SetCellValue(info.TotalAmountUp);
+            cell = sheet1.GetRow(10).GetCell(7);
+            cell.SetCellValue(info.TotalAmount);
+
+            cell = sheet1.GetRow(12).GetCell(1);
+            cell.SetCellValue(cell.StringCellValue + info.Sender);
+            cell = sheet1.GetRow(12).GetCell(2);
+            cell.SetCellValue(cell.StringCellValue + info.Manager);
             //创建文件
             FileStream files = new FileStream(downExlPath, FileMode.Create);
             workbook.Write(files);
             files.Close();
+
+
         }
 
 

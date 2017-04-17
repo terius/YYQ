@@ -1754,6 +1754,7 @@ namespace YYQERP.Services
                 view.Remark = item.Remark;
                 view.Sender = item.Sender;
                 view.TotalAmount = item.TotalAmount.ToStringText();
+                view.SerialNo = item.SerialNo;
                 view.Details = new List<DeliveryDetailView>();
                 foreach (var detail in item.DeliveryDetailSet)
                 {
@@ -1765,7 +1766,7 @@ namespace YYQERP.Services
                     }
                     else
                     {
-                        detailView.Model = detail.ProductSet.ModelSet.Name;
+                        detailView.Model = detail.ProductSet.ModelSet.GetModelText();
                     }
                     detailView.Quantity = detail.Quantity.ToStringText();
                     detailView.Remark = detail.Remark;
@@ -1822,6 +1823,44 @@ namespace YYQERP.Services
 
             return dest;
 
+        }
+
+        public static DeliveryForPrint Convert_Delivery_To_DeliveryForPrint(this DeliverySet source, IList<DicView> unitList)
+        {
+            var dest = new DeliveryForPrint();
+            if (source == null)
+            {
+                return dest;
+            }
+            dest.Customer = source.Customer;
+            dest.Manager = source.Manager;
+            dest.OrderNo = source.OrderNo;
+            dest.OrderDate = source.OrderDate.ToString("yyyy年MM月dd日");
+            dest.Sender = source.Sender;
+            dest.TotalAmount = source.TotalAmount.ToStringText();
+            dest.SerialNo = source.SerialNo;
+            dest.TotalAmountUp = source.TotalAmountUp;
+            dest.Details = new List<DeliveryForPrint_Detail>();
+            DeliveryForPrint_Detail detailView;
+            foreach (var detail in source.DeliveryDetailSet)
+            {
+                detailView = new DeliveryForPrint_Detail();
+                if (detail.ElementId.HasValue)
+                {
+                    detailView.Model = detail.ElementSet.Name;
+                }
+                else
+                {
+                    detailView.Model = detail.ProductSet.ModelSet.GetModelText();
+                }
+                detailView.Quantity = detail.Quantity.ToStringText();
+                detailView.Remark = detail.Remark;
+                detailView.Price = detail.Price.ToStringText();
+                detailView.TotalPrice = detail.TotalPrice.ToStringText();
+                detailView.Unit = unitList.GetName(detail.UnitTypeCode);
+                dest.Details.Add(detailView);
+            }
+            return dest;
         }
         #endregion
 

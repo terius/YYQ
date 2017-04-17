@@ -21,6 +21,7 @@ namespace YYQERP.Services.Views
         public string Manager { get; set; }
         public string AddUserName { get; set; }
 
+        public string SerialNo { get; set; }
         public IList<DeliveryDetailView> Details { get; set; }
     }
 
@@ -50,6 +51,8 @@ namespace YYQERP.Services.Views
 
         public string Sender { get; set; }
         public string Manager { get; set; }
+
+        public string SerialNo { get; set; }
 
         public IList<DeliveryDetail_ForAdd_View> Details { get; set; }
     }

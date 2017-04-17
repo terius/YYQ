@@ -13,5 +13,7 @@ namespace YYQERP
 
 
         public Delivery_Add_View AddView { get; set; }
+
+        public string MaxSerialNo { get; set; }
     }
 }

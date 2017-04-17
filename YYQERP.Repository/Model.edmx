@@ -73,16 +73,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Remark" Type="nvarchar" MaxLength="100" />
           <Property Name="Addtime" Type="datetime" />
-          <Property Name="Customer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="OrderNo" Type="varchar" MaxLength="50" />
-          <Property Name="OrderDate" Type="date" />
-          <Property Name="TotalAmount" Type="money" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="TotalAmount" Type="money" Nullable="false" />
           <Property Name="TotalAmountUp" Type="nvarchar" MaxLength="50" />
           <Property Name="Sender" Type="nvarchar" MaxLength="50" />
           <Property Name="Manager" Type="nvarchar" MaxLength="50" />
           <Property Name="AddUserName" Type="varchar" MaxLength="50" />
           <Property Name="Modifytime" Type="datetime" />
           <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
+          <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="DicSet">
           <Key>
@@ -477,7 +478,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DeliveryDetailSet_ProductSet">
+        <Association Name="FK_DeliveryDetailSet_ProductSet1">
           <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
           <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -884,7 +885,7 @@
             <End Role="ElementSet" EntitySet="ElementSet" />
             <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
           </AssociationSet>
-          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet" Association="Self.FK_DeliveryDetailSet_ProductSet">
+          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet1" Association="Self.FK_DeliveryDetailSet_ProductSet1">
             <End Role="ProductSet" EntitySet="ProductSet" />
             <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
           </AssociationSet>
@@ -2053,10 +2054,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Addtime" Type="DateTime" Precision="3" />
-          <Property Name="Customer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Customer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="TotalAmountUp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2064,6 +2065,7 @@
           <Property Name="Modifytime" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" FromRole="DeliverySet" ToRole="DeliveryDetailSet" />
+          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DeliveryDetailSet_DeliverySet">
           <End Type="YYQERPModel.DeliverySet" Role="DeliverySet" Multiplicity="1" />
@@ -2503,6 +2505,7 @@
           <EntitySetMapping Name="DeliverySet">
             <EntityTypeMapping TypeName="YYQERPModel.DeliverySet">
               <MappingFragment StoreEntitySet="DeliverySet">
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
                 <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
                 <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />
                 <ScalarProperty Name="AddUserName" ColumnName="AddUserName" />

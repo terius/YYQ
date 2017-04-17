@@ -9,5 +9,7 @@ namespace YYQERP.Repository
 {
     public partial class MenuSet : EntityBase<int>, IEntity
     {
+
+       
     }
 }

@@ -25,14 +25,15 @@ namespace YYQERP.Repository
         public Nullable<System.DateTime> Addtime { get; set; }
         public string Customer { get; set; }
         public string OrderNo { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<decimal> TotalAmount { get; set; }
+        public System.DateTime OrderDate { get; set; }
+        public decimal TotalAmount { get; set; }
         public string TotalAmountUp { get; set; }
         public string Sender { get; set; }
         public string Manager { get; set; }
         public string AddUserName { get; set; }
         public Nullable<System.DateTime> Modifytime { get; set; }
         public string ModifyUserName { get; set; }
+        public string SerialNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryDetailSet> DeliveryDetailSet { get; set; }
