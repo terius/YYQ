@@ -9,7 +9,7 @@ km.init = function () {
     com.CheckPer();
 }
 
-
+com.addCheckSpan();
 
 km.maingrid = function () {
     var $grid = $("#dgList");
@@ -147,12 +147,12 @@ km.addgrid = function () {
 
 
     var onClickRow = function (index) {
-
-        //  alert("onClickRow : " + index)
         if (editIndex != index) {
             if (endEditing()) {
                 $grid.datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
+                var ed = $grid.datagrid('getEditor', { index: index, field: "Quantity" });
+                // $(ed.target).next().find(":text").select();
                 editIndex = index;
             } else {
                 $grid.datagrid('selectRow', editIndex);
@@ -185,6 +185,7 @@ km.addgrid = function () {
 
 
     var onClickCell = function (index, field, value) {
+
         if (field == "delete") {
             if (deleteButtonClick) {
                 deleteButtonClick = false;
@@ -193,17 +194,30 @@ km.addgrid = function () {
             //    com.showLog("index:" + index + "  field:" + field + "   value:" + value);
 
         }
+
     }
     var deleteButtonClick = false;
     var onEndEdit = function (index, row, changes) {
-        var num = parseInt(row.Quantity);
-        var price = parseInt(row.Price);
+        var num = parseInt(row.Quantity) || 0;
+        var price = parseInt(row.Price) || 0;
         row.TotalPrice = num * price;
+
+        var totalPrice = 0;
+        var data = $grid.datagrid('getData');
+
+        for (var i = 0; i < data.rows.length; i++) {
+            num = parseInt(data.rows[i].Quantity) || 0;
+            price = parseInt(data.rows[i].Price) || 0;
+            totalPrice += num * price;
+        }
+        $("#TotalAmount").text(totalPrice);
     }
 
     var validateForm = function () {
         return $("#formadd").form('enableValidation').form('validate');
     }
+
+
 
     return {
         init: function () {
@@ -228,7 +242,11 @@ km.addgrid = function () {
                 columns: [[
                         { field: 'Type', title: '类型', width: 100, align: 'left' },
                         { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
-                        { field: 'Quantity', title: '数量', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
+                        {
+                            field: 'Quantity', title: '数量', width: 100, align: 'left',
+                            editor: { type: 'numberbox', options: { required: true } }
+
+                        },
                         { field: 'Unit', title: '单位', width: 100, align: 'left' },
                         { field: 'Price', title: '单价', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
                         { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
@@ -259,6 +277,8 @@ km.addgrid = function () {
                     pid: productId
                 }, function (data) {
                     if (data) {
+                       // com.showLog(data);
+                      
                         $grid.datagrid('appendRow', data);
                     }
                 });
@@ -311,8 +331,8 @@ km.addgrid = function () {
                     km.addView.Sender = $("#Sender").textbox("getValue");
                     km.addView.Manager = $("#Manager").textbox("getValue");
                     km.addView.Details = addDatas.rows;
-                  //  com.showLog(km.addView);
-                 
+                    //  com.showLog(km.addView);
+
                     com.SaveAjaxInfos(km.addView, km.model.urls["saveAdd"], "", do_aftersave);
 
                 }

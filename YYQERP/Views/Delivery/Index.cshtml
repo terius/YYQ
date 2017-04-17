@@ -26,14 +26,7 @@
                             <label class="caption">订单日期</label>
                             <input id="OrderDate" class="easyui-datebox required" data-options="prompt:'订单日期',value:'',required:true" style="border:1px solid #f2f2f2;width:200px; height:100%" />
                         </div>
-                        <div class="km_toolbar">
-                            <label class="caption">总价</label>
-                            <label>¥</label>
-                            <label>000000</label>
-                            @*<input id="TotalAmount" name="TotalAmount" class="easyui-numberbox required"
-                                data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
-                            <label>元</label>
-                        </div>
+                     
                         <div class="km_toolbar">
                             <label class="caption">发货人</label>
                             <input id="Sender" name="Sender" class="easyui-textbox" data-options="prompt:'Sender',value:''" style="width:200px" />
@@ -41,6 +34,11 @@
                         <div class="km_toolbar">
                             <label class="caption">经办人</label>
                             <input id="Manager" name="Manager" class="easyui-textbox" data-options="prompt:'Sender',value:''" style="width:200px" />
+                        </div>
+                        <div class="km_toolbar">
+                            <label class="caption">备注</label>
+                            <input id="Remark" name="Remark" class="easyui-textbox" data-options="prompt:'备注',value:''" style="width:400px" />
+
                         </div>
                         <div class="km_toolbar">
                             <label class="caption">选择成品</label>
@@ -58,10 +56,14 @@
                             <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addelement();">添加</button>
                         </div>
                         <div class="km_toolbar">
-                            <label class="caption">备注</label>
-                            <input id="Remark" name="Remark" class="easyui-textbox" data-options="prompt:'备注',value:''" style="width:400px" />
-
+                            <label class="caption">总价</label>
+                            <label>¥</label>
+                            <label id="TotalAmount"></label>
+                            @*<input id="TotalAmount" name="TotalAmount" class="easyui-numberbox required"
+            data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
+                            <label>元</label>
                         </div>
+                    
                         <div class="km_toolbar">
                             <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.addgrid.do_saveadd();">提交</button>
                             <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-basket-remove'" onclick="km.addgrid.do_clear();">清空列表</button>

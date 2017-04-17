@@ -367,7 +367,7 @@ com.SaveAjaxInfos = function (params, url, success_msg, callback) {
             com.message('e', result);
         }
     }, function (error) {
-        com.message('e', "AJAX执行出错！" + error);
+        com.message('e', "执行出错！" + error.responseText);
     });
 }
 
@@ -448,6 +448,10 @@ com.getDateTime = function (d) {
     var minute = "" + d.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
     var second = "" + d.getSeconds(); if (second.length == 1) { second = "0" + second; }
     return com.getDate(d) + " " + hour + ":" + minute + ":" + second;
+}
+
+com.addCheckSpan = function() {
+    $(".required").prev(".caption").append("<span style=\"color:red;padding-left:3px\">*</span>");
 }
 
 

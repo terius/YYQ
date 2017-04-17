@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using YYQERP.Cache;
-using YYQERP.Infrastructure.Helpers;
 using YYQERP.Services.Interfaces;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
@@ -46,7 +45,7 @@ namespace YYQERP.Controllers
         {
             Delivery_Add_View view = new Delivery_Add_View();
             view.Details = new List<DeliveryDetail_ForAdd_View>();
-           
+
             return Json(view, JsonRequestBehavior.AllowGet);
         }
 
@@ -62,12 +61,14 @@ namespace YYQERP.Controllers
             return Json(view, JsonRequestBehavior.AllowGet);
         }
 
-        //public string SaveAdd(string purpose)
-        //{
-        //    var pgInfo = GetInfoByStream<List<Pick_ForAdd_View>>();
-        //    var res = _pickService.SavePick(pgInfo, LoginUserName, purpose);
-        //    return res.Message;
-        //}
+        public void SaveAdd()
+        {
+            var addInfo = GetInfoByStream<Delivery_Add_View>();
+            _deliveryService.SaveAdd(addInfo);
+            //  var res = _pickService.SavePick(pgInfo, LoginUserName, purpose);
+            //  return res.Message;
+           
+        }
 
     }
 }

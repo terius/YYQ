@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using YYQERP.Infrastructure.Domain;
 using YYQERP.Infrastructure.Helpers;
 using YYQERP.Infrastructure.UnitOfWork;
@@ -125,6 +126,34 @@ namespace YYQERP.Services.Implementations
         {
             return null;
         }
+
+        public string LoginRoleName { get { return GetCookieValue("UserInfo", "userRole"); } }
+
+
+        private string GetCookieValue(string cookieName, string valueName)
+        {
+            var cookie = HttpContext.Current.Request.Cookies[cookieName];
+            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
+            {
+                return "";
+            }
+            var list = cookie.Value.Split('&');
+            foreach (var item in list)
+            {
+                string name = item.Split('=')[0];
+                string value = item.Split('=')[1];
+                if (name.Equals(valueName))
+                {
+                    return value;
+                }
+            }
+            return "";
+        }
+
+        public string LoginUserName { get { return HttpContext.Current.User.Identity.Name; } }
+
+
+       
 
     }
 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using YYQERP.Infrastructure.Enums;
 using YYQERP.Repository;
 using YYQERP.Services.Messages;
 using YYQERP.Services.Views;
@@ -52,5 +48,7 @@ namespace YYQERP.Services.Interfaces
         double GetStockQuantityNum(int eleId, int shelfId, bool isProduct = false);
 
         double GetStockQuantity(int eleId);
+
+        string CheckStockQuantity(int id, double Quantity, ElementType type, string model = "未知");
     }
 }

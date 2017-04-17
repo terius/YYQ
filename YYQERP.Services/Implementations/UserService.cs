@@ -1,21 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using YYQERP.Cache;
 using YYQERP.Infrastructure.Domain;
+using YYQERP.Infrastructure.Helpers;
+using YYQERP.Infrastructure.Querying;
 using YYQERP.Infrastructure.UnitOfWork;
 using YYQERP.Repository;
 using YYQERP.Services.Interfaces;
-using YYQERP.Services;
-using YYQERP.Services.Views;
-using System.Web;
 using YYQERP.Services.Messages;
-using YYQERP.Infrastructure.Querying;
-using System.Web.Security;
-using System.Collections;
-using YYQERP.Infrastructure.Helpers;
-using YYQERP.Cache;
+using YYQERP.Services.Views;
 
 namespace YYQERP.Services.Implementations
 {
@@ -55,7 +51,7 @@ namespace YYQERP.Services.Implementations
         }
 
 
-        public string LoginUserName { get { return HttpContext.Current.User.Identity.Name; } }
+     
 
 
         public IList<ZtreeMenuView> GetUserMenuList()
@@ -140,28 +136,7 @@ namespace YYQERP.Services.Implementations
         //    _uow.Commit();
         //}
 
-        public string LoginRoleName { get { return GetCookieValue("UserInfo", "userRole"); } }
-
-
-        private string GetCookieValue(string cookieName, string valueName)
-        {
-            var cookie = HttpContext.Current.Request.Cookies[cookieName];
-            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
-            {
-                return "";
-            }
-            var list = cookie.Value.Split('&');
-            foreach (var item in list)
-            {
-                string name = item.Split('=')[0];
-                string value = item.Split('=')[1];
-                if (name.Equals(valueName))
-                {
-                    return value;
-                }
-            }
-            return "";
-        }
+     
 
         public UserRolePermission GetUserRoleAndMenuByUserId(int userId, string userName)
         {

@@ -792,6 +792,51 @@ namespace YYQERP.Services.Implementations
             return res;
         }
 
+        public string CheckStockQuantity(int id, double Quantity, ElementType type, string model = "未知")
+        {
+          
+            double allQuantity = 0;
+            if (type == ElementType.Element)
+            {
+                var eleInfo = _Repository.GetDbSetForEdit().FirstOrDefault(d => d.ElementId == id);
+                if (eleInfo == null)
+                {
+                    return "原材料" + model + "未入库!";
+                }
+                allQuantity = eleInfo.Quantity;
+                if (Quantity > allQuantity)
+                {
+                    return model + "库存不足！";
+                }
+                eleInfo.Quantity = allQuantity - Quantity;
+                _Repository.Save(eleInfo);
+
+            }
+            else
+            {
+                var prodInfo = _Repository.GetDbQuerySet().FirstOrDefault(d => d.ProductId == id);
+                if (prodInfo == null)
+                {
+                    return "成品" + model + "未入库!";
+                }
+                allQuantity = prodInfo.Quantity;
+                if (Quantity > allQuantity)
+                {
+                    return model + "库存不足！";
+                }
+                prodInfo.Quantity = allQuantity - Quantity;
+                _Repository.Save(prodInfo);
+            }
+           
+            return "";
+
+        }
+
+
+     
+
+       // public void AddStockOutForDelivery()
+
 
     }
 }

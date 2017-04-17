@@ -1814,7 +1814,7 @@ namespace YYQERP.Services
             }
             dest.Model = source.Name;
             dest.Price = source.Price.HasValue ? source.Price.Value : 0;
-            dest.ProductId = source.Id;
+            dest.ElementId = source.Id;
             dest.Type = "原材料";
             dest.Unit = dicList.GetName(source.UnitTypeCode);
             dest.UnitTypeCode = source.UnitTypeCode;
