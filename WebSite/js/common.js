@@ -285,7 +285,7 @@ com.jqFormOption = {
     //},
     //success: function (result) {
     //    loading.fadeOut();
-      
+
     //}
 
 
@@ -304,8 +304,16 @@ com.CheckError = function (win) {
             var errmsg = $(em).data("errmsg");
             if (!errmsg) {
                 errmsg = $(em).parent().prev("td").text();
+
                 if (!errmsg) {
-                    errmsg = "必填项不能为空";
+                    errmsg = $(em).prev(".caption").text();
+                    if (errmsg) {
+                        errmsg += "不能为空";
+                    }
+                    else {
+                        errmsg = "必填项不能为空";
+                    }
+
                 }
                 else {
                     errmsg += "不能为空";
@@ -359,11 +367,12 @@ com.SaveAjaxInfos = function (params, url, success_msg, callback) {
             com.message('e', result);
         }
     }, function (error) {
-        com.message('e', "AJAX执行出错！" + error);
+        com.message('e', "执行出错！" + error.responseText);
     });
 }
 
 com.CheckPer = function () {
+  //  com.showLog(km.pers);
     var list = $("[data-checkper]");
     list.each(function () {
         var cper = $(this).data("checkper");
@@ -409,6 +418,40 @@ com.MoneyStringToInt = function (str) {
     }
     return 0;
 
+}
+
+
+com.showLog = function (msg) {
+    var now = com.getNowDate();
+    if (msg instanceof Object) {
+        console.log(now + " ---- " + JSON.stringify(msg, null, 4))
+    }
+    else {
+        console.log(now + " ---- " + msg);
+    }
+}
+
+com.getNowDate = function () {
+    var now = new Date();
+    return com.getDateTime(now);
+}
+
+com.getDate = function (d) {
+    var year = "" + d.getFullYear();
+    var month = "" + (d.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+    var day = "" + d.getDate(); if (day.length == 1) { day = "0" + day; }
+    return year + "-" + month + "-" + day;
+}
+
+com.getDateTime = function (d) {
+    var hour = "" + d.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+    var minute = "" + d.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+    var second = "" + d.getSeconds(); if (second.length == 1) { second = "0" + second; }
+    return com.getDate(d) + " " + hour + ":" + minute + ":" + second;
+}
+
+com.addCheckSpan = function() {
+    $(".required").prev(".caption").append("<span style=\"color:red;padding-left:3px\">*</span>");
 }
 
 

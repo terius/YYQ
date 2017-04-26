@@ -93,6 +93,7 @@ km.gridOption = function (option) {
             //     alert('load data successfully!');
         },
         onLoadError: function (a, b, c) {
+            com.showLog(a);
             alert('ajax执行出错');
         }
     }

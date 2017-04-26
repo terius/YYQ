@@ -43,7 +43,7 @@ wrapper.init = function () {
     });
 
     //添加我的桌面tab页 【使用jeasyui.tabs.extend.js扩展】
-    wrapper.addIframeTab(wrapper.settings.homeTabTitle, 'portal', wrapper.settings.homeTabUrl, 'icon-hamburg-home', false);
+    wrapper.addIframeTab(wrapper.settings.homeTabTitle, 'portal', wrapper.settings.homeTabUrl, 'icon-standard-application-home', false);
 
     //初始化Tab标签选项卡双击关闭tab事件 【使用jeasyui.tabs.extend.js扩展】
     wrapper.maintabs.tabs('bindDblclick', function (index, title) {

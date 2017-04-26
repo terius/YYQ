@@ -10,9 +10,8 @@
             </div>
 
             <div title="新增送货单" data-options="iconCls:'icon-standard-plugin'">
-                <form id="formadd" class="easyui-form" method="post" data-options="novalidate:true">
-                    <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;">
-
+                <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;">
+                    <form id="formadd" class="easyui-form" method="post" data-options="novalidate:true">
                         <div class="km_toolbar">
                             <label class="caption">客户</label>
                             <input id="Customer" name="Customer" class="easyui-textbox required" data-options="prompt:'客户',value:'',required:true" style="width:300px" />
@@ -45,38 +44,39 @@
                             <input id="Remark" name="Remark" class="easyui-textbox" data-options="prompt:'备注',value:''" style="width:400px" />
 
                         </div>
-                        <div class="km_toolbar">
-                            <label class="caption">选择成品</label>
-                            <input id="ProductId" name="ProductId" class="easyui-combobox"
-                                   data-options="prompt:'选择成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
-                                   style="width:250px;">
-                            <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addprod();">添加</button>
+                    </form>
+                    <div class="km_toolbar">
+                        <label class="caption">选择成品</label>
+                        <input id="ProductId" name="ProductId" class="easyui-combobox"
+                               data-options="prompt:'选择成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
+                               style="width:250px;">
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addprod();">添加</button>
 
-                        </div>
-                        <div class="km_toolbar">
-                            <label class="caption">选择原材料</label>
-                            <input id="ElementId" name="ElementId" class="easyui-combobox"
-                                   data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
-                                   style="width:250px;">
-                            <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addelement();">添加</button>
-                        </div>
-                        <div class="km_toolbar">
-                            <label class="caption">总价</label>
-                            <label>¥</label>
-                            <label id="TotalAmount"></label>
-                            @*<input id="TotalAmount" name="TotalAmount" class="easyui-numberbox required"
-                                data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
-                            <label>元</label>
-                        </div>
-
-                        <div class="km_toolbar">
-                            <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.addgrid.do_saveadd();">提交</button>
-                            <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-basket-remove'" onclick="km.addgrid.do_clear();">清空列表</button>
-                        </div>
+                    </div>
+                    <div class="km_toolbar">
+                        <label class="caption">选择原材料</label>
+                        <input id="ElementId" name="ElementId" class="easyui-combobox"
+                               data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                               style="width:250px;">
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addelement();">添加</button>
+                    </div>
+                    <div class="km_toolbar">
+                        <label class="caption">总价</label>
+                        <label>¥</label>
+                        <label id="TotalAmount"></label>
+                        @*<input id="TotalAmount" name="TotalAmount" class="easyui-numberbox required"
+                            data-options="prompt:'总价',value:'',required:true" style="width:80px" />*@
+                        <label>元</label>
                     </div>
 
-                    <table id="dg" class="easyui-datagrid" style="height:auto;"></table>
-                </form>
+                    <div class="km_toolbar">
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="km.addgrid.do_saveadd();">提交</button>
+                        <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-basket-remove'" onclick="km.addgrid.do_clear();">清空列表</button>
+                    </div>
+                </div>
+
+                <table id="dg" class="easyui-datagrid" style="height:auto;"></table>
+
             </div>
 
 
@@ -127,8 +127,8 @@
         km.prodList = @Html.Raw(Json.Encode(@Model.ProductSelectList));
         km.addView = @Html.Raw(Json.Encode(@Model.AddView));
         km.maxNo="@Model.MaxSerialNo";
-       
-       //   com.showLog( km.addView);
+
+        //   com.showLog( km.addView);
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
     </script>
 }

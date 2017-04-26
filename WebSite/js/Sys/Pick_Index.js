@@ -201,7 +201,7 @@ km.addgrid = function () {
                 method: 'get',
                 onClickRow: onClickRow,
                 checkOnSelect: false,
-                url: km.model.urls["GetAddTemplate"],
+             //   url: km.model.urls["GetAddTemplate"],
                 columns: [[
                         { field: 'IsSelect', title: '选择', width: 20, align: 'left', checkbox: true },
                         { field: 'ElementName', title: '原材料', width: 200, align: 'left' },

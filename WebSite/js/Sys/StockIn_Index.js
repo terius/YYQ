@@ -362,7 +362,7 @@ km.addgridByProduct = function () {
                                 }
                             }
                         },
-                        { field: 'Quantity', title: '数量', width: 80, align: 'left' },
+                        { field: 'Quantity', title: '数量', width: 80, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
                         { field: 'UnitName', title: '单位', width: 40, align: 'left' },
                         { field: 'Remark', title: '备注', width: 120, align: 'left', editor: { type: 'textbox' } }
                 ]]

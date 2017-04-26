@@ -57,7 +57,7 @@ $.extend($.fn.tabs.methods, {
             $tabBody.html('');
             $tabBody.css({ 'overflow': 'hidden', 'position': 'relative' });
             var $mask = $('<div style="position:absolute;width:100%;height:100%;background:#545669;z-index:1000;opacity:0.3;filter:alpha(opacity=30);"><div>').appendTo($parentBody);
-            var $maskMessage = $('<div class="mask-message" style="z-index:1001;width:auto;height:16px;line-height:16px;position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-92px;border:2px dashed #75186D;padding: 12px 5px 10px 30px;background: #ffffff url(\'/Scripts/03jeasyui/jeasyui_extend/images/ajax-loader.gif\') no-repeat scroll 5px center;">' + (params.iframe.message || '拼命加载中,请稍后 ...') + '</div>').appendTo($parentBody);
+            var $maskMessage = $('<div class="mask-message" style="z-index:1001;width:auto;height:16px;line-height:16px;position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-92px;border:2px dashed #75186D;padding: 12px 5px 10px 30px;background: #ffffff url(\'/images/ajax-loader.gif\') no-repeat scroll 5px center;">' + (params.iframe.message || '拼命加载中,请稍后 ...') + '</div>').appendTo($parentBody);
             var $containterMask = $('<div style="position:absolute;width:100%;height:100%;z-index:1;background:#fff;"></div>').appendTo($tabBody);
             var $containter = $('<div style="position:absolute;width:100%;height:100%;z-index:0;"></div>').appendTo($tabBody);
             var p = '';

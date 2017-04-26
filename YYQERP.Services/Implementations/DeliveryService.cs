@@ -156,6 +156,7 @@ namespace YYQERP.Services.Implementations
             info.TotalAmountUp = StringHelper.CmycurD(allPrice);
             _Repository.Add(info);
             _uow.Commit();
+          
 
         }
 
@@ -171,7 +172,7 @@ namespace YYQERP.Services.Implementations
             var maxNo = _Repository.GetDbQuerySet().Where(d => d.SerialNo.Contains(nowString)).Max(d => d.SerialNo);
             int itemp = 0;
             string lastNo = "001";
-            if (int.TryParse(maxNo.Substring(maxNo.Length - 3), out itemp))
+            if (maxNo != null && int.TryParse(maxNo.Substring(maxNo.Length - 3), out itemp))
             {
                 lastNo = (itemp + 1).ToString().PadLeft(3, '0');
             }
