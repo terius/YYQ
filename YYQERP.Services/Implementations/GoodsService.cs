@@ -279,6 +279,9 @@ namespace YYQERP.Services.Implementations
             string shelfCode = "";
             int colCount = dt.Columns.Count;
             int icount = 0;
+            double importCount = 0;
+            double allCount = 0;
+            StockSet stock = null;
             foreach (DataRow dr in dt.Rows)
             {
                 icount++;
@@ -301,40 +304,95 @@ namespace YYQERP.Services.Implementations
                 //{
                 //    info = _Repository.GetDbQuerySet().FirstOrDefault(d => d.Code == code);
                 //}
-                info = new ElementSet();
-                info.Code = eleCode;
-                info.Name = eleName;
                 if (!isEleExist)
                 {
-
+                    info = new ElementSet();
                     info.Addtime = dtNow;
                     info.AddUserName = loginUserName;
-                    info.Price = StringToDecimal(dr[4].ToString());
-                    info.ShelfId = shelfList.FirstOrDefault(d => d.Code == shelfCode).Id;
-                    //string msg = GetOrCreateShelfFromCode(info, dr[3].ToString(), shelfList);
-                    //if (msg != "")
-                    //{
-                    //    return "库位错误！数据信息：" + msg;// string.Join(",", dr.ItemArray);
-                    //}
-                    info.UnitTypeCode = unitList.FirstOrDefault(d => d.Name == unitName).Code; // GetOrCreateUnitCodeFromName(unitList, dr[2].ToString(), loginUserName);
-                    if (string.IsNullOrEmpty(info.UnitTypeCode))
-                    {
-                        return "数量单位错误！数据信息：" + string.Join(",", dr.ItemArray);
-                    }
-                    info.WarningQuantity = StringHelper.SafeGetDoubleFromObj(dr[5], 0);
+                    info.Code = eleCode;
                     info.Remark = "导入创建  " + dtNow.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                else
+                {
+                    info = _Repository.GetDbSetForEdit().FirstOrDefault(d => d.Code == eleCode);
+                    info.Modifytime = dtNow;
+                    info.ModifyUserName = loginUserName;
+                    info.Remark = "导入编辑  " + dtNow.ToString("yyyy-MM-dd HH:mm:ss");
+                }
 
+
+                info.Name = eleName;
+
+
+
+                info.Price = StringToDecimal(dr[4].ToString());
+                info.ShelfId = shelfList.FirstOrDefault(d => d.Code == shelfCode).Id;
+                //string msg = GetOrCreateShelfFromCode(info, dr[3].ToString(), shelfList);
+                //if (msg != "")
+                //{
+                //    return "库位错误！数据信息：" + msg;// string.Join(",", dr.ItemArray);
+                //}
+                info.UnitTypeCode = unitList.FirstOrDefault(d => d.Name == unitName).Code; // GetOrCreateUnitCodeFromName(unitList, dr[2].ToString(), loginUserName);
+                if (string.IsNullOrEmpty(info.UnitTypeCode))
+                {
+                    return "数量单位错误！数据信息：" + string.Join(",", dr.ItemArray);
+                }
+                info.WarningQuantity = StringHelper.SafeGetDoubleFromObj(dr[5], 0);
+
+
+                if (!isEleExist)
+                {
                     _Repository.Add(info);
                 }
-                //else
-                //{
-                //    info = _Repository.GetDbSetForEdit().FirstOrDefault(d => d.Code == eleCode);
-                //    info.Modifytime = dtNow;
-                //    info.ModifyUserName = loginUserName;
-                //    _Repository.Save(info);
-                //}
+                else
+                {
+                    _Repository.Save(info);
+                }
 
+                if (colCount >= 7)
+                {
+                    importCount = StringHelper.SafeGetDoubleFromObj(dr[6], 0);
+                    allCount = StringHelper.SafeGetDoubleFromObj(dr[7], 0);
+                    if (importCount > 0 || allCount > 0)
+                    {
+                        stock = _stockRepository.GetDbSetForEdit().FirstOrDefault(d => d.ElementSet.Code == eleCode);
+                        if (stock != null)
+                        {
+                            stock.LastInQuantity = allCount > 0 ? allCount : importCount;
+                            stock.LastInTime = dtNow;
+                            stock.Modifytime = dtNow;
+                            stock.ModifyUserName = info.AddUserName;
+                            stock.Quantity = allCount > 0 ? allCount : (importCount + stock.Quantity);
+                            stock.ShelfId = info.ShelfId;
+                            stock.UnitTypeCode = info.UnitTypeCode;
+                        
+                            //stock.ElementSet = null;
+                            //stock.ProductSet = null;
+                            //stock.ShelfSet = null;
+                            _stockRepository.Save(stock);
+                        }
+                        else
+                        {
+                            stock = new StockSet();
+                            stock.Addtime = dtNow;
+                            stock.AddUserName = info.AddUserName;
+                         //   stock.ElementSet = info;
+                            stock.FirstInTime = info.Addtime.Value;
+                            stock.ItemType = (int)ElementType.Element;
+                            stock.LastInQuantity = stock.Quantity = allCount > 0 ? allCount : importCount;
+                            stock.LastInTime = dtNow;
+                            stock.ShelfId = info.ShelfId;
+                            stock.UnitTypeCode = info.UnitTypeCode;
+                            if (info.StockSet == null)
+                            {
+                                info.StockSet = new List<StockSet>();
+                            }
+                            info.StockSet.Add(stock);
+                         //   _stockRepository.Add(stock);
 
+                        }
+                    }
+                }
 
 
                 //if (isEleExist)
@@ -352,10 +410,10 @@ namespace YYQERP.Services.Implementations
                 //{
 
                 //}
-                if (colCount >= 7)
-                {
-                    CreateElementStock(info, dr[6].ToString(), isEleExist, dtNow, loginUserName);
-                }
+                //if (colCount >= 7)
+                //{
+                //    CreateElementStock(info, dr[6].ToString(), isEleExist, dtNow, loginUserName);
+                //}
 
 
             }
@@ -381,18 +439,18 @@ namespace YYQERP.Services.Implementations
                 var stockInfo = _stockRepository.GetDbSetForEdit().FirstOrDefault(d => d.ElementSet.Code == eleCode && d.ShelfSet.Code == shelfCode);
                 if (stockInfo != null)
                 {
-                    stockInfo.Remark = loginUserName + " 更改库存数，原数量：" + stockInfo.Quantity + " 更改后数量：" + Quantity+"  更改时间:" + dtNow.ToString("yyyy-MM-dd HH:mm:ss");
+                    stockInfo.Remark = loginUserName + " 更改库存数，原数量：" + stockInfo.Quantity + " 更改后数量：" + Quantity + "  更改时间:" + dtNow.ToString("yyyy-MM-dd HH:mm:ss");
                     stockInfo.Quantity = Quantity;
                     stockInfo.Modifytime = dtNow;
                     stockInfo.ModifyUserName = loginUserName;
                 }
-                
+
             }
             int rs = _uow.Commit();
             return rs > 0 ? "" : "更新数据为0";
         }
 
-      
+
 
         private string ExpErr(int icount, DataRow dr)
         {

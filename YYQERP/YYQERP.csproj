@@ -2155,10 +2155,10 @@
     <Content Include="easyui\demo\tree\tree_data1.json" />
     <Content Include="easyui\demo\tree\tree_data2.json" />
     <Content Include="easyui\themes\material\images\Thumbs.db" />
-    <Content Include="ExcelTemplate\原材料模板.xls" />
     <Content Include="ExcelTemplate\销售统计模板.xlsx" />
     <Content Include="ExcelTemplate\修改库存数模板.xls" />
     <Content Include="ExcelTemplate\送货单模板.xlsx" />
+    <Content Include="ExcelTemplate\原材料导入模板.xls" />
     <None Include="Properties\PublishProfiles\web1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
