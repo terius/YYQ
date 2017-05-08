@@ -298,6 +298,14 @@ namespace YYQERP.Infrastructure.Helpers
             cell.SetCellValue(cell.StringCellValue + info.Sender);
             cell = sheet1.GetRow(12).GetCell(2);
             cell.SetCellValue(cell.StringCellValue + info.Manager);
+
+            FileInfo fi = new FileInfo(downExlPath);
+            if (!fi.Directory.Exists)
+            {
+                Directory.CreateDirectory(fi.Directory.FullName);
+            }
+
+
             //创建文件
             FileStream files = new FileStream(downExlPath, FileMode.Create);
             workbook.Write(files);

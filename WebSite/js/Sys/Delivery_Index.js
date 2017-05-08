@@ -256,7 +256,7 @@ km.addgrid = function () {
                         { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
                         {
                             field: 'Quantity', title: '数量', width: 100, align: 'left',
-                            editor: { type: 'numberbox', options: { required: true } }
+                            editor: { type: 'numberbox', options: { required: true, precision: 1 } }
 
                         },
                         { field: 'Unit', title: '单位', width: 100, align: 'left' },
