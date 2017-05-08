@@ -77,7 +77,7 @@ namespace YYQERP.Controllers
         {
             string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
             string fileName = "送货单" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
-            string destFile = Server.MapPath("~/Output1/" + fileName);
+            string destFile = Server.MapPath("~/Output/" + fileName);
             var info = _deliveryService.GetDeliveryForPrint(id);
             ExcelHelper.ExportInvoice(excelFile, destFile, info);
             return File(destFile, "application/ms-excel", fileName);
