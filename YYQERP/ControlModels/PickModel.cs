@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using YYQERP.Infrastructure;
+using YYQERP.Services.Views;
 
 namespace YYQERP
 {
@@ -10,5 +11,7 @@ namespace YYQERP
         public IList<BomCacheView> BomSelectList { get; set; }
 
         public IList<PartCacheView> PartSelectList { get; set; }
+
+      
     }
 }

@@ -30,6 +30,7 @@ namespace YYQERP.Controllers
             model.ElementSelectList = _cacheService.GetCache_Element();
             model.BomSelectList = _cacheService.GetCache_Bom();
             model.PartSelectList = _cacheService.GetCache_Part();
+           
             return View(model);
         }
 

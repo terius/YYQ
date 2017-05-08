@@ -353,7 +353,8 @@ km.addgrid = function () {
 
         },
         do_clear: function () {
-            $grid.datagrid("reload");
+            $grid.datagrid("loadData", []);
+            //$grid.datagrid("reload");
         },
         do_deleteRow: function () {
             if (confirm("是否删除此条记录？")) {
