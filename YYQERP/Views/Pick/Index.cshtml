@@ -88,7 +88,7 @@
         km.bomList = @Html.Raw(Json.Encode(@Model.BomSelectList));
         km.partList = @Html.Raw(Json.Encode(@Model.PartSelectList));
       
-        alert(JSON.stringify(km.addviews));
+     
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
     </script>
 }

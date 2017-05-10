@@ -794,22 +794,20 @@ namespace YYQERP.Services.Implementations
 
         public string CheckStockQuantity(int id, double Quantity, ElementType type, string model = "未知")
         {
-          
-            double allQuantity = 0;
             if (type == ElementType.Element)
             {
-                var eleInfo = _Repository.GetDbSetForEdit().FirstOrDefault(d => d.ElementId == id);
+                var eleInfo = _Repository.GetDbQuerySet().FirstOrDefault(d => d.ElementId == id);
                 if (eleInfo == null)
                 {
                     return "原材料" + model + "未入库!";
                 }
-                allQuantity = eleInfo.Quantity;
-                if (Quantity > allQuantity)
+
+                if (Quantity > eleInfo.Quantity)
                 {
                     return model + "库存不足！";
                 }
-                eleInfo.Quantity = allQuantity - Quantity;
-                _Repository.Save(eleInfo);
+                //  eleInfo.Quantity = allQuantity - Quantity;
+                //  _Repository.Save(eleInfo);
 
             }
             else
@@ -819,23 +817,22 @@ namespace YYQERP.Services.Implementations
                 {
                     return "成品" + model + "未入库!";
                 }
-                allQuantity = prodInfo.Quantity;
-                if (Quantity > allQuantity)
+                if (Quantity > prodInfo.Quantity)
                 {
                     return model + "库存不足！";
                 }
-                prodInfo.Quantity = allQuantity - Quantity;
-                _Repository.Save(prodInfo);
+                //  prodInfo.Quantity = allQuantity - Quantity;
+                //   _Repository.Save(prodInfo);
             }
-           
+
             return "";
 
         }
 
 
-     
 
-       // public void AddStockOutForDelivery()
+
+        // public void AddStockOutForDelivery()
 
 
     }

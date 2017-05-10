@@ -83,7 +83,7 @@
           <Property Name="AddUserName" Type="varchar" MaxLength="50" />
           <Property Name="Modifytime" Type="datetime" />
           <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
-          <Property Name="SerialNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNo" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="DicSet">
           <Key>
@@ -431,7 +431,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BomDetailSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BomDetailSet" Type="Self.BomDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -467,7 +469,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DeliveryDetailSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -478,7 +482,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DeliveryDetailSet_ProductSet1">
+        <Association Name="FK_DeliveryDetailSet_ProductSet">
           <End Role="ProductSet" Type="Self.ProductSet" Multiplicity="0..1" />
           <End Role="DeliveryDetailSet" Type="Self.DeliveryDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
@@ -491,7 +495,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ElementSet_ShelfSet">
-          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1" />
+          <End Role="ShelfSet" Type="Self.ShelfSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShelfSet">
@@ -539,7 +545,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PartSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PartDetailSet" Type="Self.PartDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -563,7 +571,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PickSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PickSet" Type="Self.PickSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -599,7 +609,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductDetailSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ProductDetailSet" Type="Self.ProductDetailSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -695,7 +707,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StockIn_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockInSet" Type="Self.StockInSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -743,7 +757,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StockOutSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockOutSet" Type="Self.StockOutSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -791,7 +807,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StockSet_ElementSet">
-          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1" />
+          <End Role="ElementSet" Type="Self.ElementSet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockSet" Type="Self.StockSet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ElementSet">
@@ -885,7 +903,7 @@
             <End Role="ElementSet" EntitySet="ElementSet" />
             <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
           </AssociationSet>
-          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet1" Association="Self.FK_DeliveryDetailSet_ProductSet1">
+          <AssociationSet Name="FK_DeliveryDetailSet_ProductSet" Association="Self.FK_DeliveryDetailSet_ProductSet">
             <End Role="ProductSet" EntitySet="ProductSet" />
             <End Role="DeliveryDetailSet" EntitySet="DeliveryDetailSet" />
           </AssociationSet>
@@ -2065,7 +2083,7 @@
           <Property Name="Modifytime" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" FromRole="DeliverySet" ToRole="DeliveryDetailSet" />
-          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DeliveryDetailSet_DeliverySet">
           <End Type="YYQERPModel.DeliverySet" Role="DeliverySet" Multiplicity="1" />
