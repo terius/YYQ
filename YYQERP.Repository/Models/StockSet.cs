@@ -10,6 +10,7 @@ namespace YYQERP.Repository
             {
                 base.AddBrokenRule(new BusinessRule(Property.NumberError, "库存数量不能小于0"));
             }
+            
         }
     }
 }

@@ -297,6 +297,10 @@ namespace YYQERP.Services.Implementations
                 {
                     return ExpErr(icount, dr);
                 }
+                if (CheckShelfIsUsed(shelfCode, eleCode))
+                {
+                    return "库位:" + shelfCode + "已存放别的原材料";
+                }
                 bool isEleExist = CheckEleExist(eleCode, eleList);
 
 
@@ -365,7 +369,7 @@ namespace YYQERP.Services.Implementations
                             stock.Quantity = allCount > 0 ? allCount : (importCount + stock.Quantity);
                             stock.ShelfId = info.ShelfId;
                             stock.UnitTypeCode = info.UnitTypeCode;
-                        
+
                             //stock.ElementSet = null;
                             //stock.ProductSet = null;
                             //stock.ShelfSet = null;
@@ -376,7 +380,7 @@ namespace YYQERP.Services.Implementations
                             stock = new StockSet();
                             stock.Addtime = dtNow;
                             stock.AddUserName = info.AddUserName;
-                         //   stock.ElementSet = info;
+                            //   stock.ElementSet = info;
                             stock.FirstInTime = info.Addtime.Value;
                             stock.ItemType = (int)ElementType.Element;
                             stock.LastInQuantity = stock.Quantity = allCount > 0 ? allCount : importCount;
@@ -388,7 +392,7 @@ namespace YYQERP.Services.Implementations
                                 info.StockSet = new List<StockSet>();
                             }
                             info.StockSet.Add(stock);
-                         //   _stockRepository.Add(stock);
+                            //   _stockRepository.Add(stock);
 
                         }
                     }
@@ -419,6 +423,16 @@ namespace YYQERP.Services.Implementations
             }
             int rs = _uow.Commit();
             return rs > 0 ? "" : "导入数据为0";
+        }
+
+        private bool CheckShelfIsUsed(string shelfCode, string eleCode)
+        {
+            var rs = _stockRepository.GetDbQuerySet().Any(d => d.ShelfSet.Code == shelfCode && d.ElementSet.Code != eleCode);
+            if (!rs)
+            {
+                rs = _Repository.GetDbQuerySet().Any(d => d.ShelfSet.Code == shelfCode && d.Code != eleCode);
+            }
+            return rs;
         }
 
         public string RestoreElement(DataTable dt, string loginUserName)
