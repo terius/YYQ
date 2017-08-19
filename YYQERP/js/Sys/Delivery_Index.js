@@ -98,8 +98,10 @@ km.maingrid = function () {
             reload({ STime: stime, ETime: etime });
         },
         do_print: function (id) {
-            com.ExportToExcel(km.model.urls["exportExcel"], { id: id });
-
+            if (confirm("是否打印此条送货单？")) {
+                com.ExportToExcel(km.model.urls["exportExcel"], { id: id });
+            }
+          
         }
 
 

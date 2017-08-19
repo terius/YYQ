@@ -80,7 +80,9 @@ namespace YYQERP.Controllers
             string destFile = Server.MapPath("~/Output/" + fileName);
             var info = _deliveryService.GetDeliveryForPrint(id);
             ExcelHelper.ExportInvoice(excelFile, destFile, info);
-            return File(destFile, "application/ms-excel", fileName);
+            var result= File(destFile, "application/ms-excel", fileName);
+
+            return result;
         }
 
     }

@@ -1137,6 +1137,10 @@ namespace YYQERP.Services.Implementations
             {
                 q.And(d => d.ModelId == request.ModelId);
             }
+            if (!string.IsNullOrWhiteSpace(request.ElementNameOrCode))
+            {
+                q.And(d => d.BomDetailSet.Any(f=>f.ElementSet.Name.Contains(request.ElementNameOrCode) || f.ElementSet.Code.Contains(request.ElementNameOrCode)));
+            }
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
             var pageData = _bomRepository.PageQuery(q, request.page, request.rows, out allcount);

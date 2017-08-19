@@ -19,6 +19,8 @@ namespace YYQERP.Services.Interfaces
         Search_StockIn_Response SearchStockIn(Search_StockIn_Request request, bool isPage = true);
         string DeleteStockIn(int id);
 
+        string DeleteStock(int id);
+
         string GetStockDetailHtml(int id);
 
 

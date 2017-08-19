@@ -46,16 +46,19 @@ namespace YYQERP.Controllers
             return Content(html);
         }
 
-        public string DeleteStockIn(int id)
-        {
-            var msg = _service.DeleteStockIn(id);
-            return msg;
-        }
+      
 
         public FileResult ExportExcelForStock(Export_Stock_Request request)
         {
             var data = _service.SearchStock(request, request.ExportPageData);
             return Export<StockListView>(data.rows, request.Columns, request.ColumnTitles, request.FileName);
+        }
+
+
+        public string DeleteStock(int id)
+        {
+            var msg = _service.DeleteStock(id);
+            return msg;
         }
 
         #endregion
@@ -115,6 +118,12 @@ namespace YYQERP.Controllers
         {
             var data = _service.SearchStockIn(request, request.ExportPageData);
             return Export<StockInListView>(data.rows, request.Columns, request.ColumnTitles, request.FileName);
+        }
+
+        public string DeleteStockIn(int id)
+        {
+            var msg = _service.DeleteStockIn(id);
+            return msg;
         }
 
         #endregion

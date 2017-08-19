@@ -28,11 +28,15 @@
 }
 
 @section Scripts {
-    <script src="~/js/Sys/Stock_Index.js"></script>
+    <script src="~/js/Sys/Stock_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
-        km.model = {"urls":{"list":"/Sys/Base_Button/GetList",
+        km.model = {
+            "urls":{
+            "list":"/Sys/Base_Button/GetList",
             "pagelist":"/Stock/GetPageList",
-            "stockdetail":"/Stock/GetStockDetail"},
+            "stockdetail":"/Stock/GetStockDetail",
+            "delete":"/Stock/DeleteStock"
+            },
             "buttons":[
                 {"ButtonCode":"stockin","ButtonName":"来料入仓","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_stockin()"},
                 {"ButtonCode":"stockedit","ButtonName":"库存管理","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_stockedit()"},

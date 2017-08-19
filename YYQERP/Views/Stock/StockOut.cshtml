@@ -23,7 +23,7 @@
                 <div class="km_toolbar">
                     <label>选择要出库的原材料</label>
                     <input id="ElementId" name="ElementId" class="easyui-combobox"
-                           data-options="prompt:'选择原材料',editable:false,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                           data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
                            style="width:250px;">
 
                     <button id="add_element" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgrid.do_addelement();">添加</button>
@@ -43,7 +43,7 @@
                 <div class="km_toolbar">
                     <label>选择要出库的产品或半成品</label>
                     <input id="ProductId" name="ProductId" class="easyui-combobox"
-                           data-options="prompt:'选择产品或半成品',editable:false,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
+                           data-options="prompt:'选择产品或半成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
                            style="width:300px;">
                     <button id="add_product" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgridByProduct.do_addproduct();">添加</button>
 
@@ -127,7 +127,7 @@
 
 @section Scripts {
     @Scripts.Render("~/js/easyui-datagrid-groupview")
-    <script src="~/js/Sys/StockOut_Index.js"></script>
+    <script src="~/js/Sys/StockOut_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         km.model = {
             "urls":{"list":"/Sys/Base_Button/GetList",

@@ -336,6 +336,17 @@ namespace YYQERP.Services.Implementations
             return "";
         }
 
+        public string DeleteStock(int id)
+        {
+            var info = _Repository.RemoveByWhere(d => d.Id == id);
+            int rs = _uow.Commit();
+            if (rs <= 0)
+            {
+                return "删除失败";
+            }
+            return "";
+        }
+
         public Search_StockOut_Response SearchStockOut(Search_StockOut_Request request, bool isPage)
         {
             Query<StockOutSet> q = new Query<StockOutSet>();

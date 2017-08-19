@@ -1073,7 +1073,7 @@ namespace YYQERP.Services
                 return view;
             }
             view.Aliases = source.Aliases;
-            view.CreateDate = source.CreateDate.Value.ToStringWithtime();
+            view.CreateDate = source.CreateDate.ToStringWithtime();
             view.Id = source.Id;
             view.ModelName = GetModelShowName(source.ModelSet);
             view.Price = MoneyToString(source.Price);

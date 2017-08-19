@@ -277,16 +277,16 @@ km.detailgrid = function () {
         },
         do_saveProductDetail: function () {
             var addDatas = $grid.datagrid('getChecked');
-            if (!addDatas || addDatas.length <= 0) {
-                com.message('e', "请先添加的原材料或产品或半成品");
-                return false;
-            }
+            //if (!addDatas || addDatas.length <= 0) {
+            //    com.message('e', "请先添加的原材料或产品或半成品");
+            //    return false;
+            //}
             com.message('c', ' <b style="color:red">是否确定保存？ </b>', function (b) {
                 if (b) {
                     do_accept();
-                    if (addDatas && addDatas.length > 0) {
+                  //  if (addDatas && addDatas.length > 0) {
                         com.SaveAjaxInfos(addDatas, km.model.urls["saveProductDetail"] + "?pid=" + km.pid, "", do_aftersave);
-                    }
+                  //  }
                 }
             });
 

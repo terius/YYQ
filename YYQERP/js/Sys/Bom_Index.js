@@ -202,7 +202,8 @@ km.maingrid = {
 
     search_data: function () {
         var modelid = com.trim($("#SearchModel").combobox("getValue"));
-        this.reload({ ModelId: modelid });
+        var s_element = com.trim($("#s_element").val());
+        this.reload({ ModelId: modelid, ElementNameOrCode: s_element });
     },
     reload: function (params) {
         var defaults = { _t: com.settings.timestamp() };
