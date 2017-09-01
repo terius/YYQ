@@ -107,7 +107,7 @@
 }
 
 @section Scripts {
-    <script src="~/js/Sys/Element_Index.js"></script>
+    <script src="~/js/Sys/Element_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         km.model = {
             "urls": {
@@ -123,8 +123,8 @@
              { "ButtonCode": "add", "ButtonName": "新增原材料", "Sort": 120, "ButtonType": 1, "IconClass": "icon-standard-add", "JsEvent": "do_add()","data_checkper":"add" },
             { "ButtonCode": "edit", "ButtonName": "编辑原材料", "Sort": 130, "ButtonType": 1, "IconClass": "icon-standard-pencil", "JsEvent": "do_edit()", "data_checkper": "edit" },
             { "ButtonCode": "delete", "ButtonName": "删除原材料", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-delete", "JsEvent": "do_delete()", "data_checkper": "delete" },
-            { "ButtonCode": "import", "ButtonName": "导入原材料", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_import()", "data_checkper": "import" },
-             { "ButtonCode": "import", "ButtonName": "更改原材料库存", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_restore()", "data_checkper": "restore" }
+            { "ButtonCode": "import", "ButtonName": "导入原材料", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_import()", "data_checkper": "import" }
+             //{ "ButtonCode": "import", "ButtonName": "更改原材料库存", "Sort": 140, "ButtonType": 1, "IconClass": "icon-standard-page-white-excel", "JsEvent": "do_restore()", "data_checkper": "restore" }
             ]
         };
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));

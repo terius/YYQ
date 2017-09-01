@@ -15,7 +15,7 @@
             <div id="km_toolbar_detail" class="km_toolbar">
                 <label>添加部件</label>
                 <input id="PartId" name="PartId" class="easyui-combobox"
-                       data-options="prompt:'选择部件',editable:false,hasDownArrow:true,panelHeight:200,valueField:'partid',textField:'partname'"
+                       data-options="prompt:'选择部件',editable:true,hasDownArrow:true,panelHeight:200,valueField:'partid',textField:'partname'"
                        style="width:250px;">
                 <button id="add_part" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addpart();">添加</button>
 
@@ -23,7 +23,7 @@
             <div id="km_toolbar_detail" class="km_toolbar">
                 <label>添加原材料</label>
                 <input id="ElementId" name="ElementId" class="easyui-combobox"
-                       data-options="prompt:'选择原材料',editable:false,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                       data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
                        style="width:250px;">
                 <button id="add_element" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addelement();">添加</button>
 
@@ -41,6 +41,7 @@
     <input id="SearchModel" name="SearchModel" class="easyui-combobox"
            data-options="prompt:'所属型号',editable:true,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
            style="width:250px;">
+    <input id="s_element" class="easyui-textbox" data-options="prompt:'原材料名称或料号',value:''" style="border:1px solid #f2f2f2;width:200px; height:26px" />
     <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
 </div>
 <script id="tpl_add" type="text/html">
@@ -58,7 +59,7 @@
                         <td>所属型号</td>
                         <td>
                             <input id="ModelId" name="ModelId" class="easyui-combobox required" data-errmsg="型号不能为空"
-                                   data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
+                                   data-options="required:true,editable:true,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
                                    style="width:250px;">
                         </td>
                     </tr>
@@ -77,7 +78,7 @@
 }
 
 @section Scripts {
-    <script src="~/js/Sys/Bom_Index.js"></script>
+    <script src="~/js/Sys/Bom_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
 
         var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'

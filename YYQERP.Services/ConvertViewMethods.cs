@@ -1755,6 +1755,15 @@ namespace YYQERP.Services
                 view.Sender = item.Sender;
                 view.TotalAmount = item.TotalAmount.ToStringText();
                 view.SerialNo = item.SerialNo;
+                if (item.IsOut.HasValue && item.IsOut.Value)
+                {
+                    view.IsOut = "是";
+                }
+                else
+                {
+                    view.IsOut = "否";
+                }
+               
                 view.Details = new List<DeliveryDetailView>();
                 foreach (var detail in item.DeliveryDetailSet)
                 {

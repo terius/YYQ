@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using YYQERP.Infrastructure;
+using YYQERP.Repository;
 
 namespace YYQERP.Cache
 {
@@ -33,5 +30,7 @@ namespace YYQERP.Cache
         IList<BomCacheView> GetCache_Bom();
 
         IList<UserCacheView> GetCache_User();
+
+        IList<ElementCacheView> ConvertTo_ElementCacheViews(IEnumerable<ElementSet> source);
     }
 }

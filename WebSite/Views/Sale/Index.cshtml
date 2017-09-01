@@ -217,7 +217,7 @@
 @section Scripts {
     @Scripts.Render("~/js/datagrid-filter")
     <script src="~/js/Export.js"></script>
-    <script src="~/js/Sys/Sale_Index.js"></script>
+    <script src="~/js/Sys/Sale_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         km.model = {
             "urls":{"pagelist":"/Sale/GetSaleReportPageList",

@@ -14,5 +14,7 @@ namespace YYQERP.Services.Interfaces
         string GetMaxSerialNo();
 
         DeliveryForPrint GetDeliveryForPrint(int id);
+
+        void UpdateIsOut(int id, bool isOut);
     }
 }

@@ -19,7 +19,7 @@
                     <div class="km_toolbar" data-checkper="setpartdetail">
                         <label>复制部件</label>
                         <input id="PartId" name="PartId" class="easyui-combobox"
-                               data-options="prompt:'选择要复制的部件',editable:false,hasDownArrow:true,panelHeight:200,valueField:'Id',textField:'Text'"
+                               data-options="prompt:'选择要复制的部件',editable:true,hasDownArrow:true,panelHeight:200,valueField:'Id',textField:'Text'"
                                style="width:250px;">
                         <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_copypart();">添加</button>
 
@@ -70,7 +70,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/js/easyui-datagrid-detailview")
-    <script src="~/js/Sys/Part_Index.js"></script>
+    <script src="~/js/Sys/Part_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
 
         var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'

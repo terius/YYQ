@@ -17,7 +17,17 @@ km.maingrid = {
                 return 'background-color:#f24b21;color:#fff;';
             }
         }
-
+        var FormatOper = function (val, row, index) {
+            return "<button  style=\"color:red\"  onclick=\"km.maingrid.deleteStock(" + row.Id + ");\">删除</button>";
+        }
+        var checkCanDel = function () {
+            for (var i = 0; i < km.pers.length; i++) {
+                if ("delete" == km.pers[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
         this.jq = $("#maingrid").datagrid(km.gridOption({
             fitColumns: true,
             queryParams: { },
@@ -31,7 +41,8 @@ km.maingrid = {
                 { field: 'UnitType', title: '单位', width: 80, align: 'left', sortable: true },
                 { field: 'FirstInTime', title: '首次入库时间', width: 150, align: 'left', sortable: true },
                 { field: 'LastInTime', title: '最近入库时间', width: 150, align: 'left', sortable: true },
-                { field: 'LastOutTime', title: '最近出库时间', width: 150, align: 'left', sortable: true }
+                { field: 'LastOutTime', title: '最近出库时间', width: 150, align: 'left', sortable: true },
+                { field: 'delete', title: '操作', width: 150, align: 'left', formatter: FormatOper, hidden: !checkCanDel() }
             ]],
             toolbar: '#toolbar1',
             onClickRow: function (index, row) {
@@ -72,7 +83,24 @@ km.maingrid = {
         km.export.ProductCode = com.trim($("#s_product").val());
      
         com.ExportToExcel("/Stock/ExportExcelForStock", km.export);
-    }
+    },
+    deleteStock: function (id) {
+        //  var index = this.jq.datagrid('getRowIndex', row);
+        if (confirm("是否删除此条库存记录？")) {
+            $.get(km.model.urls["delete"], { id: id }, function (msg) {
+
+                if (msg == "") {
+                    com.message('s', "删除成功");
+                    km.maingrid.reload();
+                }
+                else {
+                    com.message('e', msg);
+                }
+
+            })
+        }
+
+    },
 };
 
 

@@ -22,6 +22,7 @@ namespace YYQERP.Services.Views
         public string AddUserName { get; set; }
 
         public string SerialNo { get; set; }
+        public string IsOut { get; set; }
         public IList<DeliveryDetailView> Details { get; set; }
     }
 

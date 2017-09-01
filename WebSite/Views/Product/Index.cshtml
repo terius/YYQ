@@ -16,7 +16,7 @@
             <div id="km_toolbar_detail" class="km_toolbar">
                 <label>选择Bom</label>
                 <input id="BomId" name="BomId" class="easyui-combobox"
-                       data-options="prompt:'选择Bom',editable:false,hasDownArrow:true,panelHeight:200,valueField:'bomid',textField:'bomname'"
+                       data-options="prompt:'选择Bom',editable:true,hasDownArrow:true,panelHeight:200,valueField:'bomid',textField:'bomname'"
                        style="width:250px;">
                 <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addbom();">添加</button>
 
@@ -24,7 +24,7 @@
             <div id="km_toolbar_detail" class="km_toolbar">
                 <label>选择原材料</label>
                 <input id="ElementId" name="ElementId" class="easyui-combobox"
-                       data-options="prompt:'选择原材料',editable:false,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
+                       data-options="prompt:'选择原材料',editable:true,hasDownArrow:true,panelHeight:200,valueField:'ElementId',textField:'ElementName'"
                        style="width:250px;">
                 <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addelement();">添加</button>
 
@@ -32,7 +32,7 @@
             <div id="km_toolbar_detail" class="km_toolbar">
                 <label>选择半成品</label>
                 <input id="HalfProductId" name="HalfProductId" class="easyui-combobox"
-                       data-options="prompt:'选择半成品',editable:false,hasDownArrow:true,panelHeight:200,valueField:'productid',textField:'producttext'"
+                       data-options="prompt:'选择半成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'productid',textField:'producttext'"
                        style="width:250px;">
                 <button class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.detailgrid.do_addhalfproduct();">添加</button>
 
@@ -65,7 +65,7 @@
                         <td>型号</td>
                         <td>
                             <input id="ModelId" name="ModelId" class="easyui-combobox required" data-errmsg="型号不能为空"
-                                   data-options="required:true,editable:false,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
+                                   data-options="required:true,editable:true,hasDownArrow:true,panelHeight:200,valueField:'modelid',textField:'modelname'"
                                    style="width:250px;">
                         </td>
                     </tr>
@@ -109,7 +109,7 @@
 }
 
 @section Scripts {
-    <script src="~/js/Sys/Product_Index.js"></script>
+    <script src="~/js/Sys/Product_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
         + '"pagelist":"/Product/GetPageList",'

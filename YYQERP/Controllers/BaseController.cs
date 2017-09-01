@@ -68,9 +68,6 @@ namespace YYQERP.Controllers
 
             try
             {
-
-
-                string localpath = Server.MapPath("~/");
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     HttpPostedFileBase uploadFile = Request.Files[i];

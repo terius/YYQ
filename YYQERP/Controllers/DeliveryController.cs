@@ -43,6 +43,8 @@ namespace YYQERP.Controllers
             return json;
         }
 
+         
+
 
         public ActionResult GetTemplate()
         {
@@ -73,15 +75,16 @@ namespace YYQERP.Controllers
 
         }
 
-        public FileResult ExportExcel(int id)
+        public FileResult ExportExcel(int id,bool isOut)
         {
+
             string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
             string fileName = "送货单" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
             string destFile = Server.MapPath("~/Output/" + fileName);
             var info = _deliveryService.GetDeliveryForPrint(id);
             ExcelHelper.ExportInvoice(excelFile, destFile, info);
             var result= File(destFile, "application/ms-excel", fileName);
-
+            _deliveryService.UpdateIsOut(id, isOut);
             return result;
         }
 

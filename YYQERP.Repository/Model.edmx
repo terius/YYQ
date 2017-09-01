@@ -84,6 +84,7 @@
           <Property Name="Modifytime" Type="datetime" />
           <Property Name="ModifyUserName" Type="varchar" MaxLength="50" />
           <Property Name="SerialNo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsOut" Type="bit" />
         </EntityType>
         <EntityType Name="DicSet">
           <Key>
@@ -2084,6 +2085,7 @@
           <Property Name="ModifyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DeliveryDetailSet" Relationship="YYQERPModel.FK_DeliveryDetailSet_DeliverySet" FromRole="DeliverySet" ToRole="DeliveryDetailSet" />
           <Property Name="SerialNo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IsOut" Type="Boolean" />
         </EntityType>
         <Association Name="FK_DeliveryDetailSet_DeliverySet">
           <End Type="YYQERPModel.DeliverySet" Role="DeliverySet" Multiplicity="1" />
@@ -2523,6 +2525,7 @@
           <EntitySetMapping Name="DeliverySet">
             <EntityTypeMapping TypeName="YYQERPModel.DeliverySet">
               <MappingFragment StoreEntitySet="DeliverySet">
+                <ScalarProperty Name="IsOut" ColumnName="IsOut" />
                 <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
                 <ScalarProperty Name="ModifyUserName" ColumnName="ModifyUserName" />
                 <ScalarProperty Name="Modifytime" ColumnName="Modifytime" />

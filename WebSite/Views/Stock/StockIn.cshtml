@@ -47,7 +47,7 @@
                     <div class="km_toolbar">
                         <label>选择要入库的产品或半成品</label>
                         <input id="ProductId" name="ProductId" class="easyui-combobox"
-                               data-options="prompt:'选择产品或半成品',editable:false,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
+                               data-options="prompt:'选择产品或半成品',editable:true,hasDownArrow:true,panelHeight:200,valueField:'id',textField:'text'"
                                style="width:250px;">
                         <button id="add_product" class="easyui-linkbutton" data-options="iconCls:'icon-standard-add',plain:true" onclick="km.addgridByProduct.do_addproduct();">添加</button>
 
@@ -90,7 +90,7 @@
 
 @section Scripts {
     @Scripts.Render("~/js/easyui-datagrid-groupview")
-    <script src="~/js/Sys/StockIn_Index.js"></script>
+    <script src="~/js/Sys/StockIn_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
         + '"pagelist":"/Stock/GetStockInPageList",'

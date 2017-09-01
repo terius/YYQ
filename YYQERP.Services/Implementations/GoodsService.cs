@@ -1139,7 +1139,7 @@ namespace YYQERP.Services.Implementations
             }
             if (!string.IsNullOrWhiteSpace(request.ElementNameOrCode))
             {
-                q.And(d => d.BomDetailSet.Any(f=>f.ElementSet.Name.Contains(request.ElementNameOrCode) || f.ElementSet.Code.Contains(request.ElementNameOrCode)));
+                q.And(d => d.BomDetailSet.Any(f => f.ElementSet.Name.Contains(request.ElementNameOrCode) || f.ElementSet.Code.Contains(request.ElementNameOrCode)));
             }
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
@@ -1737,7 +1737,7 @@ namespace YYQERP.Services.Implementations
 
         public IList<Default_SelectItem> GetProductSelectListForDelivery()
         {
-            var list = _productRepository.GetDbQuerySet().ToList();
+            var list = _productRepository.GetDbQuerySet().Where(d => d.DeliveryDetailSet.Any(f => f.DeliverySet.IsOut != true)).ToList();
             IList<Default_SelectItem> selecters = new List<Default_SelectItem>();
             foreach (var item in list)
             {
@@ -1746,12 +1746,31 @@ namespace YYQERP.Services.Implementations
             return selecters;
         }
 
+
+
+
         public StockIn_ForAdd_ByProductView GetStockInAddItemByProductId(int pid)
         {
             var info = _productRepository.Single(pid);
             var unitList = _cacheService.GetCache_Unit();
             var view = info.ConvertTo_StockIn_ForAdd_ByProductView(unitList);
+            view.ShelfId = GetShelfIdInStock(pid, ElementType.Product);
             return view;
+        }
+
+        private int GetShelfIdInStock(int id, ElementType type)
+        {
+            StockSet info = null;
+            if (type == ElementType.Element)
+            {
+                 info = _stockRepository.GetDbQuerySet().Where(d => d.ElementId == id).OrderByDescending(d => d.Addtime).FirstOrDefault();
+            }
+            else
+            {
+                info = _stockRepository.GetDbQuerySet().Where(d => d.ProductId == id).OrderByDescending(d => d.Addtime).FirstOrDefault();
+            }
+
+            return info == null ? 0 : info.ShelfId;
         }
 
 

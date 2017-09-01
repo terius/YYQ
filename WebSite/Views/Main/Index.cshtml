@@ -17,7 +17,7 @@
 }
 
 @section Scripts {
-    <script src="~/js/Sys/Main_Index.js"></script>
+    <script src="~/js/Sys/Main_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         var model_string = '{"urls":{"list":"/Sys/Base_Button/GetList",'
         + '"pagelist":"/Main/GetPageList",'

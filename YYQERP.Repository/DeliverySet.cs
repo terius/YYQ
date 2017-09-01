@@ -34,6 +34,7 @@ namespace YYQERP.Repository
         public Nullable<System.DateTime> Modifytime { get; set; }
         public string ModifyUserName { get; set; }
         public string SerialNo { get; set; }
+        public Nullable<bool> IsOut { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryDetailSet> DeliveryDetailSet { get; set; }

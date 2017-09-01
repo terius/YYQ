@@ -70,7 +70,7 @@
 
 @section Scripts {
     @Scripts.Render("~/js/easyui-datagrid-groupview")
-    <script src="~/js/Sys/Pick_Index.js"></script>
+    <script src="~/js/Sys/Pick_Index.js?v=@(DateTime.Now.Ticks)"></script>
     <script type="text/javascript">
         km.model = {
             "urls":{"pagelist":"/Pick/GetPickPageList",

@@ -187,6 +187,18 @@ namespace YYQERP.Services.Implementations
             return info.Convert_Delivery_To_DeliveryForPrint(unitList);
         }
 
+        public void UpdateIsOut(int id,bool isOut)
+        {
+            if (isOut)
+            {
+                var info = GetInfoByID(id);
+                info.IsOut = isOut;
+                _Repository.Save(info);
+                _uow.Commit();
+            }
+            
+        }
+
 
     }
 
