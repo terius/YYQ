@@ -1881,6 +1881,26 @@ namespace YYQERP.Services.Implementations
             return "";
         }
 
+        public CEDResponse DeleteProduct(int id)
+        {
+            CEDResponse res = new CEDResponse();
+            var info = _productRepository.Single(id);
+            if (info != null)
+            {
+                 _productRepository.Remove(info);
+                int rs = _uow.Commit();
+                if (rs > 0)
+                {
+                    res.Result = true;
+                }
+                else
+                {
+                    res.Message = "删除产品失败";
+                }
+            }
+            return res;
+        }
+
         #endregion
 
         #region 领料方法

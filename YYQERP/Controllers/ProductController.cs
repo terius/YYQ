@@ -61,7 +61,11 @@ namespace YYQERP.Controllers
             var res = _goodsService.EditProduct(request);
             return res.Message;
         }
-
+        public string Delete(int id)
+        {
+            var res = _goodsService.DeleteProduct(id);
+            return res.Message;
+        }
 
 
         public ActionResult GetDetailByBomId(int bomid)

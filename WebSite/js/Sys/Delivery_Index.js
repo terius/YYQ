@@ -43,6 +43,7 @@ km.maingrid = function () {
                     { field: 'Sender', title: '发货人', width: 100, align: 'left', sortable: true },
                     { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
                     { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true },
+                    { field: 'IsOut', title: '是否已出货', width: 100, align: 'left', sortable: false },
                     { field: 'print', title: '打印', width: 50, align: 'left', formatter: FormatOper }
 
                 ]],
@@ -98,10 +99,12 @@ km.maingrid = function () {
             reload({ STime: stime, ETime: etime });
         },
         do_print: function (id) {
-            if (confirm("是否打印此条送货单？")) {
-                com.ExportToExcel(km.model.urls["exportExcel"], { id: id });
+            var isout = false;
+            if (confirm("此送货单是否出货？")) {
+
+                isout = true;
             }
-          
+            com.ExportToExcel(km.model.urls["exportExcel"], { id: id, isOut: isout });
         }
 
 
@@ -164,7 +167,7 @@ km.addgrid = function () {
         if (editIndex != index) {
             if (endEditing()) {
                 $grid.datagrid('selectRow', index)
-                        .datagrid('beginEdit', index);
+                    .datagrid('beginEdit', index);
                 var ed = $grid.datagrid('getEditor', { index: index, field: "Quantity" });
                 // $(ed.target).next().find(":text").select();
                 editIndex = index;
@@ -254,18 +257,18 @@ km.addgrid = function () {
                 //      checkOnSelect: false,
                 //url: km.model.urls["getAddTemp"],
                 columns: [[
-                        { field: 'Type', title: '类型', width: 100, align: 'left' },
-                        { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
-                        {
-                            field: 'Quantity', title: '数量', width: 100, align: 'left',
-                            editor: { type: 'numberbox', options: { required: true, precision: 1 } }
+                    { field: 'Type', title: '类型', width: 100, align: 'left' },
+                    { field: 'Model', title: '品名及规格', width: 200, align: 'left' },
+                    {
+                        field: 'Quantity', title: '数量', width: 100, align: 'left',
+                        editor: { type: 'numberbox', options: { required: true, precision: 1 } }
 
-                        },
-                        { field: 'Unit', title: '单位', width: 100, align: 'left' },
-                        { field: 'Price', title: '单价', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
-                        { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
-                        { field: 'Remark', title: '备注', width: 300, align: 'left', editor: { type: 'textbox' } },
-                        { field: 'delete', title: '操作', width: 300, align: 'left', formatter: FormatOper },
+                    },
+                    { field: 'Unit', title: '单位', width: 100, align: 'left' },
+                    { field: 'Price', title: '单价', width: 100, align: 'left', editor: { type: 'numberbox', options: { required: true } } },
+                    { field: 'TotalPrice', title: '金额', width: 100, align: 'left' },
+                    { field: 'Remark', title: '备注', width: 300, align: 'left', editor: { type: 'textbox' } },
+                    { field: 'delete', title: '操作', width: 300, align: 'left', formatter: FormatOper },
 
                 ]]
 

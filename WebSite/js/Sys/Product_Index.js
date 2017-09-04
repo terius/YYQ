@@ -366,13 +366,13 @@ km.toolbar = {
             layer.msg('请选择一条记录！'); return;
         }
         // var jsonParam = JSON.stringify(sRow);
-        com.message('c', ' <b style="color:red">确定要删除产品【' + sRow.Code + '】吗？ </b>', function (b) {
+        com.message('c', ' <b style="color:red">确定要删除产品【' + sRow.Aliases + '】吗？ </b>', function (b) {
             if (b) {
                 com.ajax({
                     url: km.model.urls["delete"], data: { Id: sRow.Id }, success: function (result) {
                         //layer.msg(result.emsg); 
                         if (result == "") {
-                            com.message('s', "删除产品【" + sRow.Code + "】成功");
+                            com.message('s', "删除产品【" + sRow.Aliases + "】成功");
                             km.maingrid.reload();
                         } else {
                             com.message('e', result);

@@ -108,7 +108,7 @@ namespace YYQERP.Services.Interfaces
 
         CEDResponse SaveProductDetail(IList<ProductDetailListView> list, string currUserName, int productId);
 
-      
+        CEDResponse DeleteProduct(int id);
 
         //领料方法
         IList<Pick_ForAdd_View> GetListByBomId_For_PickAdd(int bomid, int num);

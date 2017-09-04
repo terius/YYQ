@@ -1195,7 +1195,7 @@ namespace YYQERP.Services
             view.ProductName = GetProductShowName(source);
             view.Quantity = 1;
             view.Remark = source.Remark;
-            view.ShelfId = 0;
+            view.ShelfId = GetShelfIdByProduct(source);
             view.UnitName = GetDicNameByCode(source.UnitTypeCode, dicList);
 
             view.ItemType = source.ItemType;
@@ -1204,6 +1204,15 @@ namespace YYQERP.Services
             view.UnitTypeCode = source.UnitTypeCode;
 
             return view;
+        }
+
+        public static int GetShelfIdByProduct(ProductSet info)
+        {
+            if (info.StockSet.Count==0)
+            {
+                return 0;
+            }
+            return info.StockSet.OrderByDescending(d => d.Addtime).First().ShelfId;
         }
 
 

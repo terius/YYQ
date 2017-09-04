@@ -167,7 +167,7 @@ km.toolbar = {
             layer.msg('请选择一条记录！'); return;
         }
         // var jsonParam = JSON.stringify(sRow);
-        com.message('c', ' <b style="color:red">确定要删除原材料【' + sRow.Name + '】吗？ </b>', function (b) {
+        com.message('c', ' <b style="color:red">确定要删除原材料【' + sRow.Name + '】吗？如果删除其相关信息将一并删除，请谨慎操作！！！ </b>', function (b) {
             if (b) {
                 com.ajax({
                     url: km.model.urls["delete"], data: { Id: sRow.Id }, success: function (result) {
