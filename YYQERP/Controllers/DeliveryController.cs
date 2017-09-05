@@ -15,24 +15,38 @@ namespace YYQERP.Controllers
         private readonly IDeliveryService _deliveryService;
         private readonly ICommonCacheService _cacheService;
         private readonly IGoodsService _goodsService;
+        private readonly IUserService _userService;
 
-        public DeliveryController(IDeliveryService deliveryService, ICommonCacheService cacheService, IGoodsService goodsService)
+        public DeliveryController(IDeliveryService deliveryService,
+            ICommonCacheService cacheService,
+            IGoodsService goodsService,
+            IUserService userService
+            )
         {
             _deliveryService = deliveryService;
             _cacheService = cacheService;
             _goodsService = goodsService;
+            _userService = userService;
         }
         // GET: Pick
         public ActionResult Index()
         {
 
-            ViewBag.Pers = GetUserOpers();
+            var pers = GetUserOpers();
+            ViewBag.Pers = pers;
             var model = new DeliveryViewModel();
             model.ElementSelectList = _cacheService.GetCache_Element();
             model.ProductSelectList = _goodsService.GetProductSelectListForDelivery();
             model.AddView = new Delivery_Add_View();
             model.AddView.Details = new List<DeliveryDetail_ForAdd_View>();
             model.MaxSerialNo = _deliveryService.GetMaxSerialNo();
+            var roleName = _userService.LoginRoleName.ToLower();
+            if (roleName != "admin" && roleName != "boss" && pers.Contains("viewmyself"))
+            {
+                var info = _userService.LoginUserInfo;
+                model.SaleName = info.UserTrueName;
+            }
+          
             return View(model);
         }
 
@@ -43,7 +57,7 @@ namespace YYQERP.Controllers
             return json;
         }
 
-         
+
 
 
         public ActionResult GetTemplate()
@@ -75,7 +89,7 @@ namespace YYQERP.Controllers
 
         }
 
-        public FileResult ExportExcel(int id,bool isOut)
+        public FileResult ExportExcel(int id, bool isOut)
         {
 
             string excelFile = Server.MapPath("~/ExcelTemplate/送货单模板.xlsx");
@@ -83,7 +97,7 @@ namespace YYQERP.Controllers
             string destFile = Server.MapPath("~/Output/" + fileName);
             var info = _deliveryService.GetDeliveryForPrint(id);
             ExcelHelper.ExportInvoice(excelFile, destFile, info);
-            var result= File(destFile, "application/ms-excel", fileName);
+            var result = File(destFile, "application/ms-excel", fileName);
             _deliveryService.UpdateIsOut(id, isOut);
             return result;
         }

@@ -51,7 +51,7 @@ namespace YYQERP.Services.Implementations
         }
 
 
-     
+
 
 
         public IList<ZtreeMenuView> GetUserMenuList()
@@ -136,7 +136,7 @@ namespace YYQERP.Services.Implementations
         //    _uow.Commit();
         //}
 
-     
+
 
         public UserRolePermission GetUserRoleAndMenuByUserId(int userId, string userName)
         {
@@ -179,6 +179,8 @@ namespace YYQERP.Services.Implementations
                 return info;
             }
         }
+
+     
 
         public Search_User_Response SearchUser(Search_User_Request request)
         {

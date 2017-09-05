@@ -8,7 +8,8 @@
             <div title="送货单记录" data-options="iconCls:'icon-standard-plugin'" data-checkper="query">
                 <table id="dgList"></table>
             </div>
-
+        @if (((IList<string>)ViewBag.Pers).Contains("add"))
+        {
             <div title="新增送货单" data-options="iconCls:'icon-standard-plugin'">
                 <div id="north_panel" data-options="region:'north',border:false" style="padding:5px;background-color: #f2f2f2;">
                     <form id="formadd" class="easyui-form" method="post" data-options="novalidate:true">
@@ -78,6 +79,7 @@
                 <table id="dg" class="easyui-datagrid" style="height:auto;"></table>
 
             </div>
+        }
 
 
 
@@ -127,7 +129,7 @@
         km.prodList = @Html.Raw(Json.Encode(@Model.ProductSelectList));
         km.addView = @Html.Raw(Json.Encode(@Model.AddView));
         km.maxNo="@Model.MaxSerialNo";
-
+        km.saleName= "@Model.SaleName";
         //   com.showLog( km.addView);
         km.pers = @Html.Raw(Json.Encode(@ViewBag.Pers));
     </script>

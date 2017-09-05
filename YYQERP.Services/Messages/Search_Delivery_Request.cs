@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YYQERP.Services.Messages
 {
@@ -10,7 +6,10 @@ namespace YYQERP.Services.Messages
     {
         public DateTime STime { get; set; }
         public DateTime ETime { get; set; }
+
+        public string SaleName { get; set; }
+
     }
 
- 
+
 }

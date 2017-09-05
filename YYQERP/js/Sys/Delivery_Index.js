@@ -31,7 +31,7 @@ km.maingrid = function () {
         init: function () {
             $grid.datagrid(km.gridOption({
                 fitColumns: true,
-                queryParams: { STime: "", ETime: "" },
+                queryParams: { STime: "", ETime: "", SaleName: km.saleName },
                 url: km.model.urls["pagelist"],
                 columns: [[
                     { field: 'Addtime', title: '打印时间', width: 100, align: 'left', sortable: true },
@@ -96,7 +96,7 @@ km.maingrid = function () {
             var stime = com.trim($("#STime").datebox("getValue"));
             var etime = com.trim($("#ETime").datebox("getValue"));
 
-            reload({ STime: stime, ETime: etime });
+            reload({ STime: stime, ETime: etime, SaleName: km.saleName });
         },
         do_print: function (id) {
             var isout = false;

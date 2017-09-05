@@ -53,6 +53,11 @@ namespace YYQERP.Services.Implementations
                 q.And(d => d.Addtime <= request.ETime);
             }
 
+            if (!string.IsNullOrWhiteSpace(request.SaleName))
+            {
+                q.And(d => d.Manager == request.SaleName);
+            }
+
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
             var pageData = _Repository.PageQuery(q, request.page, request.rows, out allcount);
@@ -156,7 +161,7 @@ namespace YYQERP.Services.Implementations
             info.TotalAmountUp = StringHelper.CmycurD(allPrice);
             _Repository.Add(info);
             _uow.Commit();
-          
+
 
         }
 
@@ -187,7 +192,7 @@ namespace YYQERP.Services.Implementations
             return info.Convert_Delivery_To_DeliveryForPrint(unitList);
         }
 
-        public void UpdateIsOut(int id,bool isOut)
+        public void UpdateIsOut(int id, bool isOut)
         {
             if (isOut)
             {
@@ -196,7 +201,7 @@ namespace YYQERP.Services.Implementations
                 _Repository.Save(info);
                 _uow.Commit();
             }
-            
+
         }
 
 

@@ -1139,7 +1139,10 @@ namespace YYQERP.Services.Implementations
             }
             if (!string.IsNullOrWhiteSpace(request.ElementNameOrCode))
             {
-                q.And(d => d.BomDetailSet.Any(f => f.ElementSet.Name.Contains(request.ElementNameOrCode) || f.ElementSet.Code.Contains(request.ElementNameOrCode)));
+                q.And(d => d.BomDetailSet.Any(f => f.ElementSet.Name.Contains(request.ElementNameOrCode)
+                || f.ElementSet.Code.Contains(request.ElementNameOrCode)
+
+                ));
             }
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
@@ -1737,7 +1740,7 @@ namespace YYQERP.Services.Implementations
 
         public IList<Default_SelectItem> GetProductSelectListForDelivery()
         {
-            var list = _productRepository.GetDbQuerySet().Where(d => d.DeliveryDetailSet.Any(f => f.DeliverySet.IsOut != true)).ToList();
+            var list = _productRepository.GetDbQuerySet().Where(d => d.DeliveryDetailSet.Any(f => f.DeliverySet.IsOut != true) || d.DeliveryDetailSet.Count == 0).ToList();
             IList<Default_SelectItem> selecters = new List<Default_SelectItem>();
             foreach (var item in list)
             {
@@ -1763,7 +1766,7 @@ namespace YYQERP.Services.Implementations
             StockSet info = null;
             if (type == ElementType.Element)
             {
-                 info = _stockRepository.GetDbQuerySet().Where(d => d.ElementId == id).OrderByDescending(d => d.Addtime).FirstOrDefault();
+                info = _stockRepository.GetDbQuerySet().Where(d => d.ElementId == id).OrderByDescending(d => d.Addtime).FirstOrDefault();
             }
             else
             {
@@ -1887,7 +1890,7 @@ namespace YYQERP.Services.Implementations
             var info = _productRepository.Single(id);
             if (info != null)
             {
-                 _productRepository.Remove(info);
+                _productRepository.Remove(info);
                 int rs = _uow.Commit();
                 if (rs > 0)
                 {
