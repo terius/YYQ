@@ -105,6 +105,7 @@ km.maingrid = {
         //获取当前选中的行
         return this.jq.datagrid('getSelected');
     }
+ 
 
 };
 
@@ -118,7 +119,8 @@ km.toolbar = {
         km.template.jq_add.dialog_ext({
             title: '新增用户', iconCls: 'icon-standard-add',
             onOpenEx: function (win) {
-                win.find('#RoleId').combobox('reload', '/User/GetRoleSelectList')
+                win.find('#RoleId').combobox('reload', '/User/GetRoleSelectList');
+                win.find('#tr-resetpwd').hide();
             },
             onClickButton: function (win) { //保存操作
                 if (com.CheckError(win)) {
@@ -145,11 +147,17 @@ km.toolbar = {
         if (sRow == null) {
             layer.msg('请选择一条记录！'); return;
         }
+        km.selectUserId = sRow.Id;
         km.template.jq_add.dialog_ext({
             title: '编辑用户【' + sRow.TrueName + '】', iconCls: 'icon-standard-edit',
             onOpenEx: function (win) {
                 win.find('#RoleId').combobox('reload', '/User/GetRoleSelectList')
                 win.find('#formadd').form('load', sRow);
+                win.find('#btn_resetpwd').on("click", function () {
+                    km.toolbar.resetpwd();
+                })
+                win.find('#tr-resetpwd').show();
+               
             },
             onClickButton: function (win) { //保存操作
                 if (com.CheckError(win)) {
@@ -192,6 +200,20 @@ km.toolbar = {
                         }
                     }
                 });
+            }
+        });
+    },
+    resetpwd: function () {
+        com.message('c', ' <b style="color:red">确定要重置该用户密码吗？ </b>', function (b) {
+            if (b) {
+                $.get(km.model.urls.resetpwd, { id: km.selectUserId }, function (result) {
+                    if (result == "") {
+                        com.message('s', "用户重置密码成功");
+
+                    } else {
+                        com.message('e', result);
+                    }
+                })
             }
         });
     }

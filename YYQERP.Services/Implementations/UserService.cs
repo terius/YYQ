@@ -289,6 +289,33 @@ namespace YYQERP.Services.Implementations
             return res;
         }
 
+
+        public CEDResponse ResetUserPwd(int Id)
+        {
+            CEDResponse res = new CEDResponse();
+            var info = GetInfoByID(Id);
+            if (info != null)
+            {
+                var newpwd= StringHelper.Sha256("123456");
+                if (info.Password.Equals(newpwd))
+                {
+                    res.Result = true;
+                    return res;
+                }
+                info.Password = newpwd;
+                int rs = SaveEdit(info);
+                if (rs > 0)
+                {
+                    res.Result = true;
+                }
+                else
+                {
+                    res.Message = "重置密码失败";
+                }
+            }
+            return res;
+        }
+
         private bool CheckUserNameDup(string newUserNames, int editId = 0)
         {
             var newName = newUserNames.ToUpper().Trim();

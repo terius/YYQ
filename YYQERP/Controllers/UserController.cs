@@ -77,6 +77,17 @@ namespace YYQERP.Controllers
             return Content(res.Message);
 
         }
+
+        public ActionResult ResetPwd(int Id)
+        {
+            var res = _userService.ResetUserPwd(Id);
+            if (res.Result)
+            {
+                return Content("");
+            }
+            return Content(res.Message);
+
+        }
     }
 
     

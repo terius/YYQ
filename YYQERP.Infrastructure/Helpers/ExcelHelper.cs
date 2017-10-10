@@ -1,5 +1,6 @@
 ﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 using System;
 using System.Data;
@@ -272,31 +273,65 @@ namespace YYQERP.Infrastructure.Helpers
             cell.CellStyle.Alignment = HorizontalAlignment.Right;
             cell.SetCellValue(info.OrderDate);
 
+            MyInsertRow(sheet1, 10, info.Details.Count - 7);
+
             int index = 3;
+            IRow contentRow;
+            var style = sheet1.GetRow(3).GetCell(3).CellStyle;
+            var contentHeight = sheet1.GetRow(3).Height;
             foreach (var item in info.Details)
             {
-                cell = sheet1.GetRow(index).GetCell(1);
+                if (index < 10)
+                {
+                    contentRow = sheet1.GetRow(index);
+                }
+                else
+                {
+                    contentRow = sheet1.CreateRow(index);
+                    contentRow.Height = contentHeight;
+                    for (int i = 0; i < 9; i++)
+                    {
+                        if (i < 8)
+                        {
+                            contentRow.CreateCell(i).CellStyle = style;
+                        }
+
+                    }
+                    sheet1.AddMergedRegion(new CellRangeAddress(index, index, 1, 2));
+
+                }
+                cell = contentRow.GetCell(1);
                 cell.SetCellValue(item.Model);
-                cell = sheet1.GetRow(index).GetCell(3);
+                cell = contentRow.GetCell(3);
                 cell.SetCellValue(item.Quantity);
-                cell = sheet1.GetRow(index).GetCell(4);
+                cell = contentRow.GetCell(4);
                 cell.SetCellValue(item.Unit);
-                cell = sheet1.GetRow(index).GetCell(5);
+                cell = contentRow.GetCell(5);
                 cell.SetCellValue(item.Price);
-                cell = sheet1.GetRow(index).GetCell(6);
+                cell = contentRow.GetCell(6);
                 cell.SetCellValue(item.TotalPrice);
-                cell = sheet1.GetRow(index).GetCell(7);
+                cell = contentRow.GetCell(7);
                 cell.SetCellValue(item.Remark);
                 index++;
             }
-            cell = sheet1.GetRow(10).GetCell(3);
+            //int MergedCount = sheet1.NumMergedRegions;
+            //for (int i = MergedCount - 1; i >= 0; i--)
+            //{
+            //    sheet.RemoveMergedRegion(i);
+            //}
+            if (index > 10)
+            {
+                sheet1.AddMergedRegion(new CellRangeAddress(2, sheet1.LastRowNum - 1, 8, 8));
+            }
+            int bottomIndex = index > 9 ? index : 10;
+            cell = sheet1.GetRow(bottomIndex).GetCell(3);
             cell.SetCellValue(info.TotalAmountUp);
-            cell = sheet1.GetRow(10).GetCell(7);
+            cell = sheet1.GetRow(bottomIndex).GetCell(7);
             cell.SetCellValue(info.TotalAmount);
 
-            cell = sheet1.GetRow(12).GetCell(1);
+            cell = sheet1.GetRow(bottomIndex + 2).GetCell(1);
             cell.SetCellValue(cell.StringCellValue + info.Sender);
-            cell = sheet1.GetRow(12).GetCell(2);
+            cell = sheet1.GetRow(bottomIndex + 2).GetCell(2);
             cell.SetCellValue(cell.StringCellValue + info.Manager);
 
             FileInfo fi = new FileInfo(downExlPath);
@@ -312,6 +347,60 @@ namespace YYQERP.Infrastructure.Helpers
             files.Close();
 
 
+        }
+
+        private static void MyInsertRow(ISheet sheet, int insertRow, int insertRowCount)
+        {
+            if (insertRowCount <= 0)
+            {
+                return;
+            }
+            #region 批量移动行
+            sheet.ShiftRows(insertRow, sheet.LastRowNum, insertRowCount, true, false);
+            #endregion
+
+            //#region 对批量移动后空出的空行插，创建相应的行，并以插入行的上一行为格式源(即：插入行-1的那一行)
+            //for (int i = 插入行; i < 插入行 + 插入行总数 - 1; i++)
+            //{
+            //    HSSFRow targetRow = null;
+            //    HSSFCell sourceCell = null;
+            //    HSSFCell targetCell = null;
+
+            //    targetRow = sheet.CreateRow(i + 1);
+
+            //    for (int m = 源格式行.FirstCellNum; m < 源格式行.LastCellNum; m++)
+            //    {
+            //        sourceCell = 源格式行.GetCell(m);
+            //        if (sourceCell == null)
+            //            continue;
+            //        targetCell = targetRow.CreateCell(m);
+
+            //        targetCell.Encoding = sourceCell.Encoding;
+            //        targetCell.CellStyle = sourceCell.CellStyle;
+            //        targetCell.SetCellType(sourceCell.CellType);
+
+            //    }
+            //    //CopyRow(sourceRow, targetRow);
+
+            //    //Util.CopyRow(sheet, sourceRow, targetRow);
+            //}
+
+            //HSSFRow firstTargetRow = sheet.GetRow(插入行);
+            //HSSFCell firstSourceCell = null;
+            //HSSFCell firstTargetCell = null;
+
+            //for (int m = 源格式行.FirstCellNum; m < 源格式行.LastCellNum; m++)
+            //{
+            //    firstSourceCell = 源格式行.GetCell(m);
+            //    if (firstSourceCell == null)
+            //        continue;
+            //    firstTargetCell = firstTargetRow.CreateCell(m);
+
+            //    firstTargetCell.Encoding = firstSourceCell.Encoding;
+            //    firstTargetCell.CellStyle = firstSourceCell.CellStyle;
+            //    firstTargetCell.SetCellType(firstSourceCell.CellType);
+            //}
+            //#endregion
         }
 
 

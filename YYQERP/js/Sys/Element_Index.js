@@ -94,6 +94,7 @@ km.maingrid = function () {
             km.export.ShelfName = com.trim($("#shelfCode").val());
             com.ExportToExcel("/Element/ExportExcel", km.export);
         }
+     
     }
 }();
 

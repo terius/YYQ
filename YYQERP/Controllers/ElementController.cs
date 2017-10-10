@@ -86,7 +86,7 @@ namespace YYQERP.Controllers
         public FileResult ExportExcel(Export_Element_Request request)
         {
             var data = _goodsService.SearchElement(request, request.ExportPageData);
-            return Export<ElementListView>(data.rows, request.Columns, request.ColumnTitles, request.FileName);
+            return Export(data.rows, request.Columns, request.ColumnTitles, request.FileName);
         }
 
         

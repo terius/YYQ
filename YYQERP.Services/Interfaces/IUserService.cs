@@ -40,5 +40,8 @@ namespace YYQERP.Services.Interfaces
         CEDResponse SaveRoleMenus(string[] menuIds, int roleId);
 
         CEDResponse ChangePassword(string newPwd);
+
+
+        CEDResponse ResetUserPwd(int Id);
     }
 }

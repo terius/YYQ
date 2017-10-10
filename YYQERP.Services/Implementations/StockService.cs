@@ -400,7 +400,7 @@ namespace YYQERP.Services.Implementations
             var info = GetInfoByID(id);
             var dicCache = _cacheService.GetCache_Dic();
             var view = info.ConvertTo_StockDetailView(dicCache);
-            string s = MyHtmlHelper.CreateDetailHtml<StockDetailView>(view);
+            string s = MyHtmlHelper.CreateDetailHtml(view);
             return s;
         }
 

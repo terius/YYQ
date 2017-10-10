@@ -45,6 +45,12 @@
                                     style="width:250px;"></select>
                         </td>
                     </tr>
+                    <tr id="tr-resetpwd">
+                        <td>重置密码</td>
+                        <td>
+                            <a href="javascript:;" id="btn_resetpwd" class="easyui-linkbutton" data-options="iconCls:'icon-save'">重置密码</a>
+                       </td>
+                    </tr>
                 </table>
             </form>
         </div>
@@ -102,7 +108,8 @@
                 "pagelist": "/User/GetPageList",
                 "add": "/User/AddUser",
                 "edit": "/User/EditUser",
-                "delete": "/User/DeleteUser"
+                "delete": "/User/DeleteUser",
+                "resetpwd": "/User/ResetPwd"
             },
             "buttons": [
             { "ButtonCode": "add", "ButtonName": "新增", "Sort": 120, "ButtonType": 1, "IconClass": "icon-standard-add", "JsEvent": "do_add()", "data_checkper": "add" },
