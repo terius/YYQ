@@ -277,8 +277,10 @@ namespace YYQERP.Infrastructure.Helpers
 
             int index = 3;
             IRow contentRow;
+            // ICell contentCell;
             var style = sheet1.GetRow(3).GetCell(3).CellStyle;
             var contentHeight = sheet1.GetRow(3).Height;
+            var hCenterStyle = CreateCenterStyle(workbook);
             foreach (var item in info.Details)
             {
                 if (index < 10)
@@ -295,10 +297,9 @@ namespace YYQERP.Infrastructure.Helpers
                         {
                             contentRow.CreateCell(i).CellStyle = style;
                         }
-
                     }
                     sheet1.AddMergedRegion(new CellRangeAddress(index, index, 1, 2));
-
+                    contentRow.GetCell(1).CellStyle = hCenterStyle;
                 }
                 cell = contentRow.GetCell(1);
                 cell.SetCellValue(item.Model);
@@ -314,15 +315,7 @@ namespace YYQERP.Infrastructure.Helpers
                 cell.SetCellValue(item.Remark);
                 index++;
             }
-            //int MergedCount = sheet1.NumMergedRegions;
-            //for (int i = MergedCount - 1; i >= 0; i--)
-            //{
-            //    sheet.RemoveMergedRegion(i);
-            //}
-            if (index > 10)
-            {
-                sheet1.AddMergedRegion(new CellRangeAddress(2, sheet1.LastRowNum - 1, 8, 8));
-            }
+            
             int bottomIndex = index > 9 ? index : 10;
             cell = sheet1.GetRow(bottomIndex).GetCell(3);
             cell.SetCellValue(info.TotalAmountUp);
@@ -333,7 +326,7 @@ namespace YYQERP.Infrastructure.Helpers
             cell.SetCellValue(cell.StringCellValue + info.Sender);
             cell = sheet1.GetRow(bottomIndex + 2).GetCell(2);
             cell.SetCellValue(cell.StringCellValue + info.Manager);
-
+            sheet1.AddMergedRegion(new CellRangeAddress(2, bottomIndex + 1, 8, 8));
             FileInfo fi = new FileInfo(downExlPath);
             if (!fi.Directory.Exists)
             {
@@ -347,6 +340,15 @@ namespace YYQERP.Infrastructure.Helpers
             files.Close();
 
 
+        }
+
+        private static ICellStyle CreateCenterStyle(XSSFWorkbook book)
+        {
+            var style = book.CreateCellStyle();
+            style.BorderBottom = style.BorderLeft = style.BorderTop = style.BorderRight = BorderStyle.Thin;
+            style.Alignment = HorizontalAlignment.Center;
+            style.VerticalAlignment = VerticalAlignment.Center;
+            return style;
         }
 
         private static void MyInsertRow(ISheet sheet, int insertRow, int insertRowCount)
