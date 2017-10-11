@@ -273,7 +273,7 @@ namespace YYQERP.Infrastructure.Helpers
             cell.CellStyle.Alignment = HorizontalAlignment.Right;
             cell.SetCellValue(info.OrderDate);
 
-            MyInsertRow(sheet1, 10, info.Details.Count - 7);
+            MoveRow(sheet1, 10, info.Details.Count - 7);
 
             int index = 3;
             IRow contentRow;
@@ -351,7 +351,7 @@ namespace YYQERP.Infrastructure.Helpers
             return style;
         }
 
-        private static void MyInsertRow(ISheet sheet, int insertRow, int insertRowCount)
+        private static void MoveRow(ISheet sheet, int insertRow, int insertRowCount)
         {
             if (insertRowCount <= 0)
             {
@@ -360,56 +360,7 @@ namespace YYQERP.Infrastructure.Helpers
             #region 批量移动行
             sheet.ShiftRows(insertRow, sheet.LastRowNum, insertRowCount, true, false);
             #endregion
-
-            //#region 对批量移动后空出的空行插，创建相应的行，并以插入行的上一行为格式源(即：插入行-1的那一行)
-            //for (int i = 插入行; i < 插入行 + 插入行总数 - 1; i++)
-            //{
-            //    HSSFRow targetRow = null;
-            //    HSSFCell sourceCell = null;
-            //    HSSFCell targetCell = null;
-
-            //    targetRow = sheet.CreateRow(i + 1);
-
-            //    for (int m = 源格式行.FirstCellNum; m < 源格式行.LastCellNum; m++)
-            //    {
-            //        sourceCell = 源格式行.GetCell(m);
-            //        if (sourceCell == null)
-            //            continue;
-            //        targetCell = targetRow.CreateCell(m);
-
-            //        targetCell.Encoding = sourceCell.Encoding;
-            //        targetCell.CellStyle = sourceCell.CellStyle;
-            //        targetCell.SetCellType(sourceCell.CellType);
-
-            //    }
-            //    //CopyRow(sourceRow, targetRow);
-
-            //    //Util.CopyRow(sheet, sourceRow, targetRow);
-            //}
-
-            //HSSFRow firstTargetRow = sheet.GetRow(插入行);
-            //HSSFCell firstSourceCell = null;
-            //HSSFCell firstTargetCell = null;
-
-            //for (int m = 源格式行.FirstCellNum; m < 源格式行.LastCellNum; m++)
-            //{
-            //    firstSourceCell = 源格式行.GetCell(m);
-            //    if (firstSourceCell == null)
-            //        continue;
-            //    firstTargetCell = firstTargetRow.CreateCell(m);
-
-            //    firstTargetCell.Encoding = firstSourceCell.Encoding;
-            //    firstTargetCell.CellStyle = firstSourceCell.CellStyle;
-            //    firstTargetCell.SetCellType(firstSourceCell.CellType);
-            //}
-            //#endregion
         }
-
-
-        //public static string  ExportSaleReport()
-        //{
-
-        //}
 
     }
 }
