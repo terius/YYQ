@@ -55,71 +55,65 @@
             <td>
                 <table width="962" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td height="235" background="~/images/login_03.png">
+                        <td colspan="3" height="234" background="~/images/login_03.png"></td>
+                    </tr>
+
+                    <tr>
+                        <td width="395" height="53" background="~/images/login_05.gif">
                             &nbsp;
                         </td>
-                    </tr>
-                    <tr>
-                        <td height="53">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td width="394" height="53" background="~/images/login_05.gif">
-                                        &nbsp;
-                                    </td>
-                                    <td width="206" background="~/images/login_06.gif">
-                                        <form action="/Account/Login" method="post">
-                                            @Html.AntiForgeryToken()
+                        <td width="206" background="~/images/login_06.gif">
+                            <form action="/Account/Login" method="post">
+                                @Html.AntiForgeryToken()
 
-                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                    <td width="16%" height="25">
-                                                        <div align="right">
-                                                            <span class="STYLE1">用户</span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="57%" height="25">
-                                                        <div align="center">
-                                                            <input type="text" name="UserName" id="UserName" maxlength="20" style="width: 105px;  background-color: #292929;
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="16%" height="25">
+                                            <div align="right">
+                                                <span class="STYLE1">用户</span>
+                                            </div>
+                                        </td>
+                                        <td width="57%" height="25">
+                                            <div align="center">
+                                                <input type="text" name="UserName" id="UserName" maxlength="20" style="width: 105px;  background-color: #292929;
                                                             border: solid 1px #7dbad7; font-size: 16px; color: #6cd0ff">
-                                                        </div>
-                                                    </td>
-                                                    <td width="27%" height="25">
-                                                        &nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="25">
-                                                        <div align="right">
-                                                            <span class="STYLE1">密码</span>
-                                                        </div>
-                                                    </td>
-                                                    <td height="25">
-                                                        <div align="center">
-                                                            <input type="password" name="Password" id="Password" maxlength="20" style="width: 105px;  background-color: #292929;
+                                            </div>
+                                        </td>
+                                        <td width="27%" height="25">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25">
+                                            <div align="right">
+                                                <span class="STYLE1">密码</span>
+                                            </div>
+                                        </td>
+                                        <td height="25">
+                                            <div align="center">
+                                                <input type="password" name="Password" id="Password" maxlength="20" style="width: 105px;  background-color: #292929;
                                                             border: solid 1px #7dbad7; font-size: 16px; color: #6cd0ff">
-                                                        </div>
-                                                    </td>
-                                                    <td height="25">
-                                                        <div align="left">
-                                                            <button id="btnLogin" type="submit" style="border:none;padding:4px 8px;background-color:#292929;color:#fff;cursor:pointer">
-                                                                登录
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </form>
-                                    </td>
-                                    <td width="362" background="~/images/login_07.gif">
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                            </table>
+                                            </div>
+                                        </td>
+                                        <td height="25">
+                                            <div align="left">
+                                                <button id="btnLogin" type="submit" style="border:none;padding:4px 8px;background-color:#292929;color:#fff;cursor:pointer">
+                                                    登录
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
                         </td>
+                        <td width="362" background="~/images/login_07.gif">
+                            &nbsp;
+                        </td>
+
                     </tr>
                     <tr>
-                        <td height="213" background="~/images/login_08.gif" style="text-align:center;color:#fff">
-                            版本：2017.09.08.001
+                        <td colspan="3" height="213" background="~/images/login_08.gif" style="text-align:center;color:#fff">
+                            版本：2018.03.06.001
                         </td>
                     </tr>
                 </table>

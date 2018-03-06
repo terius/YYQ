@@ -7,7 +7,11 @@
     
         <div id="km_toolbar" class="km_toolbar">
         </div>
-     
+        <div id="toolbar1" data-checkper="query">
+            <input id="partName" class="easyui-textbox" data-options="prompt:'部件名称',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+            <input id="partCode" class="easyui-textbox" data-options="prompt:'部件代码',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+            <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+        </div>
     </div>
     <div id="main-panel" data-options="region: 'center',title:'部件列表',border:true" style="border-bottom: none; border-left: none;">
         <table id="maingrid"></table>
@@ -37,6 +41,7 @@
 
     </div>
 </div>
+
 <script id="tpl_add" type="text/html">
     <div id="ele_add" style="width: auto; height: auto;">
         <div style="padding: 10px 30px">
@@ -91,7 +96,7 @@
         + '],'
         + '"buttons":[{"ButtonCode":"add","ButtonName":"新增部件","Sort":120,"ButtonType":1,"IconClass":"icon-standard-add","JsEvent":"do_add()","data_checkper":"add"},'
         + '{"ButtonCode":"edit","ButtonName":"编辑部件","Sort":130,"ButtonType":1,"IconClass":"icon-standard-pencil","JsEvent":"do_edit()","data_checkper":"edit"},'
-            + '{"ButtonCode":"delete","ButtonName":"删除部件","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
+        + '{"ButtonCode":"delete","ButtonName":"删除部件","Sort":140,"ButtonType":1,"IconClass":"icon-standard-delete","JsEvent":"do_delete()","data_checkper":"delete"}]}';
         km.model = JSON.parse(model_string);
         km.eleData = @Html.Raw(Json.Encode(@Model.ElementCacheViews));
         km.partList = @Html.Raw(Json.Encode(@Model.PartSelectViews));

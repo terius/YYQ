@@ -1735,7 +1735,7 @@ namespace YYQERP.Services
                 return "其他";
             }
             var pinfo = list.FirstOrDefault(d => d.PartCode == partCode);
-            return pinfo == null ? "" : pinfo.PartName;
+            return pinfo == null ? "" : pinfo.PartName + "【" + partCode + "】";
         }
 
         #endregion

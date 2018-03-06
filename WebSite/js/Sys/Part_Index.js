@@ -219,9 +219,9 @@ km.maingrid = {
     },
 
     search_data: function () {
-        //  var elename = com.trim($("#elementCode").val());
-        //   var shelfcode = com.trim($("#shelfCode").val());
-        this.reload();
+          var name = com.trim($("#partName").val());
+          var code = com.trim($("#partCode").val());
+          this.reload({ PartName: name, PartCode: code });
     },
     reload: function (params) {
         var defaults = { _t: com.settings.timestamp() };

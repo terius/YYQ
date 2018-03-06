@@ -216,10 +216,16 @@ namespace YYQERP.Services.Implementations
                 }
                 else
                 {
-                    rs = GetDbQuerySet().Any(d => d.Code.Equals(newEleCode));
+                    rs =_Repository.CheckExist(d => d.Code.Equals(newEleCode));
                     if (rs)
                     {
                         return "原材料料号不能重复";
+                    }
+
+                    rs = _partRepository.CheckExist(d => d.Code.Equals(newEleCode));
+                    if (rs)
+                    {
+                        return "原材料料号与部件代码不能重复";
                     }
                 }
             }
@@ -236,6 +242,12 @@ namespace YYQERP.Services.Implementations
                     if (rs)
                     {
                         return "原材料料号不能重复";
+                    }
+
+                    rs = _partRepository.CheckExist(d => d.Code.Equals(newEleCode));
+                    if (rs)
+                    {
+                        return "原材料料号与部件代码不能重复";
                     }
                 }
             }
@@ -696,6 +708,14 @@ namespace YYQERP.Services.Implementations
         public Search_Model_Response SearchModels(Search_Model_Request request)
         {
             var q = new Query<ModelSet>();
+            if (!string.IsNullOrEmpty(request.ModelName))
+            {
+                q.And(d => d.Name.Contains(request.ModelName));
+            }
+            if (!string.IsNullOrEmpty(request.ModelCode))
+            {
+                q.And(d => d.Code.Contains(request.ModelCode));
+            }
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
             var pageData = _modelRepository.PageQuery(q, request.page, request.rows, out allcount);
@@ -867,6 +887,14 @@ namespace YYQERP.Services.Implementations
         public Search_Part_Response SearchPart(Search_Part_Request request)
         {
             var q = new Query<PartSet>();
+            if (!string.IsNullOrEmpty(request.PartName))
+            {
+                q.And(d => d.Name.Contains(request.PartName));
+            }
+            if (!string.IsNullOrEmpty(request.PartCode))
+            {
+                q.And(d => d.Code.Contains(request.PartCode));
+            }
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
             var pageData = _partRepository.PageQuery(q, request.page, request.rows, out allcount);
@@ -965,6 +993,8 @@ namespace YYQERP.Services.Implementations
             return "";
         }
 
+     
+
 
         private string CheckPartNameOrCodeDup(string newName, string newCode, int editId = 0)
         {
@@ -978,10 +1008,16 @@ namespace YYQERP.Services.Implementations
                 }
                 else
                 {
-                    rs = _partRepository.GetDbQuerySet().Any(d => d.Code.Equals(newCode));
+                    rs = _partRepository.CheckExist(d => d.Code.Equals(newCode));
                     if (rs)
                     {
                         return "部件代码不能重复";
+                    }
+
+                    rs = _Repository.CheckExist(d => d.Code.Equals(newCode));
+                    if (rs)
+                    {
+                        return "部件代码不能与原材料代码重复";
                     }
                 }
             }
@@ -994,10 +1030,16 @@ namespace YYQERP.Services.Implementations
                 }
                 else
                 {
-                    rs = _partRepository.GetDbQuerySet().Any(d => d.Code.Equals(newCode) && d.Id != editId);
+                    rs = _partRepository.CheckExist(d => d.Code.Equals(newCode) && d.Id != editId);
                     if (rs)
                     {
                         return "部件代码不能重复";
+                    }
+
+                    rs = _Repository.CheckExist(d => d.Code.Equals(newCode));
+                    if (rs)
+                    {
+                        return "部件代码不能与原材料代码重复";
                     }
                 }
             }

@@ -13,7 +13,7 @@ km.template = {
     jq_add: null,
     initTemplate: function () {
         var data = //{ title: 'baiduTemplate', list: ['test data 1', 'test data 2', 'test data3'] };
-        this.tpl_add_html = baidu.template('tpl_add', {});//使用baidu.template命名空间
+            this.tpl_add_html = baidu.template('tpl_add', {});//使用baidu.template命名空间
         this.jq_add = $(this.tpl_add_html);
     },
     init: function () {
@@ -61,9 +61,9 @@ km.maingrid = {
     },
 
     search_data: function () {
-      //  var elename = com.trim($("#elementCode").val());
-       // var shelfcode = com.trim($("#shelfCode").val());
-        this.reload();
+        var name = com.trim($("#modelName").val());
+        var code = com.trim($("#modelCode").val());
+        this.reload({ ModelName: name, ModelCode: code });
     },
     reload: function (params) {
         var defaults = { _t: com.settings.timestamp() };
@@ -86,12 +86,12 @@ km.maingrid = {
 /*工具栏按钮事件*/
 km.toolbar = {
     do_add: function () {
-      //  var jq_add = $("#ele_add");
+        //  var jq_add = $("#ele_add");
         km.template.jq_add.dialog_ext({
             title: '新增型号种类', iconCls: 'icon-standard-add',
             onOpenEx: function (win) {
-               // win.find('#UnitTypeCode').combobox('reload', '/Common/GetUnitSelectList');
-              //  win.find('#ShelfId').combobox('reload', '/Common/GetShelfSelectList');
+                // win.find('#UnitTypeCode').combobox('reload', '/Common/GetUnitSelectList');
+                //  win.find('#ShelfId').combobox('reload', '/Common/GetShelfSelectList');
             },
             onClickButton: function (win) { //保存操作
                 if (com.CheckError(win)) {
@@ -121,8 +121,8 @@ km.toolbar = {
         km.template.jq_add.dialog_ext({
             title: '编辑用户【' + sRow.Name + '】', iconCls: 'icon-standard-edit',
             onOpenEx: function (win) {
-               // win.find('#UnitTypeCode').combobox('reload', '/Common/GetUnitSelectList');
-               // win.find('#ShelfId').combobox('reload', '/Common/GetShelfSelectList');
+                // win.find('#UnitTypeCode').combobox('reload', '/Common/GetUnitSelectList');
+                // win.find('#ShelfId').combobox('reload', '/Common/GetShelfSelectList');
                 win.find('#formadd').form('load', sRow);
             },
             onClickButton: function (win) { //保存操作

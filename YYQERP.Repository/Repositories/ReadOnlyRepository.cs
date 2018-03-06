@@ -37,6 +37,11 @@ namespace YYQERP.Repository.Repositories
             return GetDbQuerySet().ToList<T>();
         }
 
+        public bool CheckExist(Expression<Func<T, bool>> predicate)
+        {
+            return GetDbQuerySet().Any(predicate);
+        }
+
 
         //public IEnumerable<T> FindBy(Query<T> query)
         //{

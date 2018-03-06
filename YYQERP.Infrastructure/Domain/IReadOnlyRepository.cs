@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace YYQERP.Infrastructure.Domain
 {
@@ -17,5 +18,7 @@ namespace YYQERP.Infrastructure.Domain
         IEnumerable<T> FindAll();
 
         IList<T> PageQuery(Query<T> query,int pageIndex,int pageSize,out int allCount);
+
+        bool CheckExist(Expression<Func<T, bool>> predicate);
     }
 }

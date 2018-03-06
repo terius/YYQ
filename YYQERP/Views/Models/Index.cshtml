@@ -5,6 +5,11 @@
     <div id="north_panel" data-options="region:'north',border:false">
         <div id="km_toolbar" class="km_toolbar">
         </div>
+        <div id="toolbar1" data-checkper="query">
+            <input id="modelName" class="easyui-textbox" data-options="prompt:'型号名称',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+            <input id="modelCode" class="easyui-textbox" data-options="prompt:'型号代码',value:''" style="border:1px solid #f2f2f2;width:200px; height:100%" />
+            <a id="btn_search" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-standard-zoom',plain:true" onclick="km.maingrid.search_data();">搜索</a>
+        </div>
     </div>
     <div id="main-panel" data-options="region: 'center',border:true" style="border-bottom: none; border-left: none;">
         <table id="maingrid"></table>
