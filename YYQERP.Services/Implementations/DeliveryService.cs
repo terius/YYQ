@@ -58,6 +58,11 @@ namespace YYQERP.Services.Implementations
                 q.And(d => d.Manager == request.SaleName);
             }
 
+            if (!string.IsNullOrWhiteSpace(request.Customer))
+            {
+                q.And(d => d.Customer.Contains(request.Customer) || d.Remark.Contains(request.Customer));
+            }
+
             q.OrderBy(d => new { d.Addtime }, true);
             int allcount = 0;
             var pageData = _Repository.PageQuery(q, request.page, request.rows, out allcount);
