@@ -44,6 +44,7 @@ km.maingrid = function () {
                     { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
                     { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true },
                     { field: 'IsOut', title: '是否已出货', width: 100, align: 'left', sortable: false },
+                    { field: 'Remark', title: '产品描述', width: 100, align: 'left', sortable: true },
                     { field: 'print', title: '打印', width: 50, align: 'left', formatter: FormatOper }
 
                 ]],

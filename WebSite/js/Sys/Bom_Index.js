@@ -76,9 +76,10 @@ km.detailgrid = function () {
                 rownumbers: true,
                 url: km.model.urls["bomdetail"],
                 queryParams: { _t: com.settings.timestamp(), bomid: 0 },
+                remoteSort: false,
                 columns: [[
                     { field: 'IsSelect', title: '部件', width: 100, align: 'left', checkbox: true },
-                    { field: 'PartName', title: '部件', width: 130, align: 'left' },
+                    { field: 'PartName', title: '部件', width: 130, align: 'left', sortable: true},
                     { field: 'ElementName', title: '原材料', width: 200, align: 'left' },
                     { field: 'ShelfName', title: '库位', width: 60, align: 'left' },
                     { field: 'Quantity', title: '数量', width: 50, align: 'left', editor: { type: 'numberbox', options: { required: true, precision: 2 } } },

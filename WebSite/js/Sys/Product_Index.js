@@ -193,7 +193,7 @@ km.detailgrid = function () {
             com.mask($('#east_panel'), true);
             $("#BomId").combobox('loadData', km.bomList);
             $("#ElementId").combobox('loadData', km.eleData);
-            $("#HalfProductId").combobox('loadData', km.halfProductList);
+            $("#PartId").combobox('loadData', km.halfProductList);
         },
 
         reload: function (params) {
@@ -253,8 +253,8 @@ km.detailgrid = function () {
                 });
             }
         },
-        do_addhalfproduct: function () {
-            var id = $("#HalfProductId").combobox("getValue");
+        do_addPart: function () {
+            var id = $("#PartId").combobox("getValue");
             if (id) {
                 do_accept();
                 var isExist = CheckExistByProduct(id);

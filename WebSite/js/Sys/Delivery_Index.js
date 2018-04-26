@@ -31,7 +31,7 @@ km.maingrid = function () {
         init: function () {
             $grid.datagrid(km.gridOption({
                 fitColumns: true,
-                queryParams: { STime: "", ETime: "", SaleName: km.saleName },
+                queryParams: { STime: "", ETime: "", SaleName: km.saleName, Customer:"" },
                 url: km.model.urls["pagelist"],
                 columns: [[
                     { field: 'Addtime', title: '打印时间', width: 100, align: 'left', sortable: true },
@@ -44,6 +44,7 @@ km.maingrid = function () {
                     { field: 'Manager', title: '收货人', width: 100, align: 'left', sortable: true },
                     { field: 'AddUserName', title: '添加人', width: 100, align: 'left', sortable: true },
                     { field: 'IsOut', title: '是否已出货', width: 100, align: 'left', sortable: false },
+                    { field: 'Remark', title: '产品描述', width: 100, align: 'left', sortable: true },
                     { field: 'print', title: '打印', width: 50, align: 'left', formatter: FormatOper }
 
                 ]],
@@ -95,8 +96,8 @@ km.maingrid = function () {
         search_data: function () {
             var stime = com.trim($("#STime").datebox("getValue"));
             var etime = com.trim($("#ETime").datebox("getValue"));
-
-            reload({ STime: stime, ETime: etime, SaleName: km.saleName });
+            var customer = com.trim($("#Skey").val());
+            reload({ STime: stime, ETime: etime, SaleName: km.saleName, Customer: customer });
         },
         do_print: function (id) {
             var isout = false;
